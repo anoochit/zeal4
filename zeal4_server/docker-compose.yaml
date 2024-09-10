@@ -1,0 +1,22 @@
+version: '3.7'
+
+services:
+  postgres:
+    image: postgres:16.3
+    ports:
+      - '8090:5432'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: zeal4
+      POSTGRES_PASSWORD: "gAlO2PStdaRJo_tgZhVrMFmf9bOTdLcx"
+    volumes:
+      - zeal4_data:/var/lib/postgresql/data
+  redis:
+    image: redis:6.2.6
+    ports:
+      - '8091:6379'
+    command: redis-server --requirepass "yW-oGWTa_uXWNG5sCUUGl6R-n_4Uep-A"
+    environment:
+      - REDIS_REPLICATION_MODE=master
+volumes:
+  zeal4_data:
