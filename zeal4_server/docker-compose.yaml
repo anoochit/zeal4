@@ -1,10 +1,10 @@
-version: '3.7'
+version: "3.7"
 
 services:
   postgres:
     image: postgres:16.3
     ports:
-      - '8090:5432'
+      - "8090:5432"
     environment:
       POSTGRES_USER: postgres
       POSTGRES_DB: zeal4
@@ -14,9 +14,19 @@ services:
   redis:
     image: redis:6.2.6
     ports:
-      - '8091:6379'
+      - "8091:6379"
     command: redis-server --requirepass "yW-oGWTa_uXWNG5sCUUGl6R-n_4Uep-A"
     environment:
       - REDIS_REPLICATION_MODE=master
+
+  mosquitto:
+    image: eclipse-mosquitto
+    volumes:
+      - ./mosquitto/config/:/mosquitto/config/:ro
+      - ./mosquitto/log/:/mosquitto/log/
+      - ./mosquitto/data:/mosquitto/data/
+    ports:
+      - 1883:1883
+      - 9001:9001
 volumes:
   zeal4_data:

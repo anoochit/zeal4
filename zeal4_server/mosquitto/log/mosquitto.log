@@ -1,0 +1,5 @@
+1725986882: mosquitto version 2.0.18 starting
+1725986882: Config loaded from /mosquitto/config/mosquitto.conf.
+1725986882: Opening ipv4 listen socket on port 1883.
+1725986882: Opening ipv6 listen socket on port 1883.
+1725986882: mosquitto version 2.0.18 running
