@@ -594,3 +594,17 @@ info: {"cpu_usage":1.44, "mem_usage":12430.45, "mem_total":15741.32, "timestamp"
 info: {"cpu_usage":0.68, "mem_usage":12458.86, "mem_total":15741.32, "timestamp":1726031703} {"service":"user-service"}
 info: {"cpu_usage":2.69, "mem_usage":12457.45, "mem_total":15741.32, "timestamp":1726031708} {"service":"user-service"}
 info: {"cpu_usage":1.45, "mem_usage":12442.32, "mem_total":15741.32, "timestamp":1726031713} {"service":"user-service"}
+info: {"cpu_usage":1.63, "mem_usage":12442.63, "mem_total":15741.32, "timestamp":1726031718} {"service":"user-service"}
+info: {"cpu_usage":1.16, "mem_usage":12382.63, "mem_total":15741.32, "timestamp":1726031723} {"service":"user-service"}
+info: {"cpu_usage":4.99, "mem_usage":12327.54, "mem_total":15741.32, "timestamp":1726031728} {"service":"user-service"}
+info: {"cpu_usage":2.74, "mem_usage":12330.68, "mem_total":15741.32, "timestamp":1726031733} {"service":"user-service"}
+info: {"cpu_usage":3.16, "mem_usage":12359.89, "mem_total":15741.32, "timestamp":1726031738} {"service":"user-service"}
+info: {"cpu_usage":1.65, "mem_usage":12378.95, "mem_total":15741.32, "timestamp":1726031743} {"service":"user-service"}
+info: {"cpu_usage":1.73, "mem_usage":12379.29, "mem_total":15741.32, "timestamp":1726031748} {"service":"user-service"}
+info: {"cpu_usage":4.02, "mem_usage":12385.18, "mem_total":15741.32, "timestamp":1726031753} {"service":"user-service"}
+info: {"cpu_usage":0.98, "mem_usage":12368.47, "mem_total":15741.32, "timestamp":1726031758} {"service":"user-service"}
+info: {"cpu_usage":1.35, "mem_usage":12367.41, "mem_total":15741.32, "timestamp":1726031763} {"service":"user-service"}
+info: {"cpu_usage":4.81, "mem_usage":12384.52, "mem_total":15741.32, "timestamp":1726031768} {"service":"user-service"}
+info: {"cpu_usage":2.45, "mem_usage":12365.86, "mem_total":15741.32, "timestamp":1726031773} {"service":"user-service"}
+info: {"cpu_usage":0.58, "mem_usage":12390.7, "mem_total":15741.32, "timestamp":1726031778} {"service":"user-service"}
+info: {"cpu_usage":2.24, "mem_usage":12381.99, "mem_total":15741.32, "timestamp":1726031783} {"service":"user-service"}
