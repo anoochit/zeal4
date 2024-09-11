@@ -1,1 +1,3 @@
 zeal4_server/mosquitto/log/mosquitto.log
+zeal4_server/migrations/*
+zeal4_server/migrations/migration_registry.txt
