@@ -57,7 +57,7 @@ client.on("connect", () => {
 
     // publish every 1 min
     client.publish("/device/" + deviceId + "/msg", message);
-  }, 5000);
+  }, 1000);
 });
 
 client.on("error", (error) => {
