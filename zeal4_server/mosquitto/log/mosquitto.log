@@ -6328,3 +6328,11 @@
 1726035161: Received PUBLISH from mqttjs_9015fa74 (d0, q0, r0, m0, '/device/mock_device/msg', ... (86 bytes))
 1726035161: Received PUBLISH from mqttjs_9015fa74 (d0, q0, r0, m0, '/device/mock_device/msg', ... (86 bytes))
 1726035162: Client mqttjs_9015fa74 closed its connection.
+1726036661: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1726038657: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1726040458: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1726042259: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1726048389: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1726054808: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1726071107: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1726072908: Saving in-memory database to /mosquitto/data//mosquitto.db.

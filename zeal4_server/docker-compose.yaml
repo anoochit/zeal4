@@ -19,6 +19,18 @@ services:
     environment:
       - REDIS_REPLICATION_MODE=master
 
+  minio:
+    image: minio/minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio_data:/data
+    environment:
+      MINIO_ROOT_USER: "minio"
+      MINIO_ROOT_PASSWORD: "v4f2EpmS7HLBsL_vIybQlBiaFeZW5cW4"
+    command: server --address "0.0.0.0:9000" --console-address ":9001" /data
+
   mosquitto:
     image: eclipse-mosquitto
     volumes:
@@ -28,5 +40,6 @@ services:
     ports:
       - 1883:1883
       - 9001:9001
+
 volumes:
   zeal4_data:
