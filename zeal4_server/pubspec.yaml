@@ -2,12 +2,13 @@ name: zeal4_server
 description: Starting point for a Serverpod server.
 # version: 1.0.0
 # homepage: https://www.example.com
-
 environment:
-  sdk: '>=3.3.0 <4.0.0'
+  sdk: ">=3.3.0 <4.0.0"
 
 dependencies:
   serverpod: 2.1.1
+  serverpod_cloud_storage_gcp: 2.1.1
+  serverpod_cloud_storage_s3: 2.1.1
 
 dev_dependencies:
-  lints: '>=3.0.0 <5.0.0'
+  lints: ">=3.0.0 <5.0.0"
