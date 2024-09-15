@@ -25,7 +25,7 @@ fields:
   order: int, default=1
   device: Device?, relation(name=device_widget)
   fields: List<String>
-  timestampField: String, default="timestamp"
+  units: List<String>
   type: WidgetType, default=text
   points: int, default=60
   dashboard: Dashboard?, relation(name=dashboard_widget)

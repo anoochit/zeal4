@@ -138,11 +138,10 @@ class Protocol extends _i1.SerializationManagerServer {
           dartType: 'List<String>',
         ),
         _i2.ColumnDefinition(
-          name: 'timestampField',
-          columnType: _i2.ColumnType.text,
+          name: 'units',
+          columnType: _i2.ColumnType.json,
           isNullable: false,
-          dartType: 'String',
-          columnDefault: '\'timestamp\'::text',
+          dartType: 'List<String>',
         ),
         _i2.ColumnDefinition(
           name: 'type',

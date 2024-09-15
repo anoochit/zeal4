@@ -23,7 +23,7 @@ abstract class DashboardWidget implements _i1.SerializableModel {
     required this.deviceId,
     this.device,
     required this.fields,
-    String? timestampField,
+    required this.units,
     _i2.WidgetType? type,
     int? points,
     required this.dashboardId,
@@ -31,7 +31,6 @@ abstract class DashboardWidget implements _i1.SerializableModel {
   })  : width = width ?? 3,
         height = height ?? 1,
         order = order ?? 1,
-        timestampField = timestampField ?? 'timestamp',
         type = type ?? _i2.WidgetType.text,
         points = points ?? 60;
 
@@ -45,7 +44,7 @@ abstract class DashboardWidget implements _i1.SerializableModel {
     required int deviceId,
     _i2.Device? device,
     required List<String> fields,
-    String? timestampField,
+    required List<String> units,
     _i2.WidgetType? type,
     int? points,
     required int dashboardId,
@@ -68,7 +67,8 @@ abstract class DashboardWidget implements _i1.SerializableModel {
       fields: (jsonSerialization['fields'] as List)
           .map((e) => e as String)
           .toList(),
-      timestampField: jsonSerialization['timestampField'] as String,
+      units:
+          (jsonSerialization['units'] as List).map((e) => e as String).toList(),
       type: _i2.WidgetType.fromJson((jsonSerialization['type'] as String)),
       points: jsonSerialization['points'] as int,
       dashboardId: jsonSerialization['dashboardId'] as int,
@@ -100,7 +100,7 @@ abstract class DashboardWidget implements _i1.SerializableModel {
 
   List<String> fields;
 
-  String timestampField;
+  List<String> units;
 
   _i2.WidgetType type;
 
@@ -120,7 +120,7 @@ abstract class DashboardWidget implements _i1.SerializableModel {
     int? deviceId,
     _i2.Device? device,
     List<String>? fields,
-    String? timestampField,
+    List<String>? units,
     _i2.WidgetType? type,
     int? points,
     int? dashboardId,
@@ -138,7 +138,7 @@ abstract class DashboardWidget implements _i1.SerializableModel {
       'deviceId': deviceId,
       if (device != null) 'device': device?.toJson(),
       'fields': fields.toJson(),
-      'timestampField': timestampField,
+      'units': units.toJson(),
       'type': type.toJson(),
       'points': points,
       'dashboardId': dashboardId,
@@ -165,7 +165,7 @@ class _DashboardWidgetImpl extends DashboardWidget {
     required int deviceId,
     _i2.Device? device,
     required List<String> fields,
-    String? timestampField,
+    required List<String> units,
     _i2.WidgetType? type,
     int? points,
     required int dashboardId,
@@ -180,7 +180,7 @@ class _DashboardWidgetImpl extends DashboardWidget {
           deviceId: deviceId,
           device: device,
           fields: fields,
-          timestampField: timestampField,
+          units: units,
           type: type,
           points: points,
           dashboardId: dashboardId,
@@ -198,7 +198,7 @@ class _DashboardWidgetImpl extends DashboardWidget {
     int? deviceId,
     Object? device = _Undefined,
     List<String>? fields,
-    String? timestampField,
+    List<String>? units,
     _i2.WidgetType? type,
     int? points,
     int? dashboardId,
@@ -214,7 +214,7 @@ class _DashboardWidgetImpl extends DashboardWidget {
       deviceId: deviceId ?? this.deviceId,
       device: device is _i2.Device? ? device : this.device?.copyWith(),
       fields: fields ?? this.fields.map((e0) => e0).toList(),
-      timestampField: timestampField ?? this.timestampField,
+      units: units ?? this.units.map((e0) => e0).toList(),
       type: type ?? this.type,
       points: points ?? this.points,
       dashboardId: dashboardId ?? this.dashboardId,

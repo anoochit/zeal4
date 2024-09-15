@@ -76,9 +76,11 @@ Future<void> initSampleData(Serverpod pod) async {
           description: 'CPU Usage',
           deviceId: 1,
           fields: ['cpu_usage'],
-          timestampField: 'timestamp',
+          units: ['%'],
           dashboardId: 1,
           type: WidgetType.text,
+          width: 2,
+          height: 1,
         ),
         // bar chart
         DashboardWidget(
@@ -86,9 +88,11 @@ Future<void> initSampleData(Serverpod pod) async {
           description: 'CPU Usage',
           deviceId: 1,
           fields: ['cpu_usage'],
-          timestampField: 'timestamp',
+          units: ['%'],
           dashboardId: 1,
           type: WidgetType.bar,
+          width: 2,
+          height: 1,
         ),
         // text widget
         DashboardWidget(
@@ -96,9 +100,11 @@ Future<void> initSampleData(Serverpod pod) async {
           description: 'Mem Usage',
           deviceId: 1,
           fields: ['mem_usage'],
-          timestampField: 'timestamp',
+          units: ['MB'],
           dashboardId: 1,
           type: WidgetType.text,
+          width: 2,
+          height: 1,
         ),
         // bar chart
         DashboardWidget(
@@ -106,9 +112,11 @@ Future<void> initSampleData(Serverpod pod) async {
           description: 'Mem Usage',
           deviceId: 1,
           fields: ['mem_usage'],
-          timestampField: 'timestamp',
+          units: ['MB'],
           dashboardId: 1,
           type: WidgetType.bar,
+          width: 2,
+          height: 1,
         ),
         // table
         DashboardWidget(
@@ -116,9 +124,11 @@ Future<void> initSampleData(Serverpod pod) async {
           description: 'Mock device data table',
           deviceId: 1,
           fields: ['cpu_usage', 'mem_usage', 'mem_total', 'timestamp'],
-          timestampField: 'timestamp',
+          units: ['%', 'MB', 'MB', 'timestamp'],
           dashboardId: 1,
           type: WidgetType.table,
+          width: 12,
+          height: 2,
         ),
       ];
 
