@@ -29,6 +29,7 @@ class DashboardView extends GetView<DashboardController> {
             final name = widget.name;
             final description = widget.description;
             final fields = widget.fields;
+            final units = widget.units;
             return SizedBox(
               width: GridUtils.responsiveSize(context.width, widget.width),
               height: GridUtils.responsiveSize(context.width, widget.height),
@@ -42,20 +43,21 @@ class DashboardView extends GetView<DashboardController> {
                           name: name,
                           description: description,
                           fields: fields,
+                          units: units,
                           deviceId: deviceId,
                         );
 
                       case WidgetType.bar:
-                        return BarChartWidgetView();
+                        return const BarChartWidgetView();
 
                       case WidgetType.pie:
-                        return PieChartWidgetView();
+                        return const PieChartWidgetView();
 
                       case WidgetType.table:
-                        return DataTableWidgetView();
+                        return const DataTableWidgetView();
 
                       default:
-                        return WrongWidgetView();
+                        return const WrongWidgetView();
                     }
                   },
                 ),

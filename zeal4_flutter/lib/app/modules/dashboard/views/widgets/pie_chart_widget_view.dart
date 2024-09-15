@@ -6,7 +6,7 @@ class PieChartWidgetView extends GetView {
   const PieChartWidgetView({super.key});
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return const Card(
       elevation: 0.5,
       child: Center(
         child: Text(

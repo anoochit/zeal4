@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class BarChartWidgetView extends GetView {
-  const BarChartWidgetView({Key? key}) : super(key: key);
+  const BarChartWidgetView({super.key});
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return const Card(
       elevation: 0.5,
       child: Center(
         child: Text(

@@ -1,24 +1,28 @@
+import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:zeal4_client/zeal4_client.dart';
 
-import '../../controllers/dashboard_controller.dart';
+import '../../../../../serverpod.dart';
 
-class TextWidgetView extends GetView<DashboardController> {
+class TextWidgetView extends GetView<TextWidgetController> {
   const TextWidgetView({
     super.key,
     required this.name,
     required this.description,
     required this.fields,
     required this.deviceId,
+    required this.units,
   });
 
   final String name;
   final String description;
   final List<String> fields;
+  final List<String> units;
   final int deviceId;
 
   List<DeviceLog> deviceLogFromJson(String str) =>
@@ -39,19 +43,35 @@ class TextWidgetView extends GetView<DashboardController> {
 
           if (snapshot.hasData) {
             final data = snapshot.data;
+            // log('${DateTime.timestamp()} : $data');
 
             if (data != null) {
               // convert to list of device log
               final logs = deviceLogFromJson(data);
+
               // get firt message
               final log = logs.first.message;
+              // title
+              final title = name;
               // get value from first field
               final value = jsonDecode(log)[fields.first];
-              return Center(
-                child: Text(
-                  '$value',
-                  style: Theme.of(context).textTheme.headlineLarge,
-                ),
+              // unit from first field
+              final unit = units.first;
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  // title
+                  Text(title),
+
+                  // value
+                  Text(
+                    '$value',
+                    style: Theme.of(context).textTheme.headlineLarge,
+                  ),
+
+                  // unit
+                  Text(unit ?? ''),
+                ],
               );
             } else {
               return const Center(
@@ -60,9 +80,19 @@ class TextWidgetView extends GetView<DashboardController> {
             }
           }
 
-          return Container();
+          return const Center(
+            child: Text('loading...'),
+          );
         },
       ),
     );
+  }
+}
+
+// FIXME : should handle stream life cycle
+class TextWidgetController extends GetxController {
+  Stream<String> streamDeviceLog({required int deviceId, required int total}) {
+    final snapshot = client.devicelog.getDeivceLog(deviceId, total, true);
+    return snapshot;
   }
 }

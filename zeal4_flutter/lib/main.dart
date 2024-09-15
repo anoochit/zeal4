@@ -11,8 +11,12 @@ void main() {
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
       themeMode: ThemeMode.dark,
-      theme: ThemeData(),
-      darkTheme: ThemeData.dark(),
+      theme: ThemeData(
+        brightness: Brightness.light,
+      ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+      ),
     ),
   );
 }
