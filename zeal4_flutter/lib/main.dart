@@ -10,6 +10,9 @@ void main() {
       title: "Application",
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
+      themeMode: ThemeMode.dark,
+      theme: ThemeData(),
+      darkTheme: ThemeData.dark(),
     ),
   );
 }

@@ -51,7 +51,7 @@ class DevicelogEndpoint extends Endpoint {
   }
 
   // stream device logs
-  Stream<List<DeviceLog>> getDeivceLog(
+  Stream<String> getDeivceLog(
       Session session, int deviceId, int total, bool desc) async* {
     while (true) {
       final logs = await DeviceLog.db.find(
@@ -62,7 +62,7 @@ class DevicelogEndpoint extends Endpoint {
         orderDescending: desc,
       );
 
-      yield logs;
+      yield jsonEncode(logs.toJson());
 
       Future.delayed(Duration(seconds: 10));
     }

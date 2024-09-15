@@ -37,7 +37,12 @@ class DashboardView extends GetView<DashboardController> {
                   builder: (context) {
                     switch (widget.type) {
                       case WidgetType.text:
-                        return TextWidgetView();
+                        return TextWidgetView(
+                          name: name,
+                          description: description,
+                          fields: fields,
+                          deviceId: deviceId,
+                        );
 
                       case WidgetType.bar:
                         return BarChartWidgetView();
@@ -49,7 +54,9 @@ class DashboardView extends GetView<DashboardController> {
                         return DataTableWidgetView();
 
                       default:
-                        return TextWidgetView();
+                        return Center(
+                          child: Text('no widget'),
+                        );
                     }
                   },
                 ),
