@@ -20,8 +20,9 @@ table: dashboard_widget
 fields:
   name: String
   description: String
-  datasource: Device
-  fields: String
+  device: Device?, relation(name=device_widget)
+  fields: List<String>
+  timestampField: String, default="timestamp"
   type: WidgetType, default=text
-  points: int, default=360
+  points: int, default=60
   dashboard: Dashboard?, relation(name=dashboard_widget)

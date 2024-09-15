@@ -11,7 +11,46 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import 'dart:async' as _i2;
-import 'protocol.dart' as _i3;
+import 'package:zeal4_client/src/protocol/device_log.dart' as _i3;
+import 'protocol.dart' as _i4;
+
+/// {@category Endpoint}
+class EndpointDevicelog extends _i1.EndpointRef {
+  EndpointDevicelog(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'devicelog';
+
+  _i2.Future<_i3.DeviceLog?> addDeivceLog(
+    String uuid,
+    String message,
+  ) =>
+      caller.callServerEndpoint<_i3.DeviceLog?>(
+        'devicelog',
+        'addDeivceLog',
+        {
+          'uuid': uuid,
+          'message': message,
+        },
+      );
+
+  _i2.Stream<List<_i3.DeviceLog>> getDeivceLog(
+    int deviceId,
+    int total,
+    bool desc,
+  ) =>
+      caller.callStreamingServerEndpoint<_i2.Stream<List<_i3.DeviceLog>>,
+          List<_i3.DeviceLog>>(
+        'devicelog',
+        'getDeivceLog',
+        {
+          'deviceId': deviceId,
+          'total': total,
+          'desc': desc,
+        },
+        {},
+      );
+}
 
 /// {@category Endpoint}
 class EndpointExample extends _i1.EndpointRef {
@@ -51,7 +90,7 @@ class Client extends _i1.ServerpodClientShared {
     bool? disconnectStreamsOnLostInternetConnection,
   }) : super(
           host,
-          _i3.Protocol(),
+          _i4.Protocol(),
           securityContext: securityContext,
           authenticationKeyManager: authenticationKeyManager,
           streamingConnectionTimeout: streamingConnectionTimeout,
@@ -61,13 +100,19 @@ class Client extends _i1.ServerpodClientShared {
           disconnectStreamsOnLostInternetConnection:
               disconnectStreamsOnLostInternetConnection,
         ) {
+    devicelog = EndpointDevicelog(this);
     example = EndpointExample(this);
   }
+
+  late final EndpointDevicelog devicelog;
 
   late final EndpointExample example;
 
   @override
-  Map<String, _i1.EndpointRef> get endpointRefLookup => {'example': example};
+  Map<String, _i1.EndpointRef> get endpointRefLookup => {
+        'devicelog': devicelog,
+        'example': example,
+      };
 
   @override
   Map<String, _i1.ModuleEndpointCaller> get moduleLookup => {};

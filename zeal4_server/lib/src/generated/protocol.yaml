@@ -1,3 +1,6 @@
+devicelog:
+  - addDeivceLog:
+  - getDeivceLog:
 example:
   - hello:
   - countdown:

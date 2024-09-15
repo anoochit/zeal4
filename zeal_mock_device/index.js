@@ -13,7 +13,7 @@ const { mem } = require("node-os-utils");
 const logger = winston.createLogger({
   level: "info",
   format: winston.format.simple(),
-  defaultMeta: { service: "user-service" },
+  defaultMeta: { service: "mock_device" },
   transports: [
     new winston.transports.File({
       filename: "log/error_pub.log",
@@ -55,9 +55,9 @@ client.on("connect", () => {
     console.log(message);
     logger.info(message);
 
-    // publish every 1 min
+    // publish every 5 sec
     client.publish("/device/" + deviceId + "/msg", message);
-  }, 1000);
+  }, 5000);
 });
 
 client.on("error", (error) => {

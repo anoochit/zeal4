@@ -1,7 +1,0 @@
-enum: FieldType
-serialized: byName
-values:
-  - string
-  - int
-  - double
-  - bool

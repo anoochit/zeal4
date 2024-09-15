@@ -10,7 +10,6 @@ MqttClientConnectionStatus? status;
 Client client = Client(
   serverPodHost,
   onFailedCall: (p0, p1, p2) => print('> serverpod : faild call'),
-  onSucceededCall: (p0) => print('> serverpod : connected'),
 );
 
 // handle subscribe
@@ -56,7 +55,19 @@ runETL() async {
         // print payload
         print('> topic : $topic\n> payload : $message');
 
-        // TODO : send payload data to endpoint
+        RegExp regExp = RegExp(r'/device/([^/]+)/msg');
+
+        Match? match = regExp.firstMatch(topic);
+
+        if (match != null) {
+          final uuid = match.group(1)!;
+          client.devicelog.addDeivceLog(uuid, message);
+        } else {
+          print('No match found.');
+        }
+
+        // send payload data to endpoint
+        client.devicelog.addDeivceLog('uuid', message);
       });
     }
   } catch (e) {

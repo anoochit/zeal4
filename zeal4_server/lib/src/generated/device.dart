@@ -20,8 +20,9 @@ abstract class Device extends _i1.TableRow
     required this.name,
     required this.description,
     this.fields,
-    DateTime? created,
+    this.widget,
     this.deviceLog,
+    DateTime? created,
   })  : created = created ?? DateTime.now(),
         super(id);
 
@@ -30,9 +31,10 @@ abstract class Device extends _i1.TableRow
     required String uuid,
     required String name,
     required String description,
-    List<_i2.DeviceFields>? fields,
-    DateTime? created,
+    List<String>? fields,
+    List<_i2.DashboardWidget>? widget,
     List<_i2.DeviceLog>? deviceLog,
+    DateTime? created,
   }) = _DeviceImpl;
 
   factory Device.fromJson(Map<String, dynamic> jsonSerialization) {
@@ -42,12 +44,16 @@ abstract class Device extends _i1.TableRow
       name: jsonSerialization['name'] as String,
       description: jsonSerialization['description'] as String,
       fields: (jsonSerialization['fields'] as List?)
-          ?.map((e) => _i2.DeviceFields.fromJson((e as Map<String, dynamic>)))
+          ?.map((e) => e as String)
           .toList(),
-      created: _i1.DateTimeJsonExtension.fromJson(jsonSerialization['created']),
+      widget: (jsonSerialization['widget'] as List?)
+          ?.map(
+              (e) => _i2.DashboardWidget.fromJson((e as Map<String, dynamic>)))
+          .toList(),
       deviceLog: (jsonSerialization['deviceLog'] as List?)
           ?.map((e) => _i2.DeviceLog.fromJson((e as Map<String, dynamic>)))
           .toList(),
+      created: _i1.DateTimeJsonExtension.fromJson(jsonSerialization['created']),
     );
   }
 
@@ -61,11 +67,13 @@ abstract class Device extends _i1.TableRow
 
   String description;
 
-  List<_i2.DeviceFields>? fields;
+  List<String>? fields;
 
-  DateTime created;
+  List<_i2.DashboardWidget>? widget;
 
   List<_i2.DeviceLog>? deviceLog;
+
+  DateTime created;
 
   @override
   _i1.Table get table => t;
@@ -75,9 +83,10 @@ abstract class Device extends _i1.TableRow
     String? uuid,
     String? name,
     String? description,
-    List<_i2.DeviceFields>? fields,
-    DateTime? created,
+    List<String>? fields,
+    List<_i2.DashboardWidget>? widget,
     List<_i2.DeviceLog>? deviceLog,
+    DateTime? created,
   });
   @override
   Map<String, dynamic> toJson() {
@@ -86,11 +95,12 @@ abstract class Device extends _i1.TableRow
       'uuid': uuid,
       'name': name,
       'description': description,
-      if (fields != null)
-        'fields': fields?.toJson(valueToJson: (v) => v.toJson()),
-      'created': created.toJson(),
+      if (fields != null) 'fields': fields?.toJson(),
+      if (widget != null)
+        'widget': widget?.toJson(valueToJson: (v) => v.toJson()),
       if (deviceLog != null)
         'deviceLog': deviceLog?.toJson(valueToJson: (v) => v.toJson()),
+      'created': created.toJson(),
     };
   }
 
@@ -101,21 +111,22 @@ abstract class Device extends _i1.TableRow
       'uuid': uuid,
       'name': name,
       'description': description,
-      if (fields != null)
-        'fields': fields?.toJson(valueToJson: (v) => v.toJsonForProtocol()),
-      'created': created.toJson(),
+      if (fields != null) 'fields': fields?.toJson(),
+      if (widget != null)
+        'widget': widget?.toJson(valueToJson: (v) => v.toJsonForProtocol()),
       if (deviceLog != null)
         'deviceLog':
             deviceLog?.toJson(valueToJson: (v) => v.toJsonForProtocol()),
+      'created': created.toJson(),
     };
   }
 
   static DeviceInclude include({
-    _i2.DeviceFieldsIncludeList? fields,
+    _i2.DashboardWidgetIncludeList? widget,
     _i2.DeviceLogIncludeList? deviceLog,
   }) {
     return DeviceInclude._(
-      fields: fields,
+      widget: widget,
       deviceLog: deviceLog,
     );
   }
@@ -154,17 +165,19 @@ class _DeviceImpl extends Device {
     required String uuid,
     required String name,
     required String description,
-    List<_i2.DeviceFields>? fields,
-    DateTime? created,
+    List<String>? fields,
+    List<_i2.DashboardWidget>? widget,
     List<_i2.DeviceLog>? deviceLog,
+    DateTime? created,
   }) : super._(
           id: id,
           uuid: uuid,
           name: name,
           description: description,
           fields: fields,
-          created: created,
+          widget: widget,
           deviceLog: deviceLog,
+          created: created,
         );
 
   @override
@@ -174,21 +187,25 @@ class _DeviceImpl extends Device {
     String? name,
     String? description,
     Object? fields = _Undefined,
-    DateTime? created,
+    Object? widget = _Undefined,
     Object? deviceLog = _Undefined,
+    DateTime? created,
   }) {
     return Device(
       id: id is int? ? id : this.id,
       uuid: uuid ?? this.uuid,
       name: name ?? this.name,
       description: description ?? this.description,
-      fields: fields is List<_i2.DeviceFields>?
+      fields: fields is List<String>?
           ? fields
-          : this.fields?.map((e0) => e0.copyWith()).toList(),
-      created: created ?? this.created,
+          : this.fields?.map((e0) => e0).toList(),
+      widget: widget is List<_i2.DashboardWidget>?
+          ? widget
+          : this.widget?.map((e0) => e0.copyWith()).toList(),
       deviceLog: deviceLog is List<_i2.DeviceLog>?
           ? deviceLog
           : this.deviceLog?.map((e0) => e0.copyWith()).toList(),
+      created: created ?? this.created,
     );
   }
 }
@@ -207,6 +224,10 @@ class DeviceTable extends _i1.Table {
       'description',
       this,
     );
+    fields = _i1.ColumnSerializable(
+      'fields',
+      this,
+    );
     created = _i1.ColumnDateTime(
       'created',
       this,
@@ -220,27 +241,29 @@ class DeviceTable extends _i1.Table {
 
   late final _i1.ColumnString description;
 
-  _i2.DeviceFieldsTable? ___fields;
+  late final _i1.ColumnSerializable fields;
 
-  _i1.ManyRelation<_i2.DeviceFieldsTable>? _fields;
+  _i2.DashboardWidgetTable? ___widget;
 
-  late final _i1.ColumnDateTime created;
+  _i1.ManyRelation<_i2.DashboardWidgetTable>? _widget;
 
   _i2.DeviceLogTable? ___deviceLog;
 
   _i1.ManyRelation<_i2.DeviceLogTable>? _deviceLog;
 
-  _i2.DeviceFieldsTable get __fields {
-    if (___fields != null) return ___fields!;
-    ___fields = _i1.createRelationTable(
-      relationFieldName: '__fields',
+  late final _i1.ColumnDateTime created;
+
+  _i2.DashboardWidgetTable get __widget {
+    if (___widget != null) return ___widget!;
+    ___widget = _i1.createRelationTable(
+      relationFieldName: '__widget',
       field: Device.t.id,
-      foreignField: _i2.DeviceFields.t.deviceId,
+      foreignField: _i2.DashboardWidget.t.deviceId,
       tableRelation: tableRelation,
       createTable: (foreignTableRelation) =>
-          _i2.DeviceFieldsTable(tableRelation: foreignTableRelation),
+          _i2.DashboardWidgetTable(tableRelation: foreignTableRelation),
     );
-    return ___fields!;
+    return ___widget!;
   }
 
   _i2.DeviceLogTable get __deviceLog {
@@ -256,22 +279,22 @@ class DeviceTable extends _i1.Table {
     return ___deviceLog!;
   }
 
-  _i1.ManyRelation<_i2.DeviceFieldsTable> get fields {
-    if (_fields != null) return _fields!;
+  _i1.ManyRelation<_i2.DashboardWidgetTable> get widget {
+    if (_widget != null) return _widget!;
     var relationTable = _i1.createRelationTable(
-      relationFieldName: 'fields',
+      relationFieldName: 'widget',
       field: Device.t.id,
-      foreignField: _i2.DeviceFields.t.deviceId,
+      foreignField: _i2.DashboardWidget.t.deviceId,
       tableRelation: tableRelation,
       createTable: (foreignTableRelation) =>
-          _i2.DeviceFieldsTable(tableRelation: foreignTableRelation),
+          _i2.DashboardWidgetTable(tableRelation: foreignTableRelation),
     );
-    _fields = _i1.ManyRelation<_i2.DeviceFieldsTable>(
+    _widget = _i1.ManyRelation<_i2.DashboardWidgetTable>(
       tableWithRelations: relationTable,
-      table: _i2.DeviceFieldsTable(
+      table: _i2.DashboardWidgetTable(
           tableRelation: relationTable.tableRelation!.lastRelation),
     );
-    return _fields!;
+    return _widget!;
   }
 
   _i1.ManyRelation<_i2.DeviceLogTable> get deviceLog {
@@ -298,13 +321,14 @@ class DeviceTable extends _i1.Table {
         uuid,
         name,
         description,
+        fields,
         created,
       ];
 
   @override
   _i1.Table? getRelationTable(String relationField) {
-    if (relationField == 'fields') {
-      return __fields;
+    if (relationField == 'widget') {
+      return __widget;
     }
     if (relationField == 'deviceLog') {
       return __deviceLog;
@@ -315,20 +339,20 @@ class DeviceTable extends _i1.Table {
 
 class DeviceInclude extends _i1.IncludeObject {
   DeviceInclude._({
-    _i2.DeviceFieldsIncludeList? fields,
+    _i2.DashboardWidgetIncludeList? widget,
     _i2.DeviceLogIncludeList? deviceLog,
   }) {
-    _fields = fields;
+    _widget = widget;
     _deviceLog = deviceLog;
   }
 
-  _i2.DeviceFieldsIncludeList? _fields;
+  _i2.DashboardWidgetIncludeList? _widget;
 
   _i2.DeviceLogIncludeList? _deviceLog;
 
   @override
   Map<String, _i1.Include?> get includes => {
-        'fields': _fields,
+        'widget': _widget,
         'deviceLog': _deviceLog,
       };
 
@@ -522,24 +546,24 @@ class DeviceRepository {
 class DeviceAttachRepository {
   const DeviceAttachRepository._();
 
-  Future<void> fields(
+  Future<void> widget(
     _i1.Session session,
     Device device,
-    List<_i2.DeviceFields> deviceFields, {
+    List<_i2.DashboardWidget> dashboardWidget, {
     _i1.Transaction? transaction,
   }) async {
-    if (deviceFields.any((e) => e.id == null)) {
-      throw ArgumentError.notNull('deviceFields.id');
+    if (dashboardWidget.any((e) => e.id == null)) {
+      throw ArgumentError.notNull('dashboardWidget.id');
     }
     if (device.id == null) {
       throw ArgumentError.notNull('device.id');
     }
 
-    var $deviceFields =
-        deviceFields.map((e) => e.copyWith(deviceId: device.id)).toList();
-    await session.db.update<_i2.DeviceFields>(
-      $deviceFields,
-      columns: [_i2.DeviceFields.t.deviceId],
+    var $dashboardWidget =
+        dashboardWidget.map((e) => e.copyWith(deviceId: device.id)).toList();
+    await session.db.update<_i2.DashboardWidget>(
+      $dashboardWidget,
+      columns: [_i2.DashboardWidget.t.deviceId],
       transaction: transaction,
     );
   }
@@ -570,23 +594,23 @@ class DeviceAttachRepository {
 class DeviceAttachRowRepository {
   const DeviceAttachRowRepository._();
 
-  Future<void> fields(
+  Future<void> widget(
     _i1.Session session,
     Device device,
-    _i2.DeviceFields deviceFields, {
+    _i2.DashboardWidget dashboardWidget, {
     _i1.Transaction? transaction,
   }) async {
-    if (deviceFields.id == null) {
-      throw ArgumentError.notNull('deviceFields.id');
+    if (dashboardWidget.id == null) {
+      throw ArgumentError.notNull('dashboardWidget.id');
     }
     if (device.id == null) {
       throw ArgumentError.notNull('device.id');
     }
 
-    var $deviceFields = deviceFields.copyWith(deviceId: device.id);
-    await session.db.updateRow<_i2.DeviceFields>(
-      $deviceFields,
-      columns: [_i2.DeviceFields.t.deviceId],
+    var $dashboardWidget = dashboardWidget.copyWith(deviceId: device.id);
+    await session.db.updateRow<_i2.DashboardWidget>(
+      $dashboardWidget,
+      columns: [_i2.DashboardWidget.t.deviceId],
       transaction: transaction,
     );
   }
@@ -616,20 +640,20 @@ class DeviceAttachRowRepository {
 class DeviceDetachRepository {
   const DeviceDetachRepository._();
 
-  Future<void> fields(
+  Future<void> widget(
     _i1.Session session,
-    List<_i2.DeviceFields> deviceFields, {
+    List<_i2.DashboardWidget> dashboardWidget, {
     _i1.Transaction? transaction,
   }) async {
-    if (deviceFields.any((e) => e.id == null)) {
-      throw ArgumentError.notNull('deviceFields.id');
+    if (dashboardWidget.any((e) => e.id == null)) {
+      throw ArgumentError.notNull('dashboardWidget.id');
     }
 
-    var $deviceFields =
-        deviceFields.map((e) => e.copyWith(deviceId: null)).toList();
-    await session.db.update<_i2.DeviceFields>(
-      $deviceFields,
-      columns: [_i2.DeviceFields.t.deviceId],
+    var $dashboardWidget =
+        dashboardWidget.map((e) => e.copyWith(deviceId: null)).toList();
+    await session.db.update<_i2.DashboardWidget>(
+      $dashboardWidget,
+      columns: [_i2.DashboardWidget.t.deviceId],
       transaction: transaction,
     );
   }
@@ -655,19 +679,19 @@ class DeviceDetachRepository {
 class DeviceDetachRowRepository {
   const DeviceDetachRowRepository._();
 
-  Future<void> fields(
+  Future<void> widget(
     _i1.Session session,
-    _i2.DeviceFields deviceFields, {
+    _i2.DashboardWidget dashboardWidget, {
     _i1.Transaction? transaction,
   }) async {
-    if (deviceFields.id == null) {
-      throw ArgumentError.notNull('deviceFields.id');
+    if (dashboardWidget.id == null) {
+      throw ArgumentError.notNull('dashboardWidget.id');
     }
 
-    var $deviceFields = deviceFields.copyWith(deviceId: null);
-    await session.db.updateRow<_i2.DeviceFields>(
-      $deviceFields,
-      columns: [_i2.DeviceFields.t.deviceId],
+    var $dashboardWidget = dashboardWidget.copyWith(deviceId: null);
+    await session.db.updateRow<_i2.DashboardWidget>(
+      $dashboardWidget,
+      columns: [_i2.DashboardWidget.t.deviceId],
       transaction: transaction,
     );
   }

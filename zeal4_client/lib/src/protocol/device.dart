@@ -19,8 +19,9 @@ abstract class Device implements _i1.SerializableModel {
     required this.name,
     required this.description,
     this.fields,
-    DateTime? created,
+    this.widget,
     this.deviceLog,
+    DateTime? created,
   }) : created = created ?? DateTime.now();
 
   factory Device({
@@ -28,9 +29,10 @@ abstract class Device implements _i1.SerializableModel {
     required String uuid,
     required String name,
     required String description,
-    List<_i2.DeviceFields>? fields,
-    DateTime? created,
+    List<String>? fields,
+    List<_i2.DashboardWidget>? widget,
     List<_i2.DeviceLog>? deviceLog,
+    DateTime? created,
   }) = _DeviceImpl;
 
   factory Device.fromJson(Map<String, dynamic> jsonSerialization) {
@@ -40,12 +42,16 @@ abstract class Device implements _i1.SerializableModel {
       name: jsonSerialization['name'] as String,
       description: jsonSerialization['description'] as String,
       fields: (jsonSerialization['fields'] as List?)
-          ?.map((e) => _i2.DeviceFields.fromJson((e as Map<String, dynamic>)))
+          ?.map((e) => e as String)
           .toList(),
-      created: _i1.DateTimeJsonExtension.fromJson(jsonSerialization['created']),
+      widget: (jsonSerialization['widget'] as List?)
+          ?.map(
+              (e) => _i2.DashboardWidget.fromJson((e as Map<String, dynamic>)))
+          .toList(),
       deviceLog: (jsonSerialization['deviceLog'] as List?)
           ?.map((e) => _i2.DeviceLog.fromJson((e as Map<String, dynamic>)))
           .toList(),
+      created: _i1.DateTimeJsonExtension.fromJson(jsonSerialization['created']),
     );
   }
 
@@ -60,20 +66,23 @@ abstract class Device implements _i1.SerializableModel {
 
   String description;
 
-  List<_i2.DeviceFields>? fields;
+  List<String>? fields;
 
-  DateTime created;
+  List<_i2.DashboardWidget>? widget;
 
   List<_i2.DeviceLog>? deviceLog;
+
+  DateTime created;
 
   Device copyWith({
     int? id,
     String? uuid,
     String? name,
     String? description,
-    List<_i2.DeviceFields>? fields,
-    DateTime? created,
+    List<String>? fields,
+    List<_i2.DashboardWidget>? widget,
     List<_i2.DeviceLog>? deviceLog,
+    DateTime? created,
   });
   @override
   Map<String, dynamic> toJson() {
@@ -82,11 +91,12 @@ abstract class Device implements _i1.SerializableModel {
       'uuid': uuid,
       'name': name,
       'description': description,
-      if (fields != null)
-        'fields': fields?.toJson(valueToJson: (v) => v.toJson()),
-      'created': created.toJson(),
+      if (fields != null) 'fields': fields?.toJson(),
+      if (widget != null)
+        'widget': widget?.toJson(valueToJson: (v) => v.toJson()),
       if (deviceLog != null)
         'deviceLog': deviceLog?.toJson(valueToJson: (v) => v.toJson()),
+      'created': created.toJson(),
     };
   }
 
@@ -104,17 +114,19 @@ class _DeviceImpl extends Device {
     required String uuid,
     required String name,
     required String description,
-    List<_i2.DeviceFields>? fields,
-    DateTime? created,
+    List<String>? fields,
+    List<_i2.DashboardWidget>? widget,
     List<_i2.DeviceLog>? deviceLog,
+    DateTime? created,
   }) : super._(
           id: id,
           uuid: uuid,
           name: name,
           description: description,
           fields: fields,
-          created: created,
+          widget: widget,
           deviceLog: deviceLog,
+          created: created,
         );
 
   @override
@@ -124,21 +136,25 @@ class _DeviceImpl extends Device {
     String? name,
     String? description,
     Object? fields = _Undefined,
-    DateTime? created,
+    Object? widget = _Undefined,
     Object? deviceLog = _Undefined,
+    DateTime? created,
   }) {
     return Device(
       id: id is int? ? id : this.id,
       uuid: uuid ?? this.uuid,
       name: name ?? this.name,
       description: description ?? this.description,
-      fields: fields is List<_i2.DeviceFields>?
+      fields: fields is List<String>?
           ? fields
-          : this.fields?.map((e0) => e0.copyWith()).toList(),
-      created: created ?? this.created,
+          : this.fields?.map((e0) => e0).toList(),
+      widget: widget is List<_i2.DashboardWidget>?
+          ? widget
+          : this.widget?.map((e0) => e0.copyWith()).toList(),
       deviceLog: deviceLog is List<_i2.DeviceLog>?
           ? deviceLog
           : this.deviceLog?.map((e0) => e0.copyWith()).toList(),
+      created: created ?? this.created,
     );
   }
 }

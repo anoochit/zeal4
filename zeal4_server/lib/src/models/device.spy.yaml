@@ -21,6 +21,7 @@ fields:
   uuid: String
   name: String
   description: String
-  fields: List<DeviceFields>?, relation(name=device_field)
-  created: DateTime, default=now
+  fields: List<String>?
+  widget: List<DashboardWidget>?, relation(name=device_widget)
   deviceLog: List<DeviceLog>?, relation(name=device_log)
+  created: DateTime, default=now
