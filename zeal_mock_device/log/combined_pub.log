@@ -4702,3 +4702,7 @@ info: {"cpu_usage":2.34, "mem_usage":11965.83, "mem_total":15741.32, "timestamp"
 info: {"cpu_usage":7.32, "mem_usage":11215.75, "mem_total":15741.32, "timestamp":1726372517} {"service":"mock_device"}
 info: {"cpu_usage":9.68, "mem_usage":10967.8, "mem_total":15741.32, "timestamp":1726372522} {"service":"mock_device"}
 info: {"cpu_usage":8.8, "mem_usage":12016.37, "mem_total":15741.32, "timestamp":1726372527} {"service":"mock_device"}
+info: {"cpu_usage":11.3, "mem_usage":12258.72, "mem_total":15741.32, "timestamp":1726372532} {"service":"mock_device"}
+info: {"cpu_usage":4.91, "mem_usage":12379.7, "mem_total":15741.32, "timestamp":1726372537} {"service":"mock_device"}
+info: {"cpu_usage":4.01, "mem_usage":12263.86, "mem_total":15741.32, "timestamp":1726372542} {"service":"mock_device"}
+info: {"cpu_usage":3.28, "mem_usage":12234.26, "mem_total":15741.32, "timestamp":1726372547} {"service":"mock_device"}
