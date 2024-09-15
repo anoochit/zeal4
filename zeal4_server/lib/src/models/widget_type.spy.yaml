@@ -1,0 +1,8 @@
+enum: WidgetType
+serialized: byName
+values:
+  - text
+  - bar
+  - pie
+  - table
+  - map

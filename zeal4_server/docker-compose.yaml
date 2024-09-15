@@ -19,17 +19,24 @@ services:
     environment:
       - REDIS_REPLICATION_MODE=master
 
+  adminer:
+    image: adminer
+    depends_on:
+      - "postgres"
+    ports:
+      - 8092:8080
+
   minio:
     image: minio/minio
     ports:
       - "9000:9000"
-      - "9001:9001"
+      - "9901:9901"
     volumes:
       - minio_data:/data
     environment:
       MINIO_ROOT_USER: "minio"
       MINIO_ROOT_PASSWORD: "v4f2EpmS7HLBsL_vIybQlBiaFeZW5cW4"
-    command: server --address "0.0.0.0:9000" --console-address ":9001" /data
+    command: server --address "0.0.0.0:9900" --console-address ":9901" /data
 
   mosquitto:
     image: eclipse-mosquitto
@@ -43,3 +50,4 @@ services:
 
 volumes:
   zeal4_data:
+  minio_data:

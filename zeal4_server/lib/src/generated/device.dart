@@ -19,6 +19,7 @@ abstract class Device extends _i1.TableRow
     required this.uuid,
     required this.name,
     required this.description,
+    this.fields,
     DateTime? created,
     this.deviceLog,
   })  : created = created ?? DateTime.now(),
@@ -26,9 +27,10 @@ abstract class Device extends _i1.TableRow
 
   factory Device({
     int? id,
-    required _i1.UuidValue uuid,
+    required String uuid,
     required String name,
     required String description,
+    List<_i2.DeviceFields>? fields,
     DateTime? created,
     List<_i2.DeviceLog>? deviceLog,
   }) = _DeviceImpl;
@@ -36,9 +38,12 @@ abstract class Device extends _i1.TableRow
   factory Device.fromJson(Map<String, dynamic> jsonSerialization) {
     return Device(
       id: jsonSerialization['id'] as int?,
-      uuid: _i1.UuidValueJsonExtension.fromJson(jsonSerialization['uuid']),
+      uuid: jsonSerialization['uuid'] as String,
       name: jsonSerialization['name'] as String,
       description: jsonSerialization['description'] as String,
+      fields: (jsonSerialization['fields'] as List?)
+          ?.map((e) => _i2.DeviceFields.fromJson((e as Map<String, dynamic>)))
+          .toList(),
       created: _i1.DateTimeJsonExtension.fromJson(jsonSerialization['created']),
       deviceLog: (jsonSerialization['deviceLog'] as List?)
           ?.map((e) => _i2.DeviceLog.fromJson((e as Map<String, dynamic>)))
@@ -50,11 +55,13 @@ abstract class Device extends _i1.TableRow
 
   static const db = DeviceRepository._();
 
-  _i1.UuidValue uuid;
+  String uuid;
 
   String name;
 
   String description;
+
+  List<_i2.DeviceFields>? fields;
 
   DateTime created;
 
@@ -65,9 +72,10 @@ abstract class Device extends _i1.TableRow
 
   Device copyWith({
     int? id,
-    _i1.UuidValue? uuid,
+    String? uuid,
     String? name,
     String? description,
+    List<_i2.DeviceFields>? fields,
     DateTime? created,
     List<_i2.DeviceLog>? deviceLog,
   });
@@ -75,9 +83,11 @@ abstract class Device extends _i1.TableRow
   Map<String, dynamic> toJson() {
     return {
       if (id != null) 'id': id,
-      'uuid': uuid.toJson(),
+      'uuid': uuid,
       'name': name,
       'description': description,
+      if (fields != null)
+        'fields': fields?.toJson(valueToJson: (v) => v.toJson()),
       'created': created.toJson(),
       if (deviceLog != null)
         'deviceLog': deviceLog?.toJson(valueToJson: (v) => v.toJson()),
@@ -88,9 +98,11 @@ abstract class Device extends _i1.TableRow
   Map<String, dynamic> toJsonForProtocol() {
     return {
       if (id != null) 'id': id,
-      'uuid': uuid.toJson(),
+      'uuid': uuid,
       'name': name,
       'description': description,
+      if (fields != null)
+        'fields': fields?.toJson(valueToJson: (v) => v.toJsonForProtocol()),
       'created': created.toJson(),
       if (deviceLog != null)
         'deviceLog':
@@ -98,8 +110,14 @@ abstract class Device extends _i1.TableRow
     };
   }
 
-  static DeviceInclude include({_i2.DeviceLogIncludeList? deviceLog}) {
-    return DeviceInclude._(deviceLog: deviceLog);
+  static DeviceInclude include({
+    _i2.DeviceFieldsIncludeList? fields,
+    _i2.DeviceLogIncludeList? deviceLog,
+  }) {
+    return DeviceInclude._(
+      fields: fields,
+      deviceLog: deviceLog,
+    );
   }
 
   static DeviceIncludeList includeList({
@@ -133,9 +151,10 @@ class _Undefined {}
 class _DeviceImpl extends Device {
   _DeviceImpl({
     int? id,
-    required _i1.UuidValue uuid,
+    required String uuid,
     required String name,
     required String description,
+    List<_i2.DeviceFields>? fields,
     DateTime? created,
     List<_i2.DeviceLog>? deviceLog,
   }) : super._(
@@ -143,6 +162,7 @@ class _DeviceImpl extends Device {
           uuid: uuid,
           name: name,
           description: description,
+          fields: fields,
           created: created,
           deviceLog: deviceLog,
         );
@@ -150,9 +170,10 @@ class _DeviceImpl extends Device {
   @override
   Device copyWith({
     Object? id = _Undefined,
-    _i1.UuidValue? uuid,
+    String? uuid,
     String? name,
     String? description,
+    Object? fields = _Undefined,
     DateTime? created,
     Object? deviceLog = _Undefined,
   }) {
@@ -161,6 +182,9 @@ class _DeviceImpl extends Device {
       uuid: uuid ?? this.uuid,
       name: name ?? this.name,
       description: description ?? this.description,
+      fields: fields is List<_i2.DeviceFields>?
+          ? fields
+          : this.fields?.map((e0) => e0.copyWith()).toList(),
       created: created ?? this.created,
       deviceLog: deviceLog is List<_i2.DeviceLog>?
           ? deviceLog
@@ -171,7 +195,7 @@ class _DeviceImpl extends Device {
 
 class DeviceTable extends _i1.Table {
   DeviceTable({super.tableRelation}) : super(tableName: 'device') {
-    uuid = _i1.ColumnUuid(
+    uuid = _i1.ColumnString(
       'uuid',
       this,
     );
@@ -190,17 +214,34 @@ class DeviceTable extends _i1.Table {
     );
   }
 
-  late final _i1.ColumnUuid uuid;
+  late final _i1.ColumnString uuid;
 
   late final _i1.ColumnString name;
 
   late final _i1.ColumnString description;
+
+  _i2.DeviceFieldsTable? ___fields;
+
+  _i1.ManyRelation<_i2.DeviceFieldsTable>? _fields;
 
   late final _i1.ColumnDateTime created;
 
   _i2.DeviceLogTable? ___deviceLog;
 
   _i1.ManyRelation<_i2.DeviceLogTable>? _deviceLog;
+
+  _i2.DeviceFieldsTable get __fields {
+    if (___fields != null) return ___fields!;
+    ___fields = _i1.createRelationTable(
+      relationFieldName: '__fields',
+      field: Device.t.id,
+      foreignField: _i2.DeviceFields.t.deviceId,
+      tableRelation: tableRelation,
+      createTable: (foreignTableRelation) =>
+          _i2.DeviceFieldsTable(tableRelation: foreignTableRelation),
+    );
+    return ___fields!;
+  }
 
   _i2.DeviceLogTable get __deviceLog {
     if (___deviceLog != null) return ___deviceLog!;
@@ -213,6 +254,24 @@ class DeviceTable extends _i1.Table {
           _i2.DeviceLogTable(tableRelation: foreignTableRelation),
     );
     return ___deviceLog!;
+  }
+
+  _i1.ManyRelation<_i2.DeviceFieldsTable> get fields {
+    if (_fields != null) return _fields!;
+    var relationTable = _i1.createRelationTable(
+      relationFieldName: 'fields',
+      field: Device.t.id,
+      foreignField: _i2.DeviceFields.t.deviceId,
+      tableRelation: tableRelation,
+      createTable: (foreignTableRelation) =>
+          _i2.DeviceFieldsTable(tableRelation: foreignTableRelation),
+    );
+    _fields = _i1.ManyRelation<_i2.DeviceFieldsTable>(
+      tableWithRelations: relationTable,
+      table: _i2.DeviceFieldsTable(
+          tableRelation: relationTable.tableRelation!.lastRelation),
+    );
+    return _fields!;
   }
 
   _i1.ManyRelation<_i2.DeviceLogTable> get deviceLog {
@@ -244,6 +303,9 @@ class DeviceTable extends _i1.Table {
 
   @override
   _i1.Table? getRelationTable(String relationField) {
+    if (relationField == 'fields') {
+      return __fields;
+    }
     if (relationField == 'deviceLog') {
       return __deviceLog;
     }
@@ -252,14 +314,23 @@ class DeviceTable extends _i1.Table {
 }
 
 class DeviceInclude extends _i1.IncludeObject {
-  DeviceInclude._({_i2.DeviceLogIncludeList? deviceLog}) {
+  DeviceInclude._({
+    _i2.DeviceFieldsIncludeList? fields,
+    _i2.DeviceLogIncludeList? deviceLog,
+  }) {
+    _fields = fields;
     _deviceLog = deviceLog;
   }
+
+  _i2.DeviceFieldsIncludeList? _fields;
 
   _i2.DeviceLogIncludeList? _deviceLog;
 
   @override
-  Map<String, _i1.Include?> get includes => {'deviceLog': _deviceLog};
+  Map<String, _i1.Include?> get includes => {
+        'fields': _fields,
+        'deviceLog': _deviceLog,
+      };
 
   @override
   _i1.Table get table => Device.t;
@@ -451,6 +522,28 @@ class DeviceRepository {
 class DeviceAttachRepository {
   const DeviceAttachRepository._();
 
+  Future<void> fields(
+    _i1.Session session,
+    Device device,
+    List<_i2.DeviceFields> deviceFields, {
+    _i1.Transaction? transaction,
+  }) async {
+    if (deviceFields.any((e) => e.id == null)) {
+      throw ArgumentError.notNull('deviceFields.id');
+    }
+    if (device.id == null) {
+      throw ArgumentError.notNull('device.id');
+    }
+
+    var $deviceFields =
+        deviceFields.map((e) => e.copyWith(deviceId: device.id)).toList();
+    await session.db.update<_i2.DeviceFields>(
+      $deviceFields,
+      columns: [_i2.DeviceFields.t.deviceId],
+      transaction: transaction,
+    );
+  }
+
   Future<void> deviceLog(
     _i1.Session session,
     Device device,
@@ -477,6 +570,27 @@ class DeviceAttachRepository {
 class DeviceAttachRowRepository {
   const DeviceAttachRowRepository._();
 
+  Future<void> fields(
+    _i1.Session session,
+    Device device,
+    _i2.DeviceFields deviceFields, {
+    _i1.Transaction? transaction,
+  }) async {
+    if (deviceFields.id == null) {
+      throw ArgumentError.notNull('deviceFields.id');
+    }
+    if (device.id == null) {
+      throw ArgumentError.notNull('device.id');
+    }
+
+    var $deviceFields = deviceFields.copyWith(deviceId: device.id);
+    await session.db.updateRow<_i2.DeviceFields>(
+      $deviceFields,
+      columns: [_i2.DeviceFields.t.deviceId],
+      transaction: transaction,
+    );
+  }
+
   Future<void> deviceLog(
     _i1.Session session,
     Device device,
@@ -502,6 +616,24 @@ class DeviceAttachRowRepository {
 class DeviceDetachRepository {
   const DeviceDetachRepository._();
 
+  Future<void> fields(
+    _i1.Session session,
+    List<_i2.DeviceFields> deviceFields, {
+    _i1.Transaction? transaction,
+  }) async {
+    if (deviceFields.any((e) => e.id == null)) {
+      throw ArgumentError.notNull('deviceFields.id');
+    }
+
+    var $deviceFields =
+        deviceFields.map((e) => e.copyWith(deviceId: null)).toList();
+    await session.db.update<_i2.DeviceFields>(
+      $deviceFields,
+      columns: [_i2.DeviceFields.t.deviceId],
+      transaction: transaction,
+    );
+  }
+
   Future<void> deviceLog(
     _i1.Session session,
     List<_i2.DeviceLog> deviceLog, {
@@ -522,6 +654,23 @@ class DeviceDetachRepository {
 
 class DeviceDetachRowRepository {
   const DeviceDetachRowRepository._();
+
+  Future<void> fields(
+    _i1.Session session,
+    _i2.DeviceFields deviceFields, {
+    _i1.Transaction? transaction,
+  }) async {
+    if (deviceFields.id == null) {
+      throw ArgumentError.notNull('deviceFields.id');
+    }
+
+    var $deviceFields = deviceFields.copyWith(deviceId: null);
+    await session.db.updateRow<_i2.DeviceFields>(
+      $deviceFields,
+      columns: [_i2.DeviceFields.t.deviceId],
+      transaction: transaction,
+    );
+  }
 
   Future<void> deviceLog(
     _i1.Session session,

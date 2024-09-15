@@ -18,15 +18,17 @@ abstract class Device implements _i1.SerializableModel {
     required this.uuid,
     required this.name,
     required this.description,
+    this.fields,
     DateTime? created,
     this.deviceLog,
   }) : created = created ?? DateTime.now();
 
   factory Device({
     int? id,
-    required _i1.UuidValue uuid,
+    required String uuid,
     required String name,
     required String description,
+    List<_i2.DeviceFields>? fields,
     DateTime? created,
     List<_i2.DeviceLog>? deviceLog,
   }) = _DeviceImpl;
@@ -34,9 +36,12 @@ abstract class Device implements _i1.SerializableModel {
   factory Device.fromJson(Map<String, dynamic> jsonSerialization) {
     return Device(
       id: jsonSerialization['id'] as int?,
-      uuid: _i1.UuidValueJsonExtension.fromJson(jsonSerialization['uuid']),
+      uuid: jsonSerialization['uuid'] as String,
       name: jsonSerialization['name'] as String,
       description: jsonSerialization['description'] as String,
+      fields: (jsonSerialization['fields'] as List?)
+          ?.map((e) => _i2.DeviceFields.fromJson((e as Map<String, dynamic>)))
+          .toList(),
       created: _i1.DateTimeJsonExtension.fromJson(jsonSerialization['created']),
       deviceLog: (jsonSerialization['deviceLog'] as List?)
           ?.map((e) => _i2.DeviceLog.fromJson((e as Map<String, dynamic>)))
@@ -49,11 +54,13 @@ abstract class Device implements _i1.SerializableModel {
   /// the id will be null.
   int? id;
 
-  _i1.UuidValue uuid;
+  String uuid;
 
   String name;
 
   String description;
+
+  List<_i2.DeviceFields>? fields;
 
   DateTime created;
 
@@ -61,9 +68,10 @@ abstract class Device implements _i1.SerializableModel {
 
   Device copyWith({
     int? id,
-    _i1.UuidValue? uuid,
+    String? uuid,
     String? name,
     String? description,
+    List<_i2.DeviceFields>? fields,
     DateTime? created,
     List<_i2.DeviceLog>? deviceLog,
   });
@@ -71,9 +79,11 @@ abstract class Device implements _i1.SerializableModel {
   Map<String, dynamic> toJson() {
     return {
       if (id != null) 'id': id,
-      'uuid': uuid.toJson(),
+      'uuid': uuid,
       'name': name,
       'description': description,
+      if (fields != null)
+        'fields': fields?.toJson(valueToJson: (v) => v.toJson()),
       'created': created.toJson(),
       if (deviceLog != null)
         'deviceLog': deviceLog?.toJson(valueToJson: (v) => v.toJson()),
@@ -91,9 +101,10 @@ class _Undefined {}
 class _DeviceImpl extends Device {
   _DeviceImpl({
     int? id,
-    required _i1.UuidValue uuid,
+    required String uuid,
     required String name,
     required String description,
+    List<_i2.DeviceFields>? fields,
     DateTime? created,
     List<_i2.DeviceLog>? deviceLog,
   }) : super._(
@@ -101,6 +112,7 @@ class _DeviceImpl extends Device {
           uuid: uuid,
           name: name,
           description: description,
+          fields: fields,
           created: created,
           deviceLog: deviceLog,
         );
@@ -108,9 +120,10 @@ class _DeviceImpl extends Device {
   @override
   Device copyWith({
     Object? id = _Undefined,
-    _i1.UuidValue? uuid,
+    String? uuid,
     String? name,
     String? description,
+    Object? fields = _Undefined,
     DateTime? created,
     Object? deviceLog = _Undefined,
   }) {
@@ -119,6 +132,9 @@ class _DeviceImpl extends Device {
       uuid: uuid ?? this.uuid,
       name: name ?? this.name,
       description: description ?? this.description,
+      fields: fields is List<_i2.DeviceFields>?
+          ? fields
+          : this.fields?.map((e0) => e0.copyWith()).toList(),
       created: created ?? this.created,
       deviceLog: deviceLog is List<_i2.DeviceLog>?
           ? deviceLog

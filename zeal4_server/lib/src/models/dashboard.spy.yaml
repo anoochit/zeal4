@@ -7,10 +7,10 @@
 # your yaml-files.
 
 # Name of the class to generate.
-class: Device
+class: Dashboard
 
 # Add the table key, if this class represents a row in the database.
-table: device
+table: dashboard
 
 # The fields (and columns if connected to the database) of the class. Supported types are
 # `bool`, `int`, `double`, `String`, `UuidValue`, `Duration`, `DateTime`, `ByteData`,
@@ -18,9 +18,6 @@ table: device
 # You can also add lists of objects and types have support for null safety.
 # Eg. `List<int>?` or `List<MyOtherClass?>`.
 fields:
-  uuid: String
   name: String
   description: String
-  fields: List<DeviceFields>?, relation(name=device_field)
-  created: DateTime, default=now
-  deviceLog: List<DeviceLog>?, relation(name=device_log)
+  widget: List<DashboardWidget>?, relation(name=dashboard_widget)
