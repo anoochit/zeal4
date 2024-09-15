@@ -1,117 +1,119 @@
-{
-  "id": 1,
-  "name": "Sample",
-  "description": "Sample dashboard",
-  "widget": [
-    {
-      "id": 1,
-      "name": "CPU Usage",
-      "description": "CPU Usage",
-      "width": 3,
-      "height": 1,
-      "order": 1,
-      "deviceId": 1,
-      "device": {
+[
+  {
+    "id": 1,
+    "name": "Sample dashboard",
+    "description": "Sample dashboard",
+    "widget": [
+      {
         "id": 1,
-        "uuid": "mock_device",
-        "name": "mock_device",
-        "description": "mock_device",
-        "fields": ["cpu_usage", "mem_usage", "mem_total", "timestamp"],
-        "created": "2024-09-15T03:34:27.631753Z"
+        "name": "CPU Usage",
+        "description": "CPU Usage",
+        "width": 2,
+        "height": 1,
+        "order": 1,
+        "deviceId": 1,
+        "device": {
+          "id": 1,
+          "uuid": "mock_device",
+          "name": "mock_device",
+          "description": "mock_device",
+          "fields": ["cpu_usage", "mem_usage", "mem_total", "timestamp"],
+          "created": "2024-09-15T10:47:01.689338Z"
+        },
+        "fields": ["cpu_usage"],
+        "units": ["%"],
+        "type": "text",
+        "points": 60,
+        "dashboardId": 1
       },
-      "fields": ["cpu_usage"],
-      "timestampField": "timestamp",
-      "type": "text",
-      "points": 60,
-      "dashboardId": 1
-    },
-    {
-      "id": 3,
-      "name": "Mem Usage",
-      "description": "Mem Usage",
-      "width": 3,
-      "height": 1,
-      "order": 2,
-      "deviceId": 1,
-      "device": {
-        "id": 1,
-        "uuid": "mock_device",
-        "name": "mock_device",
-        "description": "mock_device",
-        "fields": ["cpu_usage", "mem_usage", "mem_total", "timestamp"],
-        "created": "2024-09-15T03:34:27.631753Z"
+      {
+        "id": 3,
+        "name": "Mem Usage",
+        "description": "Mem Usage",
+        "width": 2,
+        "height": 1,
+        "order": 2,
+        "deviceId": 1,
+        "device": {
+          "id": 1,
+          "uuid": "mock_device",
+          "name": "mock_device",
+          "description": "mock_device",
+          "fields": ["cpu_usage", "mem_usage", "mem_total", "timestamp"],
+          "created": "2024-09-15T10:47:01.689338Z"
+        },
+        "fields": ["mem_usage"],
+        "units": ["MB"],
+        "type": "text",
+        "points": 60,
+        "dashboardId": 1
       },
-      "fields": ["mem_usage"],
-      "timestampField": "timestamp",
-      "type": "text",
-      "points": 60,
-      "dashboardId": 1
-    },
-    {
-      "id": 2,
-      "name": "CPU Usage",
-      "description": "CPU Usage",
-      "width": 3,
-      "height": 1,
-      "order": 3,
-      "deviceId": 1,
-      "device": {
-        "id": 1,
-        "uuid": "mock_device",
-        "name": "mock_device",
-        "description": "mock_device",
-        "fields": ["cpu_usage", "mem_usage", "mem_total", "timestamp"],
-        "created": "2024-09-15T03:34:27.631753Z"
+      {
+        "id": 2,
+        "name": "CPU Usage",
+        "description": "CPU Usage",
+        "width": 2,
+        "height": 1,
+        "order": 3,
+        "deviceId": 1,
+        "device": {
+          "id": 1,
+          "uuid": "mock_device",
+          "name": "mock_device",
+          "description": "mock_device",
+          "fields": ["cpu_usage", "mem_usage", "mem_total", "timestamp"],
+          "created": "2024-09-15T10:47:01.689338Z"
+        },
+        "fields": ["cpu_usage"],
+        "units": ["%"],
+        "type": "bar",
+        "points": 60,
+        "dashboardId": 1
       },
-      "fields": ["cpu_usage"],
-      "timestampField": "timestamp",
-      "type": "bar",
-      "points": 60,
-      "dashboardId": 1
-    },
-    {
-      "id": 4,
-      "name": "Mem Usage",
-      "description": "Mem Usage",
-      "width": 3,
-      "height": 1,
-      "order": 4,
-      "deviceId": 1,
-      "device": {
-        "id": 1,
-        "uuid": "mock_device",
-        "name": "mock_device",
-        "description": "mock_device",
-        "fields": ["cpu_usage", "mem_usage", "mem_total", "timestamp"],
-        "created": "2024-09-15T03:34:27.631753Z"
+      {
+        "id": 4,
+        "name": "Mem Usage",
+        "description": "Mem Usage",
+        "width": 2,
+        "height": 1,
+        "order": 4,
+        "deviceId": 1,
+        "device": {
+          "id": 1,
+          "uuid": "mock_device",
+          "name": "mock_device",
+          "description": "mock_device",
+          "fields": ["cpu_usage", "mem_usage", "mem_total", "timestamp"],
+          "created": "2024-09-15T10:47:01.689338Z"
+        },
+        "fields": ["mem_usage"],
+        "units": ["MB"],
+        "type": "bar",
+        "points": 60,
+        "dashboardId": 1
       },
-      "fields": ["mem_usage"],
-      "timestampField": "timestamp",
-      "type": "bar",
-      "points": 60,
-      "dashboardId": 1
-    },
-    {
-      "id": 5,
-      "name": "Mock device data table",
-      "description": "Mock device data table",
-      "width": 3,
-      "height": 1,
-      "order": 5,
-      "deviceId": 1,
-      "device": {
-        "id": 1,
-        "uuid": "mock_device",
-        "name": "mock_device",
-        "description": "mock_device",
+      {
+        "id": 5,
+        "name": "Mock device data table",
+        "description": "Mock device data table",
+        "width": 12,
+        "height": 2,
+        "order": 5,
+        "deviceId": 1,
+        "device": {
+          "id": 1,
+          "uuid": "mock_device",
+          "name": "mock_device",
+          "description": "mock_device",
+          "fields": ["cpu_usage", "mem_usage", "mem_total", "timestamp"],
+          "created": "2024-09-15T10:47:01.689338Z"
+        },
         "fields": ["cpu_usage", "mem_usage", "mem_total", "timestamp"],
-        "created": "2024-09-15T03:34:27.631753Z"
-      },
-      "fields": ["cpu_usage", "mem_usage", "mem_total", "timestamp"],
-      "timestampField": "timestamp",
-      "type": "table",
-      "points": 60,
-      "dashboardId": 1
-    }
-  ]
-}
+        "units": ["%", "MB", "MB", "timestamp"],
+        "type": "table",
+        "points": 60,
+        "dashboardId": 1
+      }
+    ]
+  }
+]

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:zeal4_flutter/app/utils/grid_utils.dart';
 
 import '../../../routes/app_pages.dart';
+import '../../../utils/grid_utils.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -12,6 +12,7 @@ class HomeView extends GetView<HomeController> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home'),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
       body: Obx(() {
         final dashboards = controller.dashboards;

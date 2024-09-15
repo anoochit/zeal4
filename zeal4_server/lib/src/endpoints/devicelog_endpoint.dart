@@ -64,7 +64,7 @@ class DevicelogEndpoint extends Endpoint {
 
       yield jsonEncode(logs.toJson());
 
-      Future.delayed(Duration(seconds: 10));
+      Future.delayed(Duration(seconds: 5));
     }
   }
 }

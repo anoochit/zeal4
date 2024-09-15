@@ -9,7 +9,7 @@ import 'widgets/bar_chart_widget_view.dart';
 import 'widgets/datatable_widget_view.dart';
 import 'widgets/pie_chart_widget_view.dart';
 import 'widgets/text_widget_view.dart';
-import 'wrong_widget_view.dart';
+import 'widgets/wrong_widget_view.dart';
 
 class DashboardView extends GetView<DashboardController> {
   const DashboardView({super.key});
@@ -20,6 +20,7 @@ class DashboardView extends GetView<DashboardController> {
     return Scaffold(
       appBar: AppBar(
         title: Obx(() => Text(controller.dashboard.value.name)),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
       body: SingleChildScrollView(
         child: Wrap(
@@ -30,11 +31,12 @@ class DashboardView extends GetView<DashboardController> {
             final description = widget.description;
             final fields = widget.fields;
             final units = widget.units;
+            final points = widget.points;
             return SizedBox(
               width: GridUtils.responsiveSize(context.width, widget.width),
               height: GridUtils.responsiveSize(context.width, widget.height),
               child: Padding(
-                padding: const EdgeInsets.all(4.0),
+                padding: const EdgeInsets.all(2.0),
                 child: Builder(
                   builder: (context) {
                     switch (widget.type) {
@@ -45,6 +47,7 @@ class DashboardView extends GetView<DashboardController> {
                           fields: fields,
                           units: units,
                           deviceId: deviceId,
+                          points: 1,
                         );
 
                       case WidgetType.bar:

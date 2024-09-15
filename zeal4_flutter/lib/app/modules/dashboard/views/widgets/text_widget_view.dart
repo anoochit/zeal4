@@ -17,6 +17,7 @@ class TextWidgetView extends GetView<TextWidgetController> {
     required this.fields,
     required this.deviceId,
     required this.units,
+    required this.points,
   });
 
   final String name;
@@ -24,6 +25,7 @@ class TextWidgetView extends GetView<TextWidgetController> {
   final List<String> fields;
   final List<String> units;
   final int deviceId;
+  final int points;
 
   List<DeviceLog> deviceLogFromJson(String str) =>
       List<DeviceLog>.from(jsonDecode(str).map((x) => DeviceLog.fromJson(x)));
@@ -33,7 +35,7 @@ class TextWidgetView extends GetView<TextWidgetController> {
     return Card(
       elevation: 0.5,
       child: StreamBuilder(
-        stream: controller.streamDeviceLog(deviceId: deviceId, total: 1),
+        stream: controller.streamDeviceLog(deviceId: deviceId, total: points),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasError) {
             return Center(
@@ -43,7 +45,7 @@ class TextWidgetView extends GetView<TextWidgetController> {
 
           if (snapshot.hasData) {
             final data = snapshot.data;
-            // log('${DateTime.timestamp()} : $data');
+            log('${DateTime.timestamp()} : $data');
 
             if (data != null) {
               // convert to list of device log
@@ -61,7 +63,10 @@ class TextWidgetView extends GetView<TextWidgetController> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   // title
-                  Text(title),
+                  Text(
+                    title,
+                    style: Theme.of(context).textTheme.labelMedium,
+                  ),
 
                   // value
                   Text(
@@ -70,7 +75,10 @@ class TextWidgetView extends GetView<TextWidgetController> {
                   ),
 
                   // unit
-                  Text(unit ?? ''),
+                  Text(
+                    unit ?? '',
+                    style: Theme.of(context).textTheme.labelSmall,
+                  ),
                 ],
               );
             } else {
@@ -92,7 +100,11 @@ class TextWidgetView extends GetView<TextWidgetController> {
 // FIXME : should handle stream life cycle
 class TextWidgetController extends GetxController {
   Stream<String> streamDeviceLog({required int deviceId, required int total}) {
-    final snapshot = client.devicelog.getDeivceLog(deviceId, total, true);
-    return snapshot;
+    try {
+      final snapshot = client.devicelog.getDeivceLog(deviceId, total, true);
+      return snapshot;
+    } catch (e) {
+      throw ('$e');
+    }
   }
 }
