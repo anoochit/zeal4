@@ -23,6 +23,8 @@ class DevicelogEndpoint extends Endpoint {
   //   return 'Hello $name';
   // }
 
+  // FIXME : should check a privilege to insert data to database
+
   // add device log
   Future<DeviceLog?> addDeivceLog(
       Session session, String uuid, String message) async {
@@ -48,7 +50,7 @@ class DevicelogEndpoint extends Endpoint {
     }
   }
 
-  // stream device log
+  // stream device logs
   Stream<List<DeviceLog>> getDeivceLog(
       Session session, int deviceId, int total, bool desc) async* {
     while (true) {

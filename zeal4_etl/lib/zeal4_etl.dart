@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:mqtt_client/mqtt_client.dart';
 import 'package:mqtt_client/mqtt_server_client.dart';
 import 'package:zeal4_client/zeal4_client.dart';
@@ -57,8 +55,8 @@ runETL() async {
         // print payload
         print('> topic : $topic\n> payload : $message');
 
+        // get device id from topic /device/+/msg
         RegExp regExp = RegExp(r'/device/([^/]+)/msg');
-
         Match? match = regExp.firstMatch(topic);
 
         if (match != null) {
