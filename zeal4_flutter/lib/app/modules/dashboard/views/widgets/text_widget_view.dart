@@ -6,15 +6,11 @@ class TextWidgetView extends GetView {
   const TextWidgetView({super.key});
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('TextWidgetView'),
-        centerTitle: true,
-      ),
-      body: const Center(
+    return Card(
+      elevation: 0.5,
+      child: Center(
         child: Text(
           'TextWidgetView is working',
-          style: TextStyle(fontSize: 20),
         ),
       ),
     );

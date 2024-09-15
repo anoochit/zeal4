@@ -10,9 +10,7 @@ class DashboardController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-
     dashboard.value = Get.arguments;
-
     log(dashboard.value.name);
   }
 }

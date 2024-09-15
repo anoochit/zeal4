@@ -26,6 +26,7 @@ class HomeView extends GetView<HomeController> {
             final dashboard = dashboards[index];
             final name = dashboard.name;
             return Card(
+              elevation: 0.5,
               clipBehavior: Clip.antiAlias,
               child: InkWell(
                 onTap: () {

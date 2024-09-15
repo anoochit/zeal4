@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:zeal4_flutter/app/utils/grid_utils.dart';
+import 'package:zeal4_client/zeal4_client.dart';
 
+import '../../../utils/grid_utils.dart';
 import '../controllers/dashboard_controller.dart';
+import 'widgets/bar_chart_widget_view.dart';
+import 'widgets/datatable_widget_view.dart';
+import 'widgets/pie_chart_widget_view.dart';
+import 'widgets/text_widget_view.dart';
 
 class DashboardView extends GetView<DashboardController> {
   const DashboardView({super.key});
@@ -19,15 +24,34 @@ class DashboardView extends GetView<DashboardController> {
         child: Wrap(
           children: List.generate(widgets.length, (index) {
             final widget = widgets[index];
+            final deviceId = widget.deviceId;
+            final name = widget.name;
+            final description = widget.description;
+            final fields = widget.fields;
             return SizedBox(
               width: GridUtils.responsiveSize(context.width, widget.width),
               height: GridUtils.responsiveSize(context.width, widget.height),
               child: Padding(
                 padding: const EdgeInsets.all(4.0),
-                child: Container(
-                  child: Center(
-                    child: Text(widget.type.name),
-                  ),
+                child: Builder(
+                  builder: (context) {
+                    switch (widget.type) {
+                      case WidgetType.text:
+                        return TextWidgetView();
+
+                      case WidgetType.bar:
+                        return BarChartWidgetView();
+
+                      case WidgetType.pie:
+                        return PieChartWidgetView();
+
+                      case WidgetType.table:
+                        return DataTableWidgetView();
+
+                      default:
+                        return TextWidgetView();
+                    }
+                  },
                 ),
               ),
             );
