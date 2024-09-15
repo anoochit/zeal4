@@ -18,7 +18,8 @@ import 'example.dart' as _i5;
 import 'widget.dart' as _i6;
 import 'widget_type.dart' as _i7;
 import 'protocol.dart' as _i8;
-import 'package:zeal4_client/src/protocol/device_log.dart' as _i9;
+import 'package:zeal4_client/src/protocol/dashboard.dart' as _i9;
+import 'package:zeal4_client/src/protocol/device_log.dart' as _i10;
 export 'dashboard.dart';
 export 'device.dart';
 export 'device_log.dart';
@@ -104,8 +105,12 @@ class Protocol extends _i1.SerializationManager {
       return (data as List).map((e) => deserialize<String>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i9.DeviceLog>) {
-      return (data as List).map((e) => deserialize<_i9.DeviceLog>(e)).toList()
+    if (t == List<_i9.Dashboard>) {
+      return (data as List).map((e) => deserialize<_i9.Dashboard>(e)).toList()
+          as dynamic;
+    }
+    if (t == List<_i10.DeviceLog>) {
+      return (data as List).map((e) => deserialize<_i10.DeviceLog>(e)).toList()
           as dynamic;
     }
     return super.deserialize<T>(data, t);

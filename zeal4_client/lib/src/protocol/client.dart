@@ -11,8 +11,24 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import 'dart:async' as _i2;
-import 'package:zeal4_client/src/protocol/device_log.dart' as _i3;
-import 'protocol.dart' as _i4;
+import 'package:zeal4_client/src/protocol/dashboard.dart' as _i3;
+import 'package:zeal4_client/src/protocol/device_log.dart' as _i4;
+import 'protocol.dart' as _i5;
+
+/// {@category Endpoint}
+class EndpointDashboard extends _i1.EndpointRef {
+  EndpointDashboard(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'dashboard';
+
+  _i2.Future<List<_i3.Dashboard>> getDashboards() =>
+      caller.callServerEndpoint<List<_i3.Dashboard>>(
+        'dashboard',
+        'getDashboards',
+        {},
+      );
+}
 
 /// {@category Endpoint}
 class EndpointDevicelog extends _i1.EndpointRef {
@@ -21,11 +37,11 @@ class EndpointDevicelog extends _i1.EndpointRef {
   @override
   String get name => 'devicelog';
 
-  _i2.Future<_i3.DeviceLog?> addDeivceLog(
+  _i2.Future<_i4.DeviceLog?> addDeivceLog(
     String uuid,
     String message,
   ) =>
-      caller.callServerEndpoint<_i3.DeviceLog?>(
+      caller.callServerEndpoint<_i4.DeviceLog?>(
         'devicelog',
         'addDeivceLog',
         {
@@ -34,13 +50,13 @@ class EndpointDevicelog extends _i1.EndpointRef {
         },
       );
 
-  _i2.Stream<List<_i3.DeviceLog>> getDeivceLog(
+  _i2.Stream<List<_i4.DeviceLog>> getDeivceLog(
     int deviceId,
     int total,
     bool desc,
   ) =>
-      caller.callStreamingServerEndpoint<_i2.Stream<List<_i3.DeviceLog>>,
-          List<_i3.DeviceLog>>(
+      caller.callStreamingServerEndpoint<_i2.Stream<List<_i4.DeviceLog>>,
+          List<_i4.DeviceLog>>(
         'devicelog',
         'getDeivceLog',
         {
@@ -90,7 +106,7 @@ class Client extends _i1.ServerpodClientShared {
     bool? disconnectStreamsOnLostInternetConnection,
   }) : super(
           host,
-          _i4.Protocol(),
+          _i5.Protocol(),
           securityContext: securityContext,
           authenticationKeyManager: authenticationKeyManager,
           streamingConnectionTimeout: streamingConnectionTimeout,
@@ -100,9 +116,12 @@ class Client extends _i1.ServerpodClientShared {
           disconnectStreamsOnLostInternetConnection:
               disconnectStreamsOnLostInternetConnection,
         ) {
+    dashboard = EndpointDashboard(this);
     devicelog = EndpointDevicelog(this);
     example = EndpointExample(this);
   }
+
+  late final EndpointDashboard dashboard;
 
   late final EndpointDevicelog devicelog;
 
@@ -110,6 +129,7 @@ class Client extends _i1.ServerpodClientShared {
 
   @override
   Map<String, _i1.EndpointRef> get endpointRefLookup => {
+        'dashboard': dashboard,
         'devicelog': devicelog,
         'example': example,
       };

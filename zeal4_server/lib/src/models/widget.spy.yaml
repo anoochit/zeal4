@@ -20,6 +20,9 @@ table: dashboard_widget
 fields:
   name: String
   description: String
+  width: int, default=3
+  height: int, default=1
+  order: int, default=1
   device: Device?, relation(name=device_widget)
   fields: List<String>
   timestampField: String, default="timestamp"

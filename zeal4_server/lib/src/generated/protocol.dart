@@ -19,7 +19,8 @@ import 'example.dart' as _i6;
 import 'widget.dart' as _i7;
 import 'widget_type.dart' as _i8;
 import 'protocol.dart' as _i9;
-import 'package:zeal4_server/src/generated/device_log.dart' as _i10;
+import 'package:zeal4_server/src/generated/dashboard.dart' as _i10;
+import 'package:zeal4_server/src/generated/device_log.dart' as _i11;
 export 'dashboard.dart';
 export 'device.dart';
 export 'device_log.dart';
@@ -103,6 +104,27 @@ class Protocol extends _i1.SerializationManagerServer {
           columnType: _i2.ColumnType.text,
           isNullable: false,
           dartType: 'String',
+        ),
+        _i2.ColumnDefinition(
+          name: 'width',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: false,
+          dartType: 'int',
+          columnDefault: '3',
+        ),
+        _i2.ColumnDefinition(
+          name: 'height',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: false,
+          dartType: 'int',
+          columnDefault: '1',
+        ),
+        _i2.ColumnDefinition(
+          name: 'order',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: false,
+          dartType: 'int',
+          columnDefault: '1',
         ),
         _i2.ColumnDefinition(
           name: 'deviceId',
@@ -381,8 +403,12 @@ class Protocol extends _i1.SerializationManagerServer {
       return (data as List).map((e) => deserialize<String>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i10.DeviceLog>) {
-      return (data as List).map((e) => deserialize<_i10.DeviceLog>(e)).toList()
+    if (t == List<_i10.Dashboard>) {
+      return (data as List).map((e) => deserialize<_i10.Dashboard>(e)).toList()
+          as dynamic;
+    }
+    if (t == List<_i11.DeviceLog>) {
+      return (data as List).map((e) => deserialize<_i11.DeviceLog>(e)).toList()
           as dynamic;
     }
     try {

@@ -1,3 +1,5 @@
+dashboard:
+  - getDashboards:
 devicelog:
   - addDeivceLog:
   - getDeivceLog:

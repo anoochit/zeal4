@@ -10,26 +10,49 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
-import '../endpoints/devicelog_endpoint.dart' as _i2;
-import '../endpoints/example_endpoint.dart' as _i3;
+import '../endpoints/dashboard_endpoint.dart' as _i2;
+import '../endpoints/devicelog_endpoint.dart' as _i3;
+import '../endpoints/example_endpoint.dart' as _i4;
 
 class Endpoints extends _i1.EndpointDispatch {
   @override
   void initializeEndpoints(_i1.Server server) {
     var endpoints = <String, _i1.Endpoint>{
-      'devicelog': _i2.DevicelogEndpoint()
+      'dashboard': _i2.DashboardEndpoint()
+        ..initialize(
+          server,
+          'dashboard',
+          null,
+        ),
+      'devicelog': _i3.DevicelogEndpoint()
         ..initialize(
           server,
           'devicelog',
           null,
         ),
-      'example': _i3.ExampleEndpoint()
+      'example': _i4.ExampleEndpoint()
         ..initialize(
           server,
           'example',
           null,
         ),
     };
+    connectors['dashboard'] = _i1.EndpointConnector(
+      name: 'dashboard',
+      endpoint: endpoints['dashboard']!,
+      methodConnectors: {
+        'getDashboards': _i1.MethodConnector(
+          name: 'getDashboards',
+          params: {},
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['dashboard'] as _i2.DashboardEndpoint)
+                  .getDashboards(session),
+        )
+      },
+    );
     connectors['devicelog'] = _i1.EndpointConnector(
       name: 'devicelog',
       endpoint: endpoints['devicelog']!,
@@ -52,7 +75,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['devicelog'] as _i2.DevicelogEndpoint).addDeivceLog(
+              (endpoints['devicelog'] as _i3.DevicelogEndpoint).addDeivceLog(
             session,
             params['uuid'],
             params['message'],
@@ -84,7 +107,7 @@ class Endpoints extends _i1.EndpointDispatch {
             Map<String, dynamic> params,
             Map<String, Stream> streamParams,
           ) =>
-              (endpoints['devicelog'] as _i2.DevicelogEndpoint).getDeivceLog(
+              (endpoints['devicelog'] as _i3.DevicelogEndpoint).getDeivceLog(
             session,
             params['deviceId'],
             params['total'],
@@ -110,7 +133,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['example'] as _i3.ExampleEndpoint).hello(
+              (endpoints['example'] as _i4.ExampleEndpoint).hello(
             session,
             params['name'],
           ),
@@ -125,7 +148,7 @@ class Endpoints extends _i1.EndpointDispatch {
             Map<String, dynamic> params,
             Map<String, Stream> streamParams,
           ) =>
-              (endpoints['example'] as _i3.ExampleEndpoint).countdown(session),
+              (endpoints['example'] as _i4.ExampleEndpoint).countdown(session),
         ),
       },
     );

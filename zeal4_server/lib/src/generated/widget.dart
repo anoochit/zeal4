@@ -18,6 +18,9 @@ abstract class DashboardWidget extends _i1.TableRow
     int? id,
     required this.name,
     required this.description,
+    int? width,
+    int? height,
+    int? order,
     required this.deviceId,
     this.device,
     required this.fields,
@@ -26,7 +29,10 @@ abstract class DashboardWidget extends _i1.TableRow
     int? points,
     required this.dashboardId,
     this.dashboard,
-  })  : timestampField = timestampField ?? 'timestamp',
+  })  : width = width ?? 3,
+        height = height ?? 1,
+        order = order ?? 1,
+        timestampField = timestampField ?? 'timestamp',
         type = type ?? _i2.WidgetType.text,
         points = points ?? 60,
         super(id);
@@ -35,6 +41,9 @@ abstract class DashboardWidget extends _i1.TableRow
     int? id,
     required String name,
     required String description,
+    int? width,
+    int? height,
+    int? order,
     required int deviceId,
     _i2.Device? device,
     required List<String> fields,
@@ -50,6 +59,9 @@ abstract class DashboardWidget extends _i1.TableRow
       id: jsonSerialization['id'] as int?,
       name: jsonSerialization['name'] as String,
       description: jsonSerialization['description'] as String,
+      width: jsonSerialization['width'] as int,
+      height: jsonSerialization['height'] as int,
+      order: jsonSerialization['order'] as int,
       deviceId: jsonSerialization['deviceId'] as int,
       device: jsonSerialization['device'] == null
           ? null
@@ -77,6 +89,12 @@ abstract class DashboardWidget extends _i1.TableRow
 
   String description;
 
+  int width;
+
+  int height;
+
+  int order;
+
   int deviceId;
 
   _i2.Device? device;
@@ -100,6 +118,9 @@ abstract class DashboardWidget extends _i1.TableRow
     int? id,
     String? name,
     String? description,
+    int? width,
+    int? height,
+    int? order,
     int? deviceId,
     _i2.Device? device,
     List<String>? fields,
@@ -115,6 +136,9 @@ abstract class DashboardWidget extends _i1.TableRow
       if (id != null) 'id': id,
       'name': name,
       'description': description,
+      'width': width,
+      'height': height,
+      'order': order,
       'deviceId': deviceId,
       if (device != null) 'device': device?.toJson(),
       'fields': fields.toJson(),
@@ -132,6 +156,9 @@ abstract class DashboardWidget extends _i1.TableRow
       if (id != null) 'id': id,
       'name': name,
       'description': description,
+      'width': width,
+      'height': height,
+      'order': order,
       'deviceId': deviceId,
       if (device != null) 'device': device?.toJsonForProtocol(),
       'fields': fields.toJson(),
@@ -186,6 +213,9 @@ class _DashboardWidgetImpl extends DashboardWidget {
     int? id,
     required String name,
     required String description,
+    int? width,
+    int? height,
+    int? order,
     required int deviceId,
     _i2.Device? device,
     required List<String> fields,
@@ -198,6 +228,9 @@ class _DashboardWidgetImpl extends DashboardWidget {
           id: id,
           name: name,
           description: description,
+          width: width,
+          height: height,
+          order: order,
           deviceId: deviceId,
           device: device,
           fields: fields,
@@ -213,6 +246,9 @@ class _DashboardWidgetImpl extends DashboardWidget {
     Object? id = _Undefined,
     String? name,
     String? description,
+    int? width,
+    int? height,
+    int? order,
     int? deviceId,
     Object? device = _Undefined,
     List<String>? fields,
@@ -226,6 +262,9 @@ class _DashboardWidgetImpl extends DashboardWidget {
       id: id is int? ? id : this.id,
       name: name ?? this.name,
       description: description ?? this.description,
+      width: width ?? this.width,
+      height: height ?? this.height,
+      order: order ?? this.order,
       deviceId: deviceId ?? this.deviceId,
       device: device is _i2.Device? ? device : this.device?.copyWith(),
       fields: fields ?? this.fields.map((e0) => e0).toList(),
@@ -249,6 +288,21 @@ class DashboardWidgetTable extends _i1.Table {
     description = _i1.ColumnString(
       'description',
       this,
+    );
+    width = _i1.ColumnInt(
+      'width',
+      this,
+      hasDefault: true,
+    );
+    height = _i1.ColumnInt(
+      'height',
+      this,
+      hasDefault: true,
+    );
+    order = _i1.ColumnInt(
+      'order',
+      this,
+      hasDefault: true,
     );
     deviceId = _i1.ColumnInt(
       'deviceId',
@@ -283,6 +337,12 @@ class DashboardWidgetTable extends _i1.Table {
   late final _i1.ColumnString name;
 
   late final _i1.ColumnString description;
+
+  late final _i1.ColumnInt width;
+
+  late final _i1.ColumnInt height;
+
+  late final _i1.ColumnInt order;
 
   late final _i1.ColumnInt deviceId;
 
@@ -331,6 +391,9 @@ class DashboardWidgetTable extends _i1.Table {
         id,
         name,
         description,
+        width,
+        height,
+        order,
         deviceId,
         fields,
         timestampField,
