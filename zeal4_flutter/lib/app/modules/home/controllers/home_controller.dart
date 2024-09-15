@@ -6,10 +6,12 @@ import 'package:zeal4_flutter/serverpod.dart';
 
 class HomeController extends GetxController {
   RxList<Dashboard> dashboards = <Dashboard>[].obs;
+  RxBool isLoading = false.obs;
 
   @override
   void onInit() {
     super.onInit();
+    isLoading.value = true;
     getDashboard();
   }
 
