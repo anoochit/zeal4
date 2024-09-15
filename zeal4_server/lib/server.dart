@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:serverpod/serverpod.dart';
 import 'src/generated/protocol.dart';
 import 'src/generated/endpoints.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:zeal4_flutter/app/utils/grid_utils.dart';
 
+import '../../../routes/app_pages.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -30,6 +30,10 @@ class HomeView extends GetView<HomeController> {
               child: InkWell(
                 onTap: () {
                   // TODO : open dashboard
+                  Get.toNamed(
+                    Routes.DASHBOARD,
+                    arguments: dashboard,
+                  );
                 },
                 child: GridTile(
                   child: Center(

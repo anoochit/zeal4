@@ -10,4 +10,9 @@ class GridUtils {
                     ? 5
                     : 6;
   }
+
+  static double responsiveSize(double width, int size) {
+    final itemWidth = (width / 12);
+    return itemWidth * size;
+  }
 }
