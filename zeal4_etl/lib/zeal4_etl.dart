@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:mqtt_client/mqtt_client.dart';
 import 'package:mqtt_client/mqtt_server_client.dart';
 import 'package:zeal4_client/zeal4_client.dart';
@@ -65,9 +67,6 @@ runETL() async {
         } else {
           print('No match found.');
         }
-
-        // send payload data to endpoint
-        client.devicelog.addDeivceLog('uuid', message);
       });
     }
   } catch (e) {

@@ -35,8 +35,8 @@ class DevicelogEndpoint extends Endpoint {
     if (devices.isNotEmpty) {
       final device = devices.first;
       final jsonData = jsonDecode(message);
-      final created =
-          DateTime.fromMillisecondsSinceEpoch(jsonData['timestamp']);
+      final timeStamp = jsonData['timestamp'] * 1000;
+      final created = DateTime.fromMillisecondsSinceEpoch(timeStamp);
       final row = DeviceLog(
         message: message,
         deviceId: device.id!,
