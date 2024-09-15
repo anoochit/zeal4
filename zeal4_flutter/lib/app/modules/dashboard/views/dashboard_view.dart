@@ -9,6 +9,7 @@ import 'widgets/bar_chart_widget_view.dart';
 import 'widgets/datatable_widget_view.dart';
 import 'widgets/pie_chart_widget_view.dart';
 import 'widgets/text_widget_view.dart';
+import 'wrong_widget_view.dart';
 
 class DashboardView extends GetView<DashboardController> {
   const DashboardView({super.key});
@@ -54,9 +55,7 @@ class DashboardView extends GetView<DashboardController> {
                         return DataTableWidgetView();
 
                       default:
-                        return Center(
-                          child: Text('no widget'),
-                        );
+                        return WrongWidgetView();
                     }
                   },
                 ),
