@@ -8,7 +8,6 @@ import '../controllers/dashboard_controller.dart';
 import 'widgets/bar_chart_widget_view.dart';
 import 'widgets/datatable_widget_view.dart';
 import 'widgets/pie_chart_widget_view.dart';
-import 'widgets/text_widget_view2.dart';
 import 'widgets/text_widget_view3.dart';
 import 'widgets/wrong_widget_view.dart';
 

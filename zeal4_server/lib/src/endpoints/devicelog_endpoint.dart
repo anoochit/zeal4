@@ -50,7 +50,7 @@ class DevicelogEndpoint extends Endpoint {
     }
   }
 
-  // FIXME : stream device logs
+  // Method 1 : stream device logs as json string
   Stream<String> getDeivceLog(
       Session session, int deviceId, int total, bool desc) async* {
     while (true) {
@@ -68,7 +68,7 @@ class DevicelogEndpoint extends Endpoint {
     }
   }
 
-  // send stream of Serialize List Object
+  // Method 2 : stream device log as a Serializable object
   Stream<SnapshotDeviceLog> streamDeviceLog(
       Session session, int deviceId, int total, bool desc) async* {
     while (true) {

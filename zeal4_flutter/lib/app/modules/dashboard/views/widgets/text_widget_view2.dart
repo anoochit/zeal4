@@ -34,7 +34,7 @@ class _TextWidget2ViewState extends State<TextWidget2View> {
 
   String json = '[]';
 
-  late Stream stream;
+  late Stream<String> stream;
 
   @override
   void initState() {
@@ -54,7 +54,7 @@ class _TextWidget2ViewState extends State<TextWidget2View> {
       elevation: 0.5,
       child: StreamBuilder(
         stream: stream.distinct(),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
           if (snapshot.hasError) {
             return const Center(
               child: Text('Error'),
