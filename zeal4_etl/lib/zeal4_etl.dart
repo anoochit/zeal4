@@ -61,7 +61,12 @@ runETL() async {
 
         if (match != null) {
           final uuid = match.group(1)!;
-          client.devicelog.addDeivceLog(uuid, message);
+
+          try {
+            client.devicelog.addDeivceLog(uuid, message);
+          } catch (e) {
+            print('$e');
+          }
         } else {
           print('No match found.');
         }

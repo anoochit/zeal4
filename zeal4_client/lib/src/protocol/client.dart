@@ -13,7 +13,8 @@ import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import 'dart:async' as _i2;
 import 'package:zeal4_client/src/protocol/dashboard.dart' as _i3;
 import 'package:zeal4_client/src/protocol/device_log.dart' as _i4;
-import 'protocol.dart' as _i5;
+import 'package:zeal4_client/src/protocol/snapshot_devicelog.dart' as _i5;
+import 'protocol.dart' as _i6;
 
 /// {@category Endpoint}
 class EndpointDashboard extends _i1.EndpointRef {
@@ -65,6 +66,23 @@ class EndpointDevicelog extends _i1.EndpointRef {
         },
         {},
       );
+
+  _i2.Stream<_i5.SnapshotDeviceLog> streamDeviceLog(
+    int deviceId,
+    int total,
+    bool desc,
+  ) =>
+      caller.callStreamingServerEndpoint<_i2.Stream<_i5.SnapshotDeviceLog>,
+          _i5.SnapshotDeviceLog>(
+        'devicelog',
+        'streamDeviceLog',
+        {
+          'deviceId': deviceId,
+          'total': total,
+          'desc': desc,
+        },
+        {},
+      );
 }
 
 /// {@category Endpoint}
@@ -105,7 +123,7 @@ class Client extends _i1.ServerpodClientShared {
     bool? disconnectStreamsOnLostInternetConnection,
   }) : super(
           host,
-          _i5.Protocol(),
+          _i6.Protocol(),
           securityContext: securityContext,
           authenticationKeyManager: authenticationKeyManager,
           streamingConnectionTimeout: streamingConnectionTimeout,

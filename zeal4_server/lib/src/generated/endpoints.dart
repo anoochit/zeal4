@@ -114,6 +114,39 @@ class Endpoints extends _i1.EndpointDispatch {
             params['desc'],
           ),
         ),
+        'streamDeviceLog': _i1.MethodStreamConnector(
+          name: 'streamDeviceLog',
+          params: {
+            'deviceId': _i1.ParameterDescription(
+              name: 'deviceId',
+              type: _i1.getType<int>(),
+              nullable: false,
+            ),
+            'total': _i1.ParameterDescription(
+              name: 'total',
+              type: _i1.getType<int>(),
+              nullable: false,
+            ),
+            'desc': _i1.ParameterDescription(
+              name: 'desc',
+              type: _i1.getType<bool>(),
+              nullable: false,
+            ),
+          },
+          streamParams: {},
+          returnType: _i1.MethodStreamReturnType.streamType,
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+            Map<String, Stream> streamParams,
+          ) =>
+              (endpoints['devicelog'] as _i3.DevicelogEndpoint).streamDeviceLog(
+            session,
+            params['deviceId'],
+            params['total'],
+            params['desc'],
+          ),
+        ),
       },
     );
     connectors['example'] = _i1.EndpointConnector(
