@@ -50,7 +50,7 @@ class DevicelogEndpoint extends Endpoint {
     }
   }
 
-  // stream device logs
+  // FIXME : stream device logs
   Stream<String> getDeivceLog(
       Session session, int deviceId, int total, bool desc) async* {
     while (true) {
@@ -64,7 +64,7 @@ class DevicelogEndpoint extends Endpoint {
 
       yield jsonEncode(logs.toJson());
 
-      Future.delayed(Duration(seconds: 5));
+      Future.delayed(Duration(seconds: 10));
     }
   }
 }

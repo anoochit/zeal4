@@ -55,9 +55,9 @@ client.on("connect", () => {
     console.log(message);
     logger.info(message);
 
-    // publish every 5 sec
+    // publish every 10 sec
     client.publish("/device/" + deviceId + "/msg", message);
-  }, 5000);
+  }, 10000);
 });
 
 client.on("error", (error) => {

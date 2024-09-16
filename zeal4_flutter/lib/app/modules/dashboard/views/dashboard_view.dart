@@ -9,6 +9,7 @@ import 'widgets/bar_chart_widget_view.dart';
 import 'widgets/datatable_widget_view.dart';
 import 'widgets/pie_chart_widget_view.dart';
 import 'widgets/text_widget_view.dart';
+import 'widgets/text_widget_view2.dart';
 import 'widgets/wrong_widget_view.dart';
 
 class DashboardView extends GetView<DashboardController> {
@@ -31,7 +32,7 @@ class DashboardView extends GetView<DashboardController> {
             final description = widget.description;
             final fields = widget.fields;
             final units = widget.units;
-            final points = widget.points;
+            final points = 1;
             return SizedBox(
               width: GridUtils.responsiveSize(context.width, widget.width),
               height: GridUtils.responsiveSize(context.width, widget.height),
@@ -41,13 +42,13 @@ class DashboardView extends GetView<DashboardController> {
                   builder: (context) {
                     switch (widget.type) {
                       case WidgetType.text:
-                        return TextWidgetView(
+                        return TextWidget2View(
                           name: name,
                           description: description,
                           fields: fields,
                           units: units,
                           deviceId: deviceId,
-                          points: 1,
+                          points: points,
                         );
 
                       case WidgetType.bar:
