@@ -25,7 +25,7 @@ class HomeView extends GetView<HomeController> {
             padding: const EdgeInsets.all(8.0),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: GridUtils.responsiveGridColumn(context.width),
-              childAspectRatio: 3 / 2,
+              // childAspectRatio: 16 / 9,
             ),
             itemCount: dashboards.length,
             itemBuilder: (BuildContext context, int index) {

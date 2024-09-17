@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 import 'package:flutter/material.dart';
 
 import 'package:zeal4_client/zeal4_client.dart';
@@ -56,6 +57,10 @@ class _TextWidget3ViewState extends State<TextWidget3View> {
             return const Center(
               child: Text('Error'),
             );
+          }
+
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            log('stream done');
           }
 
           // has data
