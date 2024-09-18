@@ -33,9 +33,6 @@ class _BarChartWidgetViewState extends State<BarChartWidgetView> {
   @override
   void initState() {
     super.initState();
-    // get stream device logs
-    stream =
-        client.devicelog.streamDeviceLog(widget.deviceId, widget.points, true);
   }
 
   @override
@@ -45,14 +42,21 @@ class _BarChartWidgetViewState extends State<BarChartWidgetView> {
 
   @override
   Widget build(BuildContext context) {
+    // get stream device logs
+
     return Card(
       elevation: 0.5,
       child: StreamBuilder(
-        stream: stream,
+        stream: client.devicelog
+            .streamDeviceLog(widget.deviceId, widget.points, true),
         builder:
             (BuildContext context, AsyncSnapshot<SnapshotDeviceLog> snapshot) {
           if (snapshot.hasError) {
-            return Text('${snapshot.error}');
+            return Center(
+              child: Text(
+                '${snapshot.error}',
+              ),
+            );
           }
 
           if (snapshot.hasData) {
@@ -72,11 +76,13 @@ class _BarChartWidgetViewState extends State<BarChartWidgetView> {
                   isUtc: true,
                 );
                 double value = double.parse('${data[field]}');
+
                 datasource.add(ChartData(timestamp, value));
               }
 
               chartSeries.add(
-                StackedColumnSeries<ChartData, dynamic>(
+                ColumnSeries<ChartData, dynamic>(
+                  name: field,
                   dataSource: datasource,
                   xValueMapper: (datum, index) => datum.x,
                   yValueMapper: (datum, index) => datum.y,
@@ -86,11 +92,20 @@ class _BarChartWidgetViewState extends State<BarChartWidgetView> {
 
             return SfCartesianChart(
               primaryXAxis: const DateTimeAxis(),
+              primaryYAxis: const NumericAxis(),
               series: chartSeries,
+              enableAxisAnimation: true,
+              legend: const Legend(
+                isVisible: true,
+                position: LegendPosition.top,
+              ),
             );
           }
 
-          return Container();
+          // loading
+          return const Center(
+            child: Text('loading...'),
+          );
         },
       ),
     );

@@ -29,15 +29,9 @@ class DataTableWidgetView extends StatefulWidget {
 class _DataTableWidgetViewState extends State<DataTableWidgetView> {
   late Stream<SnapshotDeviceLog> stream;
 
-  List<DeviceLog> devicelogs = [];
-
   @override
   void initState() {
     super.initState();
-
-    // get stream device logs
-    stream =
-        client.devicelog.streamDeviceLog(widget.deviceId, widget.points, true);
   }
 
   @override
@@ -51,11 +45,16 @@ class _DataTableWidgetViewState extends State<DataTableWidgetView> {
       elevation: 0.5,
       clipBehavior: Clip.antiAlias,
       child: StreamBuilder(
-        stream: stream,
+        stream: client.devicelog
+            .streamDeviceLog(widget.deviceId, widget.points, true),
         builder:
             (BuildContext context, AsyncSnapshot<SnapshotDeviceLog> snapshot) {
           if (snapshot.hasError) {
-            return Text('${snapshot.error}');
+            return Center(
+              child: Text(
+                '${snapshot.error}',
+              ),
+            );
           }
 
           if (snapshot.hasData) {
@@ -90,7 +89,10 @@ class _DataTableWidgetViewState extends State<DataTableWidgetView> {
               }).toList(),
             );
           }
-          return Container();
+          // loading
+          return const Center(
+            child: Text('loading...'),
+          );
         },
       ),
     );

@@ -75,7 +75,15 @@ class DashboardView extends GetView<DashboardController> {
                         );
 
                       case WidgetType.pie:
-                        return const PieChartWidgetView();
+                        return PieChartWidgetView(
+                          name: name,
+                          description: description,
+                          fields: fields,
+                          units: units,
+                          deviceId: deviceId,
+                          // fix 1 point
+                          points: 1,
+                        );
 
                       case WidgetType.table:
                         return DataTableWidgetView(

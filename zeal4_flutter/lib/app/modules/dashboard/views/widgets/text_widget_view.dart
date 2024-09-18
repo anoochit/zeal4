@@ -35,10 +35,6 @@ class _TextWidgetViewState extends State<TextWidgetView> {
   @override
   void initState() {
     super.initState();
-    // get stream device logs
-    // use lastest 1 row
-    stream =
-        client.devicelog.streamDeviceLog(widget.deviceId, widget.points, true);
   }
 
   @override
@@ -51,13 +47,17 @@ class _TextWidgetViewState extends State<TextWidgetView> {
     return Card(
       elevation: 0.5,
       child: StreamBuilder(
-        stream: stream,
+        stream: client.devicelog
+            .streamDeviceLog(widget.deviceId, widget.points, true)
+            .distinct(),
         builder:
             (BuildContext context, AsyncSnapshot<SnapshotDeviceLog> snapshot) {
           // has error
           if (snapshot.hasError) {
-            return const Center(
-              child: Text('Error'),
+            return Center(
+              child: Text(
+                '${snapshot.error}',
+              ),
             );
           }
 

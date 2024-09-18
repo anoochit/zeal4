@@ -33,9 +33,6 @@ class _LineChartWidgetViewState extends State<LineChartWidgetView> {
   @override
   void initState() {
     super.initState();
-    // get stream device logs
-    stream =
-        client.devicelog.streamDeviceLog(widget.deviceId, widget.points, true);
   }
 
   @override
@@ -48,11 +45,16 @@ class _LineChartWidgetViewState extends State<LineChartWidgetView> {
     return Card(
       elevation: 0.5,
       child: StreamBuilder(
-        stream: stream,
+        stream: client.devicelog
+            .streamDeviceLog(widget.deviceId, widget.points, true),
         builder:
             (BuildContext context, AsyncSnapshot<SnapshotDeviceLog> snapshot) {
           if (snapshot.hasError) {
-            return Text('${snapshot.error}');
+            return Center(
+              child: Text(
+                '${snapshot.error}',
+              ),
+            );
           }
 
           if (snapshot.hasData) {
@@ -86,11 +88,15 @@ class _LineChartWidgetViewState extends State<LineChartWidgetView> {
 
             return SfCartesianChart(
               primaryXAxis: const DateTimeAxis(),
+              primaryYAxis: const NumericAxis(),
               series: chartSeries,
             );
           }
 
-          return Container();
+          // loading
+          return const Center(
+            child: Text('loading...'),
+          );
         },
       ),
     );
