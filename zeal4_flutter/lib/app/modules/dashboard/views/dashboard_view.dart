@@ -16,12 +16,12 @@ class DashboardView extends GetView<DashboardController> {
   const DashboardView({super.key});
   @override
   Widget build(BuildContext context) {
-    List<DashboardWidget> widgets = controller.dashboard.value.widget ?? [];
-
     return GetBuilder<DashboardController>(
         id: 'dashboard',
         init: DashboardController(),
         builder: (controller) {
+          List<DashboardWidget> widgets =
+              controller.dashboard.value.widget ?? [];
           return Scaffold(
             appBar: AppBar(
               title: Text(controller.dashboard.value.name),

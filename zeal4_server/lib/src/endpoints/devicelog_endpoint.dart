@@ -53,18 +53,18 @@ class DevicelogEndpoint extends Endpoint {
   // Method 2 : stream device log as a Serializable object
   Stream<SnapshotDeviceLog> streamDeviceLog(
       Session session, int deviceId, int total, bool desc) async* {
-    // while (true) {
-    List<DeviceLog> logs = await DeviceLog.db.find(
-      session,
-      where: (p) => (p.deviceId.equals(deviceId)),
-      limit: total,
-      orderBy: (p) => (p.created),
-      orderDescending: desc,
-    );
+    while (true) {
+      List<DeviceLog> logs = await DeviceLog.db.find(
+        session,
+        where: (p) => (p.deviceId.equals(deviceId)),
+        limit: total,
+        orderBy: (p) => (p.created),
+        orderDescending: desc,
+      );
 
-    yield SnapshotDeviceLog(devicelogs: logs);
+      yield SnapshotDeviceLog(devicelogs: logs);
 
-    Future.delayed(Duration(seconds: 10));
-    // }
+      Future.delayed(Duration(seconds: 10));
+    }
   }
 }
