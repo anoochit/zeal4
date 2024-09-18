@@ -78,7 +78,7 @@ class _LineChartWidgetViewState extends State<LineChartWidgetView> {
               }
 
               chartSeries.add(
-                LineSeries<ChartData, dynamic>(
+                StackedLineSeries<ChartData, dynamic>(
                   name: field,
                   dataSource: datasource.reversed.toList(),
                   xValueMapper: (datum, index) => datum.x,

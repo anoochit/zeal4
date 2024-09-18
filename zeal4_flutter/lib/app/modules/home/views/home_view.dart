@@ -18,7 +18,7 @@ class HomeView extends GetView<HomeController> {
         final dashboards = controller.dashboards;
         return RefreshIndicator(
           onRefresh: () async {
-            //
+            // refresh dashboard data
             controller.getDashboard();
           },
           child: GridView.builder(
@@ -36,7 +36,7 @@ class HomeView extends GetView<HomeController> {
                 clipBehavior: Clip.antiAlias,
                 child: InkWell(
                   onTap: () {
-                    // TODO : open dashboard
+                    // open dashboard screen
                     Get.toNamed(
                       Routes.DASHBOARD,
                       arguments: dashboard,
@@ -44,7 +44,17 @@ class HomeView extends GetView<HomeController> {
                   },
                   child: GridTile(
                     child: Center(
-                      child: Text(name),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            Icons.dashboard,
+                            size: 64.0,
+                            color: Theme.of(context).colorScheme.inversePrimary,
+                          ),
+                          Text(name),
+                        ],
+                      ),
                     ),
                   ),
                 ),
