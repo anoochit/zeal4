@@ -35,8 +35,9 @@ class _TextWidget3ViewState extends State<TextWidget3View> {
   @override
   void initState() {
     super.initState();
-
-    stream = client.devicelog.streamDeviceLog(widget.deviceId, 1, true);
+    // use lastest 1 row
+    stream =
+        client.devicelog.streamDeviceLog(widget.deviceId, widget.points, true);
   }
 
   @override

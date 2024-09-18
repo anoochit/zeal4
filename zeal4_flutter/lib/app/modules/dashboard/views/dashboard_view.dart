@@ -31,10 +31,12 @@ class DashboardView extends GetView<DashboardController> {
             final description = widget.description;
             final fields = widget.fields;
             final units = widget.units;
-            const points = 1;
+            const points = 600;
             return SizedBox(
               width: GridUtils.responsiveSize(context.width, widget.width),
-              height: GridUtils.responsiveSize(context.width, widget.height),
+              height: (widget.type == WidgetType.table)
+                  ? null
+                  : GridUtils.responsiveSize(context.width, widget.height),
               child: Padding(
                 padding: const EdgeInsets.all(2.0),
                 child: Builder(
@@ -47,7 +49,7 @@ class DashboardView extends GetView<DashboardController> {
                           fields: fields,
                           units: units,
                           deviceId: deviceId,
-                          points: points,
+                          points: 1,
                         );
 
                       case WidgetType.bar:
@@ -57,7 +59,14 @@ class DashboardView extends GetView<DashboardController> {
                         return const PieChartWidgetView();
 
                       case WidgetType.table:
-                        return const DataTableWidgetView();
+                        return DataTableWidgetView(
+                          name: name,
+                          description: description,
+                          fields: fields,
+                          units: units,
+                          deviceId: deviceId,
+                          points: 10,
+                        );
 
                       default:
                         return const WrongWidgetView();
