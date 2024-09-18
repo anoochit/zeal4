@@ -44,6 +44,7 @@ class _LineChartWidgetViewState extends State<LineChartWidgetView> {
   Widget build(BuildContext context) {
     return Card(
       elevation: 0.5,
+      clipBehavior: Clip.antiAlias,
       child: StreamBuilder(
         stream: client.devicelog
             .streamDeviceLog(widget.deviceId, widget.points, true),

@@ -46,6 +46,7 @@ class _TextWidgetViewState extends State<TextWidgetView> {
   Widget build(BuildContext context) {
     return Card(
       elevation: 0.5,
+      clipBehavior: Clip.antiAlias,
       child: StreamBuilder(
         stream: client.devicelog
             .streamDeviceLog(widget.deviceId, widget.points, true)

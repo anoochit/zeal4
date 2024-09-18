@@ -18,93 +18,100 @@ class DashboardView extends GetView<DashboardController> {
   Widget build(BuildContext context) {
     List<DashboardWidget> widgets = controller.dashboard.value.widget ?? [];
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Obx(() => Text(controller.dashboard.value.name)),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-      ),
-      body: SingleChildScrollView(
-        child: Wrap(
-          children: List.generate(widgets.length, (index) {
-            final widget = widgets[index];
-            final deviceId = widget.deviceId;
-            final name = widget.name;
-            final description = widget.description;
-            final fields = widget.fields;
-            final units = widget.units;
-            final points = widget.points;
-            return SizedBox(
-              width: GridUtils.responsiveSize(context.width, widget.width),
-              height: (widget.type == WidgetType.table)
-                  ? null
-                  : GridUtils.responsiveSize(context.width, widget.height),
-              child: Padding(
-                padding: const EdgeInsets.all(2.0),
-                child: Builder(
-                  builder: (context) {
-                    switch (widget.type) {
-                      case WidgetType.text:
-                        return TextWidgetView(
-                          name: name,
-                          description: description,
-                          fields: fields,
-                          units: units,
-                          deviceId: deviceId,
-                          // fix 1 point
-                          points: 1,
-                        );
+    return GetBuilder<DashboardController>(
+        id: 'dashboard',
+        init: DashboardController(),
+        builder: (controller) {
+          return Scaffold(
+            appBar: AppBar(
+              title: Text(controller.dashboard.value.name),
+              backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+            ),
+            body: SingleChildScrollView(
+              child: Wrap(
+                children: List.generate(widgets.length, (index) {
+                  final widget = widgets[index];
+                  final deviceId = widget.deviceId;
+                  final name = widget.name;
+                  final description = widget.description;
+                  final fields = widget.fields;
+                  final units = widget.units;
+                  final points = widget.points;
+                  return SizedBox(
+                    width:
+                        GridUtils.responsiveSize(context.width, widget.width),
+                    height: (widget.type == WidgetType.table)
+                        ? null
+                        : GridUtils.responsiveSize(
+                            context.width, widget.height),
+                    child: Padding(
+                      padding: const EdgeInsets.all(2.0),
+                      child: Builder(
+                        builder: (context) {
+                          switch (widget.type) {
+                            case WidgetType.text:
+                              return TextWidgetView(
+                                name: name,
+                                description: description,
+                                fields: fields,
+                                units: units,
+                                deviceId: deviceId,
+                                // fix 1 point
+                                points: 1,
+                              );
 
-                      case WidgetType.bar:
-                        return BarChartWidgetView(
-                          name: name,
-                          description: description,
-                          fields: fields,
-                          units: units,
-                          deviceId: deviceId,
-                          points: points,
-                        );
+                            case WidgetType.bar:
+                              return BarChartWidgetView(
+                                name: name,
+                                description: description,
+                                fields: fields,
+                                units: units,
+                                deviceId: deviceId,
+                                points: points,
+                              );
 
-                      case WidgetType.line:
-                        return LineChartWidgetView(
-                          name: name,
-                          description: description,
-                          fields: fields,
-                          units: units,
-                          deviceId: deviceId,
-                          points: points,
-                        );
+                            case WidgetType.line:
+                              return LineChartWidgetView(
+                                name: name,
+                                description: description,
+                                fields: fields,
+                                units: units,
+                                deviceId: deviceId,
+                                points: points,
+                              );
 
-                      case WidgetType.pie:
-                        return PieChartWidgetView(
-                          name: name,
-                          description: description,
-                          fields: fields,
-                          units: units,
-                          deviceId: deviceId,
-                          // fix 1 point
-                          points: 1,
-                        );
+                            case WidgetType.pie:
+                              return PieChartWidgetView(
+                                name: name,
+                                description: description,
+                                fields: fields,
+                                units: units,
+                                deviceId: deviceId,
+                                // fix 1 point
+                                points: 1,
+                              );
 
-                      case WidgetType.table:
-                        return DataTableWidgetView(
-                          name: name,
-                          description: description,
-                          fields: fields,
-                          units: units,
-                          deviceId: deviceId,
-                          points: points,
-                        );
+                            case WidgetType.table:
+                              return DataTableWidgetView(
+                                name: name,
+                                description: description,
+                                fields: fields,
+                                units: units,
+                                deviceId: deviceId,
+                                points: points,
+                              );
 
-                      default:
-                        return const WrongWidgetView();
-                    }
-                  },
-                ),
+                            default:
+                              return const WrongWidgetView();
+                          }
+                        },
+                      ),
+                    ),
+                  );
+                }),
               ),
-            );
-          }),
-        ),
-      ),
-    );
+            ),
+          );
+        });
   }
 }
