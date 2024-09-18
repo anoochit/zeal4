@@ -72,7 +72,6 @@ class _LineChartWidgetViewState extends State<LineChartWidgetView> {
                 final data = jsonDecode(log.message);
                 final timestamp = DateTime.fromMillisecondsSinceEpoch(
                   double.parse('${data['timestamp'] * 1000}').toInt(),
-                  isUtc: true,
                 ).toIso8601String();
                 double value = double.parse('${data[field]}');
                 datasource.add(ChartData(timestamp, value));
@@ -81,7 +80,7 @@ class _LineChartWidgetViewState extends State<LineChartWidgetView> {
               chartSeries.add(
                 LineSeries<ChartData, dynamic>(
                   name: field,
-                  dataSource: datasource,
+                  dataSource: datasource.reversed.toList(),
                   xValueMapper: (datum, index) => datum.x,
                   yValueMapper: (datum, index) => datum.y,
                   animationDuration: 0,

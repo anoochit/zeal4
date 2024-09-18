@@ -83,7 +83,7 @@ class _BarChartWidgetViewState extends State<BarChartWidgetView> {
               chartSeries.add(
                 ColumnSeries<ChartData, dynamic>(
                   name: field,
-                  dataSource: datasource,
+                  dataSource: datasource.reversed.toList(),
                   xValueMapper: (datum, index) => datum.x,
                   yValueMapper: (datum, index) => datum.y,
                 ),
