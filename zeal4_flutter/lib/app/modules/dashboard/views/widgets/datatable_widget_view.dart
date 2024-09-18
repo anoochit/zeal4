@@ -51,8 +51,11 @@ class _DataTableWidgetViewState extends State<DataTableWidgetView> {
             (BuildContext context, AsyncSnapshot<SnapshotDeviceLog> snapshot) {
           if (snapshot.hasError) {
             return Center(
-              child: Text(
-                '${snapshot.error}',
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 64.0),
+                child: Text(
+                  '${snapshot.error}',
+                ),
               ),
             );
           }
