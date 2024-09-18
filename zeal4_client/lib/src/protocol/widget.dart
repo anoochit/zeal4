@@ -25,14 +25,17 @@ abstract class DashboardWidget implements _i1.SerializableModel {
     required this.fields,
     required this.units,
     _i2.WidgetType? type,
+    required this.labels,
     int? points,
     required this.dashboardId,
     this.dashboard,
+    bool? enable,
   })  : width = width ?? 3,
         height = height ?? 1,
         order = order ?? 1,
         type = type ?? _i2.WidgetType.text,
-        points = points ?? 60;
+        points = points ?? 60,
+        enable = enable ?? false;
 
   factory DashboardWidget({
     int? id,
@@ -46,9 +49,11 @@ abstract class DashboardWidget implements _i1.SerializableModel {
     required List<String> fields,
     required List<String> units,
     _i2.WidgetType? type,
+    required List<String> labels,
     int? points,
     required int dashboardId,
     _i2.Dashboard? dashboard,
+    bool? enable,
   }) = _DashboardWidgetImpl;
 
   factory DashboardWidget.fromJson(Map<String, dynamic> jsonSerialization) {
@@ -70,12 +75,16 @@ abstract class DashboardWidget implements _i1.SerializableModel {
       units:
           (jsonSerialization['units'] as List).map((e) => e as String).toList(),
       type: _i2.WidgetType.fromJson((jsonSerialization['type'] as String)),
+      labels: (jsonSerialization['labels'] as List)
+          .map((e) => e as String)
+          .toList(),
       points: jsonSerialization['points'] as int,
       dashboardId: jsonSerialization['dashboardId'] as int,
       dashboard: jsonSerialization['dashboard'] == null
           ? null
           : _i2.Dashboard.fromJson(
               (jsonSerialization['dashboard'] as Map<String, dynamic>)),
+      enable: jsonSerialization['enable'] as bool,
     );
   }
 
@@ -104,11 +113,15 @@ abstract class DashboardWidget implements _i1.SerializableModel {
 
   _i2.WidgetType type;
 
+  List<String> labels;
+
   int points;
 
   int dashboardId;
 
   _i2.Dashboard? dashboard;
+
+  bool enable;
 
   DashboardWidget copyWith({
     int? id,
@@ -122,9 +135,11 @@ abstract class DashboardWidget implements _i1.SerializableModel {
     List<String>? fields,
     List<String>? units,
     _i2.WidgetType? type,
+    List<String>? labels,
     int? points,
     int? dashboardId,
     _i2.Dashboard? dashboard,
+    bool? enable,
   });
   @override
   Map<String, dynamic> toJson() {
@@ -140,9 +155,11 @@ abstract class DashboardWidget implements _i1.SerializableModel {
       'fields': fields.toJson(),
       'units': units.toJson(),
       'type': type.toJson(),
+      'labels': labels.toJson(),
       'points': points,
       'dashboardId': dashboardId,
       if (dashboard != null) 'dashboard': dashboard?.toJson(),
+      'enable': enable,
     };
   }
 
@@ -167,9 +184,11 @@ class _DashboardWidgetImpl extends DashboardWidget {
     required List<String> fields,
     required List<String> units,
     _i2.WidgetType? type,
+    required List<String> labels,
     int? points,
     required int dashboardId,
     _i2.Dashboard? dashboard,
+    bool? enable,
   }) : super._(
           id: id,
           name: name,
@@ -182,9 +201,11 @@ class _DashboardWidgetImpl extends DashboardWidget {
           fields: fields,
           units: units,
           type: type,
+          labels: labels,
           points: points,
           dashboardId: dashboardId,
           dashboard: dashboard,
+          enable: enable,
         );
 
   @override
@@ -200,9 +221,11 @@ class _DashboardWidgetImpl extends DashboardWidget {
     List<String>? fields,
     List<String>? units,
     _i2.WidgetType? type,
+    List<String>? labels,
     int? points,
     int? dashboardId,
     Object? dashboard = _Undefined,
+    bool? enable,
   }) {
     return DashboardWidget(
       id: id is int? ? id : this.id,
@@ -216,10 +239,12 @@ class _DashboardWidgetImpl extends DashboardWidget {
       fields: fields ?? this.fields.map((e0) => e0).toList(),
       units: units ?? this.units.map((e0) => e0).toList(),
       type: type ?? this.type,
+      labels: labels ?? this.labels.map((e0) => e0).toList(),
       points: points ?? this.points,
       dashboardId: dashboardId ?? this.dashboardId,
       dashboard:
           dashboard is _i2.Dashboard? ? dashboard : this.dashboard?.copyWith(),
+      enable: enable ?? this.enable,
     );
   }
 }

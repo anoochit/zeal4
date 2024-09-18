@@ -71,10 +71,9 @@ class _BarChartWidgetViewState extends State<BarChartWidgetView> {
 
               for (var log in devicelogs) {
                 final data = jsonDecode(log.message);
-                DateTime timestamp = DateTime.fromMillisecondsSinceEpoch(
+                final timestamp = DateTime.fromMillisecondsSinceEpoch(
                   double.parse('${data['timestamp'] * 1000}').toInt(),
-                  isUtc: true,
-                );
+                ).toIso8601String();
                 double value = double.parse('${data[field]}');
 
                 datasource.add(ChartData(timestamp, value));
@@ -91,10 +90,9 @@ class _BarChartWidgetViewState extends State<BarChartWidgetView> {
             }
 
             return SfCartesianChart(
-              primaryXAxis: const DateTimeAxis(),
+              primaryXAxis: const CategoryAxis(),
               primaryYAxis: const NumericAxis(),
               series: chartSeries,
-              enableAxisAnimation: true,
               legend: const Legend(
                 isVisible: true,
                 position: LegendPosition.top,
@@ -113,7 +111,7 @@ class _BarChartWidgetViewState extends State<BarChartWidgetView> {
 }
 
 class ChartData {
-  final DateTime x;
+  final String x;
   final double y;
   ChartData(
     this.x,

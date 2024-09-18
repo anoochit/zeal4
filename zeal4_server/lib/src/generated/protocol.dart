@@ -153,6 +153,12 @@ class Protocol extends _i1.SerializationManagerServer {
           columnDefault: '\'text\'::text',
         ),
         _i2.ColumnDefinition(
+          name: 'labels',
+          columnType: _i2.ColumnType.json,
+          isNullable: false,
+          dartType: 'List<String>',
+        ),
+        _i2.ColumnDefinition(
           name: 'points',
           columnType: _i2.ColumnType.bigint,
           isNullable: false,
@@ -164,6 +170,13 @@ class Protocol extends _i1.SerializationManagerServer {
           columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int',
+        ),
+        _i2.ColumnDefinition(
+          name: 'enable',
+          columnType: _i2.ColumnType.boolean,
+          isNullable: false,
+          dartType: 'bool',
+          columnDefault: 'false',
         ),
       ],
       foreignKeys: [

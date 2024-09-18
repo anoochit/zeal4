@@ -27,5 +27,7 @@ fields:
   fields: List<String>
   units: List<String>
   type: WidgetType, default=text
+  labels: List<String>
   points: int, default=60
   dashboard: Dashboard?, relation(name=dashboard_widget)
+  enable: bool, default=false

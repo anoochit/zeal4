@@ -69,27 +69,33 @@ class _LineChartWidgetViewState extends State<LineChartWidgetView> {
 
               for (var log in devicelogs) {
                 final data = jsonDecode(log.message);
-                DateTime timestamp = DateTime.fromMillisecondsSinceEpoch(
+                final timestamp = DateTime.fromMillisecondsSinceEpoch(
                   double.parse('${data['timestamp'] * 1000}').toInt(),
                   isUtc: true,
-                );
+                ).toIso8601String();
                 double value = double.parse('${data[field]}');
                 datasource.add(ChartData(timestamp, value));
               }
 
               chartSeries.add(
                 LineSeries<ChartData, dynamic>(
+                  name: field,
                   dataSource: datasource,
                   xValueMapper: (datum, index) => datum.x,
                   yValueMapper: (datum, index) => datum.y,
+                  animationDuration: 0,
                 ),
               );
             }
 
             return SfCartesianChart(
-              primaryXAxis: const DateTimeAxis(),
+              primaryXAxis: const CategoryAxis(),
               primaryYAxis: const NumericAxis(),
               series: chartSeries,
+              legend: const Legend(
+                isVisible: true,
+                position: LegendPosition.top,
+              ),
             );
           }
 
@@ -104,7 +110,7 @@ class _LineChartWidgetViewState extends State<LineChartWidgetView> {
 }
 
 class ChartData {
-  final DateTime x;
+  final String x;
   final double y;
   ChartData(
     this.x,

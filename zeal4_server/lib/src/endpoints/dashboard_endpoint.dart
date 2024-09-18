@@ -29,6 +29,7 @@ class DashboardEndpoint extends Endpoint {
       orderDescending: false,
       include: Dashboard.include(
         widget: DashboardWidget.includeList(
+          where: (p) => (p.enable.equals(true)),
           orderBy: (w) => (w.order),
           include: DashboardWidget.include(
             device: Device.include(),

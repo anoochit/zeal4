@@ -30,7 +30,7 @@ void run(List<String> args) async {
   );
 
   // init sample data
-  // initSampleData(pod);
+  initSampleData(pod);
 
   // Start the server.
   await pod.start();
@@ -77,23 +77,15 @@ Future<void> initSampleData(Serverpod pod) async {
           deviceId: 1,
           fields: ['cpu_usage'],
           units: ['%'],
+          labels: ['CPU Usage'],
           dashboardId: 1,
           type: WidgetType.text,
           width: 2,
           height: 1,
+          order: 1,
+          enable: true,
         ),
-        // bar chart
-        DashboardWidget(
-          name: 'CPU Usage',
-          description: 'CPU Usage',
-          deviceId: 1,
-          fields: ['cpu_usage'],
-          units: ['%'],
-          dashboardId: 1,
-          type: WidgetType.bar,
-          width: 2,
-          height: 1,
-        ),
+
         // text widget
         DashboardWidget(
           name: 'Mem Usage',
@@ -101,22 +93,60 @@ Future<void> initSampleData(Serverpod pod) async {
           deviceId: 1,
           fields: ['mem_usage'],
           units: ['MB'],
+          labels: ['Mem Usage'],
           dashboardId: 1,
           type: WidgetType.text,
           width: 2,
           height: 1,
+          order: 2,
+          enable: true,
+        ),
+
+        // text widget
+        DashboardWidget(
+          name: 'Mem Total',
+          description: 'Mem Total',
+          deviceId: 1,
+          fields: ['mem_total'],
+          units: ['MB'],
+          labels: ['Mem Total'],
+          dashboardId: 1,
+          type: WidgetType.text,
+          width: 2,
+          height: 1,
+          order: 2,
+          enable: true,
+        ),
+
+        // bar chart
+        DashboardWidget(
+          name: 'CPU Usage',
+          description: 'CPU Usage',
+          deviceId: 1,
+          fields: ['cpu_usage'],
+          units: ['%'],
+          labels: ['CPU Usage'],
+          dashboardId: 1,
+          type: WidgetType.bar,
+          width: 6,
+          height: 1,
+          order: 3,
+          enable: true,
         ),
         // bar chart
         DashboardWidget(
           name: 'Mem Usage',
           description: 'Mem Usage',
           deviceId: 1,
-          fields: ['mem_usage'],
-          units: ['MB'],
+          fields: ['mem_usage', 'mem_total'],
+          units: ['MB', 'MB'],
+          labels: ['Mem Usage', 'Mem Total'],
           dashboardId: 1,
           type: WidgetType.bar,
-          width: 2,
+          width: 6,
           height: 1,
+          order: 4,
+          enable: true,
         ),
         // table
         DashboardWidget(
@@ -125,10 +155,13 @@ Future<void> initSampleData(Serverpod pod) async {
           deviceId: 1,
           fields: ['timestamp', 'cpu_usage', 'mem_usage', 'mem_total'],
           units: ['timestamp', '%', 'MB', 'MB'],
+          labels: ['Datetime', 'CPU Usage', 'Mem Usage', 'Mem Total'],
           dashboardId: 1,
           type: WidgetType.table,
           width: 12,
           height: 2,
+          order: 5,
+          enable: true,
         ),
       ];
 

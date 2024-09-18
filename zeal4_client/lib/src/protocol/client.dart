@@ -51,22 +51,6 @@ class EndpointDevicelog extends _i1.EndpointRef {
         },
       );
 
-  _i2.Stream<String> getDeivceLog(
-    int deviceId,
-    int total,
-    bool desc,
-  ) =>
-      caller.callStreamingServerEndpoint<_i2.Stream<String>, String>(
-        'devicelog',
-        'getDeivceLog',
-        {
-          'deviceId': deviceId,
-          'total': total,
-          'desc': desc,
-        },
-        {},
-      );
-
   _i2.Stream<_i5.SnapshotDeviceLog> streamDeviceLog(
     int deviceId,
     int total,
