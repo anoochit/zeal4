@@ -8,14 +8,14 @@ import '../controllers/dashboard_controller.dart';
 import 'widgets/bar_chart_widget_view.dart';
 import 'widgets/datatable_widget_view.dart';
 import 'widgets/pie_chart_widget_view.dart';
-import 'widgets/text_widget_view3.dart';
+import 'widgets/text_widget_view.dart';
 import 'widgets/wrong_widget_view.dart';
 
 class DashboardView extends GetView<DashboardController> {
   const DashboardView({super.key});
   @override
   Widget build(BuildContext context) {
-    final widgets = controller.dashboard.value.widget ?? [];
+    List<DashboardWidget> widgets = controller.dashboard.value.widget ?? [];
 
     return Scaffold(
       appBar: AppBar(
@@ -31,7 +31,7 @@ class DashboardView extends GetView<DashboardController> {
             final description = widget.description;
             final fields = widget.fields;
             final units = widget.units;
-            const points = 600;
+            final points = widget.points;
             return SizedBox(
               width: GridUtils.responsiveSize(context.width, widget.width),
               height: (widget.type == WidgetType.table)
@@ -43,12 +43,13 @@ class DashboardView extends GetView<DashboardController> {
                   builder: (context) {
                     switch (widget.type) {
                       case WidgetType.text:
-                        return TextWidget3View(
+                        return TextWidgetView(
                           name: name,
                           description: description,
                           fields: fields,
                           units: units,
                           deviceId: deviceId,
+                          // fix 1 point
                           points: 1,
                         );
 
@@ -65,7 +66,7 @@ class DashboardView extends GetView<DashboardController> {
                           fields: fields,
                           units: units,
                           deviceId: deviceId,
-                          points: 10,
+                          points: points,
                         );
 
                       default:

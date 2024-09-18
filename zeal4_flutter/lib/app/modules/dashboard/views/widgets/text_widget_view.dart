@@ -1,15 +1,13 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 
-import 'package:get/get.dart';
 import 'package:zeal4_client/zeal4_client.dart';
 
 import '../../../../../serverpod.dart';
 
-class TextWidgetView extends GetView<TextWidgetController> {
+class TextWidgetView extends StatefulWidget {
   const TextWidgetView({
     super.key,
     required this.name,
@@ -27,38 +25,62 @@ class TextWidgetView extends GetView<TextWidgetController> {
   final int deviceId;
   final int points;
 
-  List<DeviceLog> deviceLogFromJson(String str) =>
-      List<DeviceLog>.from(jsonDecode(str).map((x) => DeviceLog.fromJson(x)));
+  @override
+  State<TextWidgetView> createState() => _TextWidgetViewState();
+}
+
+class _TextWidgetViewState extends State<TextWidgetView> {
+  late Stream<SnapshotDeviceLog> stream;
+
+  @override
+  void initState() {
+    super.initState();
+    // use lastest 1 row
+    stream =
+        client.devicelog.streamDeviceLog(widget.deviceId, widget.points, true);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Card(
       elevation: 0.5,
       child: StreamBuilder(
-        stream: controller.streamDeviceLog(deviceId: deviceId, total: points),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
+        stream: stream,
+        builder:
+            (BuildContext context, AsyncSnapshot<SnapshotDeviceLog> snapshot) {
+          // has error
           if (snapshot.hasError) {
-            return Center(
-              child: Text('${snapshot.error}'),
+            return const Center(
+              child: Text('Error'),
             );
           }
 
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            log('stream done');
+          }
+
+          // has data
           if (snapshot.hasData) {
             final data = snapshot.data;
-            log('${DateTime.timestamp()} : $data');
 
             if (data != null) {
-              // convert to list of device log
-              final logs = deviceLogFromJson(data);
-
               // get firt message
-              final log = logs.first.message;
+              final log = data.devicelogs.first.message;
+
               // title
-              final title = name;
+              final title = widget.name;
+
               // get value from first field
-              final value = jsonDecode(log)[fields.first];
+              final value = jsonDecode(log)[widget.fields.first];
+
               // unit from first field
-              final unit = units.first;
+              final unit = widget.units.first;
+
               return Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -76,7 +98,7 @@ class TextWidgetView extends GetView<TextWidgetController> {
 
                   // unit
                   Text(
-                    unit ?? '',
+                    unit,
                     style: Theme.of(context).textTheme.labelSmall,
                   ),
                 ],
@@ -88,23 +110,12 @@ class TextWidgetView extends GetView<TextWidgetController> {
             }
           }
 
+          // loading
           return const Center(
             child: Text('loading...'),
           );
         },
       ),
     );
-  }
-}
-
-// FIXME : should handle stream life cycle
-class TextWidgetController extends GetxController {
-  Stream<String> streamDeviceLog({required int deviceId, required int total}) {
-    try {
-      final snapshot = client.devicelog.getDeivceLog(deviceId, total, true);
-      return snapshot;
-    } catch (e) {
-      throw ('$e');
-    }
   }
 }
