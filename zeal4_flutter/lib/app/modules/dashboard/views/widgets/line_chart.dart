@@ -1,12 +1,13 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:zeal4_client/zeal4_client.dart';
 
 import '../../../../../serverpod.dart';
 
-class DataTableWidgetView extends StatefulWidget {
-  const DataTableWidgetView(
+class LineChartWidgetView extends StatefulWidget {
+  const LineChartWidgetView(
       {super.key,
       required this.name,
       required this.description,
@@ -23,18 +24,15 @@ class DataTableWidgetView extends StatefulWidget {
   final int points;
 
   @override
-  State<DataTableWidgetView> createState() => _DataTableWidgetViewState();
+  State<LineChartWidgetView> createState() => _LineChartWidgetViewState();
 }
 
-class _DataTableWidgetViewState extends State<DataTableWidgetView> {
+class _LineChartWidgetViewState extends State<LineChartWidgetView> {
   late Stream<SnapshotDeviceLog> stream;
-
-  List<DeviceLog> devicelogs = [];
 
   @override
   void initState() {
     super.initState();
-
     // get stream device logs
     stream =
         client.devicelog.streamDeviceLog(widget.deviceId, widget.points, true);
@@ -49,7 +47,6 @@ class _DataTableWidgetViewState extends State<DataTableWidgetView> {
   Widget build(BuildContext context) {
     return Card(
       elevation: 0.5,
-      clipBehavior: Clip.antiAlias,
       child: StreamBuilder(
         stream: stream,
         builder:
@@ -63,36 +60,48 @@ class _DataTableWidgetViewState extends State<DataTableWidgetView> {
 
             final devicelogs = data!.devicelogs;
 
-            return DataTable(
-              columns: List.generate(
-                widget.fields.length,
-                (index) => DataColumn(
-                  label: Text(widget.fields[index]),
-                ),
-              ),
-              rows: devicelogs.map((e) {
-                final message = e.message;
+            List<CartesianSeries> chartSeries = [];
 
-                final data = jsonDecode(message) as Map<String, dynamic>;
-                return DataRow(
-                  cells: widget.fields
-                      .map(
-                        (cell) => DataCell(
-                          (cell == 'timestamp')
-                              ? Text(DateTime.fromMillisecondsSinceEpoch(
-                                  double.parse('${data[cell] * 1000}').toInt(),
-                                ).toIso8601String())
-                              : Text('${data[cell]}'),
-                        ),
-                      )
-                      .toList(),
+            for (var field in widget.fields) {
+              List<ChartData> datasource = [];
+
+              for (var log in devicelogs) {
+                final data = jsonDecode(log.message);
+                DateTime timestamp = DateTime.fromMillisecondsSinceEpoch(
+                  double.parse('${data['timestamp'] * 1000}').toInt(),
+                  isUtc: true,
                 );
-              }).toList(),
+                double value = double.parse('${data[field]}');
+                datasource.add(ChartData(timestamp, value));
+              }
+
+              chartSeries.add(
+                LineSeries<ChartData, dynamic>(
+                  dataSource: datasource,
+                  xValueMapper: (datum, index) => datum.x,
+                  yValueMapper: (datum, index) => datum.y,
+                ),
+              );
+            }
+
+            return SfCartesianChart(
+              primaryXAxis: const DateTimeAxis(),
+              series: chartSeries,
             );
           }
+
           return Container();
         },
       ),
     );
   }
+}
+
+class ChartData {
+  final DateTime x;
+  final double y;
+  ChartData(
+    this.x,
+    this.y,
+  );
 }

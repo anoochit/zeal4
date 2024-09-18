@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:zeal4_client/zeal4_client.dart';
+import 'package:zeal4_flutter/app/modules/dashboard/views/widgets/line_chart.dart';
 
 import '../../../utils/grid_utils.dart';
 import '../controllers/dashboard_controller.dart';
@@ -54,7 +55,24 @@ class DashboardView extends GetView<DashboardController> {
                         );
 
                       case WidgetType.bar:
-                        return const BarChartWidgetView();
+                        return BarChartWidgetView(
+                          name: name,
+                          description: description,
+                          fields: fields,
+                          units: units,
+                          deviceId: deviceId,
+                          points: points,
+                        );
+
+                      case WidgetType.line:
+                        return LineChartWidgetView(
+                          name: name,
+                          description: description,
+                          fields: fields,
+                          units: units,
+                          deviceId: deviceId,
+                          points: points,
+                        );
 
                       case WidgetType.pie:
                         return const PieChartWidgetView();

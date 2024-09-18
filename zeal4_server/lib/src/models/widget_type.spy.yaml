@@ -3,6 +3,7 @@ serialized: byName
 values:
   - text
   - bar
+  - line
   - pie
   - table
   - map
