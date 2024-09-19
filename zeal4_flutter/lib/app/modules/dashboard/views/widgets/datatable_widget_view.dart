@@ -94,7 +94,10 @@ class _DataTableWidgetViewState extends State<DataTableWidgetView> {
           }
           // loading
           return const Center(
-            child: Text('loading...'),
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 64.0),
+              child: Text('loading...'),
+            ),
           );
         },
       ),
