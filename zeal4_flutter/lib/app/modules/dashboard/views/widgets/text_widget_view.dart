@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
 import 'package:flutter/material.dart';
 
 import 'package:zeal4_client/zeal4_client.dart';
@@ -60,10 +59,6 @@ class _TextWidgetViewState extends State<TextWidgetView> {
                 '${snapshot.error}',
               ),
             );
-          }
-
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            log('stream done');
           }
 
           // has data
