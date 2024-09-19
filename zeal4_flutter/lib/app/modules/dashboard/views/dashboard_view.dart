@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:zeal4_client/zeal4_client.dart';
-import 'package:zeal4_flutter/app/modules/dashboard/views/widgets/line_chart.dart';
 
 import '../../../utils/grid_utils.dart';
 import '../controllers/dashboard_controller.dart';
 import 'widgets/bar_chart_widget_view.dart';
 import 'widgets/datatable_widget_view.dart';
+import 'widgets/line_chart.dart';
 import 'widgets/pie_chart_widget_view.dart';
 import 'widgets/text_widget_view.dart';
 import 'widgets/wrong_widget_view.dart';
