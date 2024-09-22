@@ -1,0 +1,1 @@
+a sample aqi firmware with smartconfig 
