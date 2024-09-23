@@ -1,6 +1,7 @@
 name: zeal4_etl
 description: A sample command-line application.
 version: 1.0.0
+publish_to: none
 # repository: https://github.com/my_org/my_repo
 environment:
   sdk: ^3.5.1
