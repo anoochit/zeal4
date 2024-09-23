@@ -50,10 +50,27 @@ class DevicelogEndpoint extends Endpoint {
     }
   }
 
+  // Method 1 : push stream device log to client
+  Stream<SnapshotDeviceLog> streamInfinitDeviceLog(
+      Session session, int deviceId, int total, bool desc) async* {
+    while (true) {
+      List<DeviceLog> logs = await DeviceLog.db.find(
+        session,
+        where: (p) => (p.deviceId.equals(deviceId)),
+        limit: total,
+        orderBy: (p) => (p.created),
+        orderDescending: desc,
+      );
+
+      yield SnapshotDeviceLog(devicelogs: logs);
+
+      Future.delayed(Duration(seconds: 10));
+    }
+  }
+
   // Method 2 : stream device log as a Serializable object
   Stream<SnapshotDeviceLog> streamDeviceLog(
       Session session, int deviceId, int total, bool desc) async* {
-    // while (true) {
     List<DeviceLog> logs = await DeviceLog.db.find(
       session,
       where: (p) => (p.deviceId.equals(deviceId)),
@@ -63,13 +80,10 @@ class DevicelogEndpoint extends Endpoint {
     );
 
     yield SnapshotDeviceLog(devicelogs: logs);
-
-    Future.delayed(Duration(seconds: 10));
-    // }
   }
 
   // Method 3 : Stream only data points and use periodic timer to featch data from client
-  Stream<DeviceLog> streamDeviceLogDataPoint(
+  Stream<DeviceLog> streamDeviceLogDataPoints(
       Session session, int deviceId, int total, bool desc) async* {
     List<DeviceLog> logs = await DeviceLog.db.find(
       session,
@@ -82,5 +96,19 @@ class DevicelogEndpoint extends Endpoint {
     for (var log in logs) {
       yield log;
     }
+  }
+
+  // Method 4 : return future list of devicelog
+  Future<List<DeviceLog>> getDeviceLog(
+      Session session, int deviceId, int total, bool desc) async {
+    List<DeviceLog> logs = await DeviceLog.db.find(
+      session,
+      where: (p) => (p.deviceId.equals(deviceId)),
+      limit: total,
+      orderBy: (p) => (p.created),
+      orderDescending: desc,
+    );
+
+    return logs;
   }
 }

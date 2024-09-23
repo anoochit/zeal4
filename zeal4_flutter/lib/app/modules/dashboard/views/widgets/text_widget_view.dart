@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 import 'package:flutter/material.dart';
 
 import 'package:zeal4_client/zeal4_client.dart';
@@ -29,16 +30,25 @@ class TextWidgetView extends StatefulWidget {
 }
 
 class _TextWidgetViewState extends State<TextWidgetView> {
-  late Stream<SnapshotDeviceLog> stream;
+  late Timer timer;
 
   @override
   void initState() {
     super.initState();
+    // timer periodic
+    timer = Timer.periodic(
+      const Duration(seconds: 5),
+      (timer) {
+        log('update text widget');
+        setState(() {});
+      },
+    );
   }
 
   @override
   void dispose() {
     super.dispose();
+    timer.cancel();
   }
 
   @override
@@ -46,12 +56,11 @@ class _TextWidgetViewState extends State<TextWidgetView> {
     return Card(
       elevation: 0.5,
       clipBehavior: Clip.antiAlias,
-      child: StreamBuilder(
-        stream: client.devicelog
-            .streamDeviceLog(widget.deviceId, widget.points, true)
-            .distinct(),
+      child: FutureBuilder(
+        future:
+            client.devicelog.getDeviceLog(widget.deviceId, widget.points, true),
         builder:
-            (BuildContext context, AsyncSnapshot<SnapshotDeviceLog> snapshot) {
+            (BuildContext context, AsyncSnapshot<List<DeviceLog>> snapshot) {
           // has error
           if (snapshot.hasError) {
             return Center(
@@ -67,13 +76,13 @@ class _TextWidgetViewState extends State<TextWidgetView> {
 
             if (data != null) {
               // get firt message
-              final log = data.devicelogs.first.message;
+              final log = data.first;
 
               // title
               final title = widget.name;
 
               // get value from first field
-              final value = jsonDecode(log)[widget.fields.first];
+              final value = jsonDecode(log.message)[widget.fields.first];
 
               // unit from first field
               final unit = widget.units.first;

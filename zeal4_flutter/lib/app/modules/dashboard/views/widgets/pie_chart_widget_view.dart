@@ -1,4 +1,6 @@
+import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -28,16 +30,24 @@ class PieChartWidgetView extends StatefulWidget {
 }
 
 class _PieChartWidgetViewState extends State<PieChartWidgetView> {
-  late Stream<SnapshotDeviceLog> stream;
-
+  late Timer timer;
   @override
   void initState() {
     super.initState();
+    // timer periodic
+    timer = Timer.periodic(
+      const Duration(seconds: 5),
+      (timer) {
+        log('update line chart widget');
+        setState(() {});
+      },
+    );
   }
 
   @override
   void dispose() {
     super.dispose();
+    timer.cancel();
   }
 
   @override
@@ -45,12 +55,11 @@ class _PieChartWidgetViewState extends State<PieChartWidgetView> {
     return Card(
       elevation: 0.5,
       clipBehavior: Clip.antiAlias,
-      child: StreamBuilder(
-        stream: client.devicelog
-            .streamDeviceLog(widget.deviceId, widget.points, true)
-            .distinct(),
+      child: FutureBuilder(
+        future:
+            client.devicelog.getDeviceLog(widget.deviceId, widget.points, true),
         builder:
-            (BuildContext context, AsyncSnapshot<SnapshotDeviceLog> snapshot) {
+            (BuildContext context, AsyncSnapshot<List<DeviceLog>> snapshot) {
           if (snapshot.hasError) {
             return Center(
               child: Text(
@@ -60,14 +69,9 @@ class _PieChartWidgetViewState extends State<PieChartWidgetView> {
           }
 
           if (snapshot.hasData) {
-            final data = snapshot.data;
-
-            final devicelogs = data!.devicelogs.first;
-
+            final devicelogs = snapshot.data!.first;
             final message = jsonDecode(devicelogs.message);
-
             List<ChartData> dataSource = [];
-
             for (var field in widget.fields) {
               dataSource.add(
                 ChartData(

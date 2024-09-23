@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -27,16 +28,24 @@ class DataTableWidgetView extends StatefulWidget {
 }
 
 class _DataTableWidgetViewState extends State<DataTableWidgetView> {
-  late Stream<SnapshotDeviceLog> stream;
+  late Timer timer;
 
   @override
   void initState() {
     super.initState();
+    // timer periodic
+    timer = Timer.periodic(
+      const Duration(seconds: 5),
+      (timer) {
+        setState(() {});
+      },
+    );
   }
 
   @override
   void dispose() {
     super.dispose();
+    timer.cancel();
   }
 
   @override
@@ -44,11 +53,11 @@ class _DataTableWidgetViewState extends State<DataTableWidgetView> {
     return Card(
       elevation: 0.5,
       clipBehavior: Clip.antiAlias,
-      child: StreamBuilder(
-        stream: client.devicelog
-            .streamDeviceLog(widget.deviceId, widget.points, true),
+      child: FutureBuilder(
+        future:
+            client.devicelog.getDeviceLog(widget.deviceId, widget.points, true),
         builder:
-            (BuildContext context, AsyncSnapshot<SnapshotDeviceLog> snapshot) {
+            (BuildContext context, AsyncSnapshot<List<DeviceLog>> snapshot) {
           if (snapshot.hasError) {
             return Center(
               child: Padding(
@@ -61,9 +70,7 @@ class _DataTableWidgetViewState extends State<DataTableWidgetView> {
           }
 
           if (snapshot.hasData) {
-            final data = snapshot.data;
-
-            final devicelogs = data!.devicelogs;
+            final devicelogs = snapshot.data;
 
             return DataTable(
               columns: List.generate(
@@ -72,7 +79,7 @@ class _DataTableWidgetViewState extends State<DataTableWidgetView> {
                   label: Text(widget.fields[index]),
                 ),
               ),
-              rows: devicelogs.map((e) {
+              rows: devicelogs!.map((e) {
                 final message = e.message;
 
                 final data = jsonDecode(message) as Map<String, dynamic>;

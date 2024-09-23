@@ -1,4 +1,6 @@
+import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -28,16 +30,25 @@ class BarChartWidgetView extends StatefulWidget {
 }
 
 class _BarChartWidgetViewState extends State<BarChartWidgetView> {
-  late Stream<SnapshotDeviceLog> stream;
+  late Timer timer;
 
   @override
   void initState() {
     super.initState();
+    // timer periodic
+    timer = Timer.periodic(
+      const Duration(seconds: 5),
+      (timer) {
+        log('update bar chart widget');
+        setState(() {});
+      },
+    );
   }
 
   @override
   void dispose() {
     super.dispose();
+    timer.cancel();
   }
 
   @override
@@ -47,11 +58,11 @@ class _BarChartWidgetViewState extends State<BarChartWidgetView> {
     return Card(
       elevation: 0.5,
       clipBehavior: Clip.antiAlias,
-      child: StreamBuilder(
-        stream: client.devicelog
-            .streamDeviceLog(widget.deviceId, widget.points, true),
+      child: FutureBuilder(
+        future:
+            client.devicelog.getDeviceLog(widget.deviceId, widget.points, true),
         builder:
-            (BuildContext context, AsyncSnapshot<SnapshotDeviceLog> snapshot) {
+            (BuildContext context, AsyncSnapshot<List<DeviceLog>> snapshot) {
           if (snapshot.hasError) {
             return Center(
               child: Text(
@@ -61,16 +72,14 @@ class _BarChartWidgetViewState extends State<BarChartWidgetView> {
           }
 
           if (snapshot.hasData) {
-            final data = snapshot.data;
-
-            final devicelogs = data!.devicelogs;
+            final devicelogs = snapshot.data;
 
             List<CartesianSeries> chartSeries = [];
 
             for (var field in widget.fields) {
               List<ChartData> datasource = [];
 
-              for (var log in devicelogs) {
+              for (var log in devicelogs!) {
                 final data = jsonDecode(log.message);
                 final timestamp = DateTime.fromMillisecondsSinceEpoch(
                   double.parse('${data['timestamp'] * 1000}').toInt(),

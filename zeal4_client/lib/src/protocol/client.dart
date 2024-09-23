@@ -51,6 +51,23 @@ class EndpointDevicelog extends _i1.EndpointRef {
         },
       );
 
+  _i2.Stream<_i5.SnapshotDeviceLog> streamInfinitDeviceLog(
+    int deviceId,
+    int total,
+    bool desc,
+  ) =>
+      caller.callStreamingServerEndpoint<_i2.Stream<_i5.SnapshotDeviceLog>,
+          _i5.SnapshotDeviceLog>(
+        'devicelog',
+        'streamInfinitDeviceLog',
+        {
+          'deviceId': deviceId,
+          'total': total,
+          'desc': desc,
+        },
+        {},
+      );
+
   _i2.Stream<_i5.SnapshotDeviceLog> streamDeviceLog(
     int deviceId,
     int total,
@@ -68,7 +85,7 @@ class EndpointDevicelog extends _i1.EndpointRef {
         {},
       );
 
-  _i2.Stream<_i4.DeviceLog> streamDeviceLogDataPoint(
+  _i2.Stream<_i4.DeviceLog> streamDeviceLogDataPoints(
     int deviceId,
     int total,
     bool desc,
@@ -76,13 +93,28 @@ class EndpointDevicelog extends _i1.EndpointRef {
       caller.callStreamingServerEndpoint<_i2.Stream<_i4.DeviceLog>,
           _i4.DeviceLog>(
         'devicelog',
-        'streamDeviceLogDataPoint',
+        'streamDeviceLogDataPoints',
         {
           'deviceId': deviceId,
           'total': total,
           'desc': desc,
         },
         {},
+      );
+
+  _i2.Future<List<_i4.DeviceLog>> getDeviceLog(
+    int deviceId,
+    int total,
+    bool desc,
+  ) =>
+      caller.callServerEndpoint<List<_i4.DeviceLog>>(
+        'devicelog',
+        'getDeviceLog',
+        {
+          'deviceId': deviceId,
+          'total': total,
+          'desc': desc,
+        },
       );
 }
 

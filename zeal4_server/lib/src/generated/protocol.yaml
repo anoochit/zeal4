@@ -2,8 +2,10 @@ dashboard:
   - getDashboards:
 devicelog:
   - addDeivceLog:
+  - streamInfinitDeviceLog:
   - streamDeviceLog:
-  - streamDeviceLogDataPoint:
+  - streamDeviceLogDataPoints:
+  - getDeviceLog:
 example:
   - hello:
   - countdown:
