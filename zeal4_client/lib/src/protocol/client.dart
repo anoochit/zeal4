@@ -67,6 +67,23 @@ class EndpointDevicelog extends _i1.EndpointRef {
         },
         {},
       );
+
+  _i2.Stream<_i4.DeviceLog> streamDeviceLogDataPoint(
+    int deviceId,
+    int total,
+    bool desc,
+  ) =>
+      caller.callStreamingServerEndpoint<_i2.Stream<_i4.DeviceLog>,
+          _i4.DeviceLog>(
+        'devicelog',
+        'streamDeviceLogDataPoint',
+        {
+          'deviceId': deviceId,
+          'total': total,
+          'desc': desc,
+        },
+        {},
+      );
 }
 
 /// {@category Endpoint}

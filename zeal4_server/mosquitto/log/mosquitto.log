@@ -6348,3 +6348,42 @@
 1726365922: Opening ipv4 listen socket on port 1883.
 1726365922: Opening ipv6 listen socket on port 1883.
 1726365922: mosquitto version 2.0.18 running
+1727129149: mosquitto version 2.0.18 starting
+1727129149: Config loaded from /mosquitto/config/mosquitto.conf.
+1727129149: Opening ipv4 listen socket on port 1883.
+1727129149: Opening ipv6 listen socket on port 1883.
+1727129149: mosquitto version 2.0.18 running
+1727129264: New connection from 172.20.0.1:33494 on port 1883.
+1727129264: New client connected from 172.20.0.1:33494 as mqttjs_f67d5201 (p2, c1, k60).
+1727129264: No will message specified.
+1727129264: Sending CONNACK to mqttjs_f67d5201 (0, 0)
+1727129275: Received PUBLISH from mqttjs_f67d5201 (d0, q0, r0, m0, '/device/mock_device/msg', ... (86 bytes))
+1727129285: Received PUBLISH from mqttjs_f67d5201 (d0, q0, r0, m0, '/device/mock_device/msg', ... (86 bytes))
+1727129295: Received PUBLISH from mqttjs_f67d5201 (d0, q0, r0, m0, '/device/mock_device/msg', ... (86 bytes))
+1727129305: Received PUBLISH from mqttjs_f67d5201 (d0, q0, r0, m0, '/device/mock_device/msg', ... (86 bytes))
+1727129315: Received PUBLISH from mqttjs_f67d5201 (d0, q0, r0, m0, '/device/mock_device/msg', ... (86 bytes))
+1727129324: Received PINGREQ from mqttjs_f67d5201
+1727129324: Sending PINGRESP to mqttjs_f67d5201
+1727129325: Received PUBLISH from mqttjs_f67d5201 (d0, q0, r0, m0, '/device/mock_device/msg', ... (86 bytes))
+1727129335: Received PUBLISH from mqttjs_f67d5201 (d0, q0, r0, m0, '/device/mock_device/msg', ... (86 bytes))
+1727129345: Received PUBLISH from mqttjs_f67d5201 (d0, q0, r0, m0, '/device/mock_device/msg', ... (87 bytes))
+1727129347: New connection from 172.20.0.1:41870 on port 1883.
+1727129347: New client connected from 172.20.0.1:41870 as ClientId-1727129346458925 (p1, c1, k0).
+1727129347: No will message specified.
+1727129347: Sending CONNACK to ClientId-1727129346458925 (0, 0)
+1727129347: Received SUBSCRIBE from ClientId-1727129346458925
+1727129347: 	/device/+/msg (QoS 0)
+1727129347: ClientId-1727129346458925 0 /device/+/msg
+1727129347: Sending SUBACK to ClientId-1727129346458925
+1727129355: Received PUBLISH from mqttjs_f67d5201 (d0, q0, r0, m0, '/device/mock_device/msg', ... (85 bytes))
+1727129355: Sending PUBLISH to ClientId-1727129346458925 (d0, q0, r0, m0, '/device/mock_device/msg', ... (85 bytes))
+1727129365: Received PUBLISH from mqttjs_f67d5201 (d0, q0, r0, m0, '/device/mock_device/msg', ... (86 bytes))
+1727129365: Sending PUBLISH to ClientId-1727129346458925 (d0, q0, r0, m0, '/device/mock_device/msg', ... (86 bytes))
+1727129375: Received PUBLISH from mqttjs_f67d5201 (d0, q0, r0, m0, '/device/mock_device/msg', ... (86 bytes))
+1727129375: Sending PUBLISH to ClientId-1727129346458925 (d0, q0, r0, m0, '/device/mock_device/msg', ... (86 bytes))
+1727129384: Received PINGREQ from mqttjs_f67d5201
+1727129384: Sending PINGRESP to mqttjs_f67d5201
+1727129385: Received PUBLISH from mqttjs_f67d5201 (d0, q0, r0, m0, '/device/mock_device/msg', ... (87 bytes))
+1727129385: Sending PUBLISH to ClientId-1727129346458925 (d0, q0, r0, m0, '/device/mock_device/msg', ... (87 bytes))
+1727129395: Received PUBLISH from mqttjs_f67d5201 (d0, q0, r0, m0, '/device/mock_device/msg', ... (87 bytes))
+1727129395: Sending PUBLISH to ClientId-1727129346458925 (d0, q0, r0, m0, '/device/mock_device/msg', ... (87 bytes))
