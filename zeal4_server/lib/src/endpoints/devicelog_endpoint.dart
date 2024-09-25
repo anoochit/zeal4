@@ -117,7 +117,7 @@ class DevicelogEndpoint extends Endpoint {
     return logs;
   }
 
-  // Method 5
+  // Method 5 : send stream message both device log and snapshot device log
   Stream deviceLogMessage(
       Session session, int deviceId, int total, bool desc) async* {
     var messageStream =

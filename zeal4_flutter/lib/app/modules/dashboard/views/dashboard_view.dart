@@ -10,6 +10,7 @@ import 'widgets/datatable_widget_view.dart';
 import 'widgets/line_chart.dart';
 import 'widgets/pie_chart_widget_view.dart';
 import 'widgets/text_widget_view.dart';
+import 'widgets/text_widget_view2.dart';
 import 'widgets/wrong_widget_view.dart';
 
 class DashboardView extends GetView<DashboardController> {
@@ -50,7 +51,7 @@ class DashboardView extends GetView<DashboardController> {
                         builder: (context) {
                           switch (widget.type) {
                             case WidgetType.text:
-                              return TextWidgetView(
+                              return TextWidgetView2(
                                 name: name,
                                 description: description,
                                 fields: fields,
