@@ -248,7 +248,7 @@ class DeviceLogRepository {
   final attachRow = const DeviceLogAttachRowRepository._();
 
   Future<List<DeviceLog>> find(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<DeviceLogTable>? where,
     int? limit,
     int? offset,
@@ -258,20 +258,20 @@ class DeviceLogRepository {
     _i1.Transaction? transaction,
     DeviceLogInclude? include,
   }) async {
-    return session.db.find<DeviceLog>(
+    return databaseAccessor.db.find<DeviceLog>(
       where: where?.call(DeviceLog.t),
       orderBy: orderBy?.call(DeviceLog.t),
       orderByList: orderByList?.call(DeviceLog.t),
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
       include: include,
     );
   }
 
   Future<DeviceLog?> findFirstRow(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<DeviceLogTable>? where,
     int? offset,
     _i1.OrderByBuilder<DeviceLogTable>? orderBy,
@@ -280,121 +280,121 @@ class DeviceLogRepository {
     _i1.Transaction? transaction,
     DeviceLogInclude? include,
   }) async {
-    return session.db.findFirstRow<DeviceLog>(
+    return databaseAccessor.db.findFirstRow<DeviceLog>(
       where: where?.call(DeviceLog.t),
       orderBy: orderBy?.call(DeviceLog.t),
       orderByList: orderByList?.call(DeviceLog.t),
       orderDescending: orderDescending,
       offset: offset,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
       include: include,
     );
   }
 
   Future<DeviceLog?> findById(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     int id, {
     _i1.Transaction? transaction,
     DeviceLogInclude? include,
   }) async {
-    return session.db.findById<DeviceLog>(
+    return databaseAccessor.db.findById<DeviceLog>(
       id,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
       include: include,
     );
   }
 
   Future<List<DeviceLog>> insert(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<DeviceLog> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insert<DeviceLog>(
+    return databaseAccessor.db.insert<DeviceLog>(
       rows,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<DeviceLog> insertRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     DeviceLog row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insertRow<DeviceLog>(
+    return databaseAccessor.db.insertRow<DeviceLog>(
       row,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<DeviceLog>> update(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<DeviceLog> rows, {
     _i1.ColumnSelections<DeviceLogTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.update<DeviceLog>(
+    return databaseAccessor.db.update<DeviceLog>(
       rows,
       columns: columns?.call(DeviceLog.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<DeviceLog> updateRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     DeviceLog row, {
     _i1.ColumnSelections<DeviceLogTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.updateRow<DeviceLog>(
+    return databaseAccessor.db.updateRow<DeviceLog>(
       row,
       columns: columns?.call(DeviceLog.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<DeviceLog>> delete(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<DeviceLog> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.delete<DeviceLog>(
+    return databaseAccessor.db.delete<DeviceLog>(
       rows,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<DeviceLog> deleteRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     DeviceLog row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteRow<DeviceLog>(
+    return databaseAccessor.db.deleteRow<DeviceLog>(
       row,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<DeviceLog>> deleteWhere(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     required _i1.WhereExpressionBuilder<DeviceLogTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteWhere<DeviceLog>(
+    return databaseAccessor.db.deleteWhere<DeviceLog>(
       where: where(DeviceLog.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<int> count(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<DeviceLogTable>? where,
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.count<DeviceLog>(
+    return databaseAccessor.db.count<DeviceLog>(
       where: where?.call(DeviceLog.t),
       limit: limit,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 }
@@ -403,7 +403,7 @@ class DeviceLogAttachRowRepository {
   const DeviceLogAttachRowRepository._();
 
   Future<void> device(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     DeviceLog deviceLog,
     _i2.Device device, {
     _i1.Transaction? transaction,
@@ -416,10 +416,10 @@ class DeviceLogAttachRowRepository {
     }
 
     var $deviceLog = deviceLog.copyWith(deviceId: device.id);
-    await session.db.updateRow<DeviceLog>(
+    await databaseAccessor.db.updateRow<DeviceLog>(
       $deviceLog,
       columns: [DeviceLog.t.deviceId],
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 }

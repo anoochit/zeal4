@@ -6,6 +6,7 @@ devicelog:
   - streamDeviceLog:
   - streamDeviceLogDataPoints:
   - getDeviceLog:
+  - deviceLogMessage:
 example:
   - hello:
   - countdown:

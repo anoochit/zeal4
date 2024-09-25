@@ -116,6 +116,22 @@ class EndpointDevicelog extends _i1.EndpointRef {
           'desc': desc,
         },
       );
+
+  _i2.Stream<dynamic> deviceLogMessage(
+    int deviceId,
+    int total,
+    bool desc,
+  ) =>
+      caller.callStreamingServerEndpoint<_i2.Stream<dynamic>, dynamic>(
+        'devicelog',
+        'deviceLogMessage',
+        {
+          'deviceId': deviceId,
+          'total': total,
+          'desc': desc,
+        },
+        {},
+      );
 }
 
 /// {@category Endpoint}

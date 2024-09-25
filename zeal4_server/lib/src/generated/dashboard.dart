@@ -257,7 +257,7 @@ class DashboardRepository {
   final detachRow = const DashboardDetachRowRepository._();
 
   Future<List<Dashboard>> find(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<DashboardTable>? where,
     int? limit,
     int? offset,
@@ -267,20 +267,20 @@ class DashboardRepository {
     _i1.Transaction? transaction,
     DashboardInclude? include,
   }) async {
-    return session.db.find<Dashboard>(
+    return databaseAccessor.db.find<Dashboard>(
       where: where?.call(Dashboard.t),
       orderBy: orderBy?.call(Dashboard.t),
       orderByList: orderByList?.call(Dashboard.t),
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
       include: include,
     );
   }
 
   Future<Dashboard?> findFirstRow(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<DashboardTable>? where,
     int? offset,
     _i1.OrderByBuilder<DashboardTable>? orderBy,
@@ -289,121 +289,121 @@ class DashboardRepository {
     _i1.Transaction? transaction,
     DashboardInclude? include,
   }) async {
-    return session.db.findFirstRow<Dashboard>(
+    return databaseAccessor.db.findFirstRow<Dashboard>(
       where: where?.call(Dashboard.t),
       orderBy: orderBy?.call(Dashboard.t),
       orderByList: orderByList?.call(Dashboard.t),
       orderDescending: orderDescending,
       offset: offset,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
       include: include,
     );
   }
 
   Future<Dashboard?> findById(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     int id, {
     _i1.Transaction? transaction,
     DashboardInclude? include,
   }) async {
-    return session.db.findById<Dashboard>(
+    return databaseAccessor.db.findById<Dashboard>(
       id,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
       include: include,
     );
   }
 
   Future<List<Dashboard>> insert(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<Dashboard> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insert<Dashboard>(
+    return databaseAccessor.db.insert<Dashboard>(
       rows,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<Dashboard> insertRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     Dashboard row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insertRow<Dashboard>(
+    return databaseAccessor.db.insertRow<Dashboard>(
       row,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<Dashboard>> update(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<Dashboard> rows, {
     _i1.ColumnSelections<DashboardTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.update<Dashboard>(
+    return databaseAccessor.db.update<Dashboard>(
       rows,
       columns: columns?.call(Dashboard.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<Dashboard> updateRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     Dashboard row, {
     _i1.ColumnSelections<DashboardTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.updateRow<Dashboard>(
+    return databaseAccessor.db.updateRow<Dashboard>(
       row,
       columns: columns?.call(Dashboard.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<Dashboard>> delete(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<Dashboard> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.delete<Dashboard>(
+    return databaseAccessor.db.delete<Dashboard>(
       rows,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<Dashboard> deleteRow(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     Dashboard row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteRow<Dashboard>(
+    return databaseAccessor.db.deleteRow<Dashboard>(
       row,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<List<Dashboard>> deleteWhere(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     required _i1.WhereExpressionBuilder<DashboardTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteWhere<Dashboard>(
+    return databaseAccessor.db.deleteWhere<Dashboard>(
       where: where(Dashboard.t),
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 
   Future<int> count(
-    _i1.Session session, {
+    _i1.DatabaseAccessor databaseAccessor, {
     _i1.WhereExpressionBuilder<DashboardTable>? where,
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.count<Dashboard>(
+    return databaseAccessor.db.count<Dashboard>(
       where: where?.call(Dashboard.t),
       limit: limit,
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 }
@@ -412,7 +412,7 @@ class DashboardAttachRepository {
   const DashboardAttachRepository._();
 
   Future<void> widget(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     Dashboard dashboard,
     List<_i2.DashboardWidget> dashboardWidget, {
     _i1.Transaction? transaction,
@@ -427,10 +427,10 @@ class DashboardAttachRepository {
     var $dashboardWidget = dashboardWidget
         .map((e) => e.copyWith(dashboardId: dashboard.id))
         .toList();
-    await session.db.update<_i2.DashboardWidget>(
+    await databaseAccessor.db.update<_i2.DashboardWidget>(
       $dashboardWidget,
       columns: [_i2.DashboardWidget.t.dashboardId],
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 }
@@ -439,7 +439,7 @@ class DashboardAttachRowRepository {
   const DashboardAttachRowRepository._();
 
   Future<void> widget(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     Dashboard dashboard,
     _i2.DashboardWidget dashboardWidget, {
     _i1.Transaction? transaction,
@@ -452,10 +452,10 @@ class DashboardAttachRowRepository {
     }
 
     var $dashboardWidget = dashboardWidget.copyWith(dashboardId: dashboard.id);
-    await session.db.updateRow<_i2.DashboardWidget>(
+    await databaseAccessor.db.updateRow<_i2.DashboardWidget>(
       $dashboardWidget,
       columns: [_i2.DashboardWidget.t.dashboardId],
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 }
@@ -464,7 +464,7 @@ class DashboardDetachRepository {
   const DashboardDetachRepository._();
 
   Future<void> widget(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     List<_i2.DashboardWidget> dashboardWidget, {
     _i1.Transaction? transaction,
   }) async {
@@ -474,10 +474,10 @@ class DashboardDetachRepository {
 
     var $dashboardWidget =
         dashboardWidget.map((e) => e.copyWith(dashboardId: null)).toList();
-    await session.db.update<_i2.DashboardWidget>(
+    await databaseAccessor.db.update<_i2.DashboardWidget>(
       $dashboardWidget,
       columns: [_i2.DashboardWidget.t.dashboardId],
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 }
@@ -486,7 +486,7 @@ class DashboardDetachRowRepository {
   const DashboardDetachRowRepository._();
 
   Future<void> widget(
-    _i1.Session session,
+    _i1.DatabaseAccessor databaseAccessor,
     _i2.DashboardWidget dashboardWidget, {
     _i1.Transaction? transaction,
   }) async {
@@ -495,10 +495,10 @@ class DashboardDetachRowRepository {
     }
 
     var $dashboardWidget = dashboardWidget.copyWith(dashboardId: null);
-    await session.db.updateRow<_i2.DashboardWidget>(
+    await databaseAccessor.db.updateRow<_i2.DashboardWidget>(
       $dashboardWidget,
       columns: [_i2.DashboardWidget.t.dashboardId],
-      transaction: transaction,
+      transaction: transaction ?? databaseAccessor.transaction,
     );
   }
 }

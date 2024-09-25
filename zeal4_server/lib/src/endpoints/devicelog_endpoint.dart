@@ -44,6 +44,11 @@ class DevicelogEndpoint extends Endpoint {
         deviceId: device.id!,
         created: created,
       );
+
+      // send message to message central
+      session.messages.postMessage('channel_${device.id}', row);
+
+      // save data to database
       return await DeviceLog.db.insertRow(session, row);
     } else {
       return null;
@@ -110,5 +115,26 @@ class DevicelogEndpoint extends Endpoint {
     );
 
     return logs;
+  }
+
+  // Method 5
+  Stream deviceLogMessage(
+      Session session, int deviceId, int total, bool desc) async* {
+    var messageStream =
+        session.messages.createStream<DeviceLog>('channel_$deviceId');
+
+    List<DeviceLog> logs = await DeviceLog.db.find(
+      session,
+      where: (p) => (p.deviceId.equals(deviceId)),
+      limit: total,
+      orderBy: (p) => (p.created),
+      orderDescending: desc,
+    );
+
+    yield SnapshotDeviceLog(devicelogs: logs);
+
+    await for (var message in messageStream) {
+      yield message;
+    }
   }
 }
