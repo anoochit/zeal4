@@ -45,7 +45,7 @@ class DevicelogEndpoint extends Endpoint {
         created: created,
       );
 
-      // send message to message central
+      // send message to message central to keep streaming
       session.messages.postMessage('channel_${device.id}', row);
 
       // save data to database
@@ -117,7 +117,7 @@ class DevicelogEndpoint extends Endpoint {
     return logs;
   }
 
-  // Method 5 : send stream message both device log and snapshot device log
+  // Method 5 : listen central message then send stream message both device log and snapshot device log
   Stream deviceLogMessage(
       Session session, int deviceId, int total, bool desc) async* {
     var messageStream =

@@ -39,7 +39,7 @@ class _TextWidgetViewState extends State<TextWidgetView> {
   @override
   void initState() {
     super.initState();
-
+    // listen streaming data
     listenToUpdate();
   }
 
@@ -61,9 +61,9 @@ class _TextWidgetViewState extends State<TextWidgetView> {
             });
           }
 
-          // if (update is SnapshotDeviceLog) {
-          // get snapshot devicelog
-          // }
+          if (update is SnapshotDeviceLog) {
+            //get snapshot devicelog
+          }
         }
       } on MethodStreamException catch (e) {
         log('$e');
