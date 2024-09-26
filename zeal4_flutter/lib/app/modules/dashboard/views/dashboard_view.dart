@@ -9,6 +9,7 @@ import 'widgets/bar_chart_widget_view.dart';
 import 'widgets/datatable_widget_view.dart';
 import 'widgets/line_chart.dart';
 import 'widgets/pie_chart_widget_view.dart';
+import 'widgets/stext_widget_view.dart';
 import 'widgets/text_widget_view.dart';
 import 'widgets/wrong_widget_view.dart';
 
@@ -51,6 +52,17 @@ class DashboardView extends GetView<DashboardController> {
                           switch (widget.type) {
                             case WidgetType.text:
                               return TextWidgetView(
+                                name: name,
+                                description: description,
+                                fields: fields,
+                                units: units,
+                                deviceId: deviceId,
+                                // fix 1 point
+                                points: 1,
+                              );
+
+                            case WidgetType.stext:
+                              return STextWidgetView(
                                 name: name,
                                 description: description,
                                 fields: fields,

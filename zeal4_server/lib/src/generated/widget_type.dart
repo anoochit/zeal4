@@ -13,6 +13,7 @@ import 'package:serverpod/serverpod.dart' as _i1;
 
 enum WidgetType implements _i1.SerializableModel {
   text,
+  stext,
   bar,
   line,
   pie,
@@ -23,6 +24,8 @@ enum WidgetType implements _i1.SerializableModel {
     switch (name) {
       case 'text':
         return text;
+      case 'stext':
+        return stext;
       case 'bar':
         return bar;
       case 'line':

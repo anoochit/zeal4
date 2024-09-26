@@ -2,6 +2,7 @@ enum: WidgetType
 serialized: byName
 values:
   - text
+  - stext 
   - bar
   - line
   - pie
