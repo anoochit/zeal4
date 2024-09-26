@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -38,7 +37,6 @@ class _LineChartWidgetViewState extends State<LineChartWidgetView> {
     timer = Timer.periodic(
       const Duration(seconds: 5),
       (timer) {
-        log('update line chart widget');
         setState(() {});
       },
     );

@@ -30,50 +30,25 @@ class TextWidgetView extends StatefulWidget {
 }
 
 class _TextWidgetViewState extends State<TextWidgetView> {
-  // device log
-  DeviceLog? deviceLog;
-
-  // snapshot device log
-  // SnapshotDeviceLog? snapshotDeviceLog;
+  late Timer timer;
 
   @override
   void initState() {
     super.initState();
-    // listen streaming data
-    listenToUpdate();
-  }
-
-  Future<void> listenToUpdate() async {
-    while (true) {
-      try {
-        //
-        final messageUpdates = client.devicelog.deviceLogMessage(
-          widget.deviceId,
-          widget.points,
-          true,
-        );
-
-        await for (final update in messageUpdates) {
-          if (update is DeviceLog) {
-            // get device log
-            setState(() {
-              deviceLog = update;
-            });
-          }
-
-          if (update is SnapshotDeviceLog) {
-            //get snapshot devicelog
-          }
-        }
-      } on MethodStreamException catch (e) {
-        log('$e');
-      }
-    }
+    // timer periodic
+    timer = Timer.periodic(
+      const Duration(seconds: 5),
+      (timer) {
+        log('update text widget');
+        setState(() {});
+      },
+    );
   }
 
   @override
   void dispose() {
     super.dispose();
+    timer.cancel();
   }
 
   @override
@@ -81,42 +56,67 @@ class _TextWidgetViewState extends State<TextWidgetView> {
     return Card(
       elevation: 0.5,
       clipBehavior: Clip.antiAlias,
-      child: Builder(
-        builder: (context) {
-          if (deviceLog != null) {
-            // title
-            final title = widget.name;
-
-            // unit from first field
-            final unit = widget.units.first;
-
-            // value
-            final value = jsonDecode(deviceLog!.message)[widget.fields.first];
-
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                // title
-                Text(
-                  title,
-                  style: Theme.of(context).textTheme.labelMedium,
-                ),
-
-                // value
-                Text(
-                  '$value',
-                  style: Theme.of(context).textTheme.headlineLarge,
-                ),
-
-                // unit
-                Text(
-                  unit,
-                  style: Theme.of(context).textTheme.labelSmall,
-                ),
-              ],
+      child: FutureBuilder(
+        future:
+            client.devicelog.getDeviceLog(widget.deviceId, widget.points, true),
+        builder:
+            (BuildContext context, AsyncSnapshot<List<DeviceLog>> snapshot) {
+          // has error
+          if (snapshot.hasError) {
+            return Center(
+              child: Text(
+                '${snapshot.error}',
+              ),
             );
           }
 
+          // has data
+          if (snapshot.hasData) {
+            final data = snapshot.data;
+
+            if (data != null) {
+              // get firt message
+              final log = data.first;
+
+              // title
+              final title = widget.name;
+
+              // get value from first field
+              final value = jsonDecode(log.message)[widget.fields.first];
+
+              // unit from first field
+              final unit = widget.units.first;
+
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  // title
+                  Text(
+                    title,
+                    style: Theme.of(context).textTheme.labelMedium,
+                  ),
+
+                  // value
+                  Text(
+                    '$value',
+                    style: Theme.of(context).textTheme.headlineLarge,
+                  ),
+
+                  // unit
+                  Text(
+                    unit,
+                    style: Theme.of(context).textTheme.labelSmall,
+                  ),
+                ],
+              );
+            } else {
+              return const Center(
+                child: Text('nodata'),
+              );
+            }
+          }
+
+          // loading
           return const Center(
             child: Text('loading...'),
           );
