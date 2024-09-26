@@ -95,6 +95,7 @@ class _BarChartWidgetViewState extends State<BarChartWidgetView> {
                   dataSource: datasource.reversed.toList(),
                   xValueMapper: (datum, index) => datum.x,
                   yValueMapper: (datum, index) => datum.y,
+                  animationDuration: 0,
                 ),
               );
             }
