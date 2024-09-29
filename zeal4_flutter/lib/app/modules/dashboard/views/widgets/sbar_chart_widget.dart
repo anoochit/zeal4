@@ -72,7 +72,7 @@ class _SBarChartWidgetViewState extends State<SBarChartWidgetView> {
               chartSerieField.dataSource!
                   .add(ChartData(timeStampFormat, value));
 
-              if (datasource.length > widget.points) {
+              if (widget.points <= datasource.length) {
                 chartSerieField.dataSource!.removeAt(0);
               }
             }
