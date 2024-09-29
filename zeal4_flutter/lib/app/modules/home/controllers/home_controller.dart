@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:get/get.dart';
 import 'package:zeal4_client/zeal4_client.dart';
+
 import 'package:zeal4_flutter/serverpod.dart';
 
 class HomeController extends GetxController {

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
 
 import '../../../routes/app_pages.dart';
@@ -19,8 +20,8 @@ class HomeView extends GetView<HomeController> {
           (Platform.isWindows || Platform.isLinux || Platform.isMacOS)
               ? IconButton(
                   onPressed: () => controller.getDashboard(),
-                  icon: Icon(Icons.refresh))
-              : SizedBox()
+                  icon: const Icon(Icons.refresh))
+              : const SizedBox()
         ],
       ),
       body: Obx(() {

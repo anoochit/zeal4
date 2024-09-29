@@ -8,8 +8,6 @@ import 'app/utils/windows_utils.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
-
-
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
@@ -26,8 +24,6 @@ void main() {
     ),
   );
 
-
-  
   // windows config
   initWindows();
 }
