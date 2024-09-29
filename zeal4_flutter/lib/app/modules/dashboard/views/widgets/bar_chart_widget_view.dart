@@ -73,7 +73,6 @@ class _BarChartWidgetViewState extends State<BarChartWidgetView> {
 
           if (snapshot.hasData) {
             final devicelogs = snapshot.data;
-
             List<CartesianSeries> chartSeries = [];
 
             for (var field in widget.fields) {
@@ -90,7 +89,7 @@ class _BarChartWidgetViewState extends State<BarChartWidgetView> {
               }
 
               chartSeries.add(
-                StackedColumnSeries<ChartData, dynamic>(
+                ColumnSeries<ChartData, dynamic>(
                   name: field,
                   dataSource: datasource.reversed.toList(),
                   xValueMapper: (datum, index) => datum.x,

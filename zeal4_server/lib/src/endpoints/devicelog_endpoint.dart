@@ -103,7 +103,7 @@ class DevicelogEndpoint extends Endpoint {
     }
   }
 
-  // Method 4 : return future list of devicelog
+  // return future list of devicelog
   Future<List<DeviceLog>> getDeviceLog(
       Session session, int deviceId, int total, bool desc) async {
     List<DeviceLog> logs = await DeviceLog.db.find(
@@ -117,7 +117,7 @@ class DevicelogEndpoint extends Endpoint {
     return logs;
   }
 
-  // Method 5 : listen central message then send stream message both device log and snapshot device log
+  //  listen central message then send stream message both device log and snapshot device log
   Stream deviceLogMessage(
       Session session, int deviceId, int total, bool desc) async* {
     var messageStream =

@@ -58,6 +58,7 @@ class _STextWidgetViewState extends State<STextWidgetView> {
             // get device log
             if (mounted) {
               setState(() {
+                log('device log', time: DateTime.now());
                 deviceLog = update;
               });
             }
@@ -66,6 +67,7 @@ class _STextWidgetViewState extends State<STextWidgetView> {
           if (update is SnapshotDeviceLog) {
             //get snapshot devicelog
             setState(() {
+              log('snapshot device log', time: DateTime.now());
               deviceLog = update.devicelogs.first;
             });
           }

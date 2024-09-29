@@ -25,7 +25,7 @@ class HomeView extends GetView<HomeController> {
             padding: const EdgeInsets.all(8.0),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: GridUtils.responsiveGridColumn(context.width),
-              // childAspectRatio: 16 / 9,
+              childAspectRatio: 4 / 3,
             ),
             itemCount: dashboards.length,
             itemBuilder: (BuildContext context, int index) {
@@ -48,7 +48,7 @@ class HomeView extends GetView<HomeController> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Icon(
-                            Icons.dashboard,
+                            Icons.monitor_outlined,
                             size: 64.0,
                             color: Theme.of(context).colorScheme.inversePrimary,
                           ),

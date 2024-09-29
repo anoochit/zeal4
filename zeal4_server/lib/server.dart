@@ -30,7 +30,7 @@ void run(List<String> args) async {
   );
 
   // init sample data
-  initSampleData(pod);
+  // initSampleData(pod);
 
   // Start the server.
   await pod.start();
