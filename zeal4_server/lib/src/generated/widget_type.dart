@@ -15,6 +15,7 @@ enum WidgetType implements _i1.SerializableModel {
   text,
   stext,
   bar,
+  sbar,
   line,
   pie,
   table,
@@ -28,6 +29,8 @@ enum WidgetType implements _i1.SerializableModel {
         return stext;
       case 'bar':
         return bar;
+      case 'sbar':
+        return sbar;
       case 'line':
         return line;
       case 'pie':

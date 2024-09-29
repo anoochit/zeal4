@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:zeal4_client/zeal4_client.dart';
 
@@ -80,12 +81,16 @@ class _BarChartWidgetViewState extends State<BarChartWidgetView> {
 
               for (var log in devicelogs!) {
                 final data = jsonDecode(log.message);
+                // final timestamp = DateTime.fromMillisecondsSinceEpoch(
+                //   double.parse('${data['timestamp'] * 1000}').toInt(),
+                // ).toIso8601String();
                 final timestamp = DateTime.fromMillisecondsSinceEpoch(
                   double.parse('${data['timestamp'] * 1000}').toInt(),
-                ).toIso8601String();
+                );
+                final timeStampFormat = DateFormat.Hms().format(timestamp);
                 double value = double.parse('${data[field]}');
 
-                datasource.add(ChartData(timestamp, value));
+                datasource.add(ChartData(timeStampFormat, value));
               }
 
               chartSeries.add(

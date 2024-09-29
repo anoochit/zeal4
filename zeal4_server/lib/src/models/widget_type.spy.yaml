@@ -4,6 +4,7 @@ values:
   - text
   - stext 
   - bar
+  - sbar
   - line
   - pie
   - table
