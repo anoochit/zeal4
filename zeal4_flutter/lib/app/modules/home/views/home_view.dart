@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,6 +15,13 @@ class HomeView extends GetView<HomeController> {
       appBar: AppBar(
         title: const Text('Home'),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        actions: [
+          (Platform.isWindows || Platform.isLinux || Platform.isMacOS)
+              ? IconButton(
+                  onPressed: () => controller.getDashboard(),
+                  icon: Icon(Icons.refresh))
+              : SizedBox()
+        ],
       ),
       body: Obx(() {
         final dashboards = controller.dashboards;

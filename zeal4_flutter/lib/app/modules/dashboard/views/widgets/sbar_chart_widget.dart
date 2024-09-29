@@ -135,61 +135,10 @@ class _SBarChartWidgetViewState extends State<SBarChartWidgetView> {
   @override
   Widget build(BuildContext context) {
     // get stream device logs
-
     return Card(
       elevation: 0.5,
       clipBehavior: Clip.antiAlias,
       child: buildChart(chartSeries),
-      /*
-      child: StreamBuilder(
-        stream: client.devicelog
-            .deviceLogMessage(widget.deviceId, widget.points, true),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (snapshot.hasError) {
-            return buildError(snapshot);
-          }
-
-          if (snapshot.hasData) {
-            final data = snapshot.data;
-
-            List<CartesianSeries> chartSeries = [];
-
-            if (data is SnapshotDeviceLog) {
-              final devicelogs = data.devicelogs;
-
-              for (var field in widget.fields) {
-                List<ChartData> datasource = [];
-
-                for (var log in devicelogs) {
-                  final data = jsonDecode(log.message);
-                  final timestamp = DateTime.fromMillisecondsSinceEpoch(
-                    double.parse('${data['timestamp'] * 1000}').toInt(),
-                  ).toIso8601String();
-                  double value = double.parse('${data[field]}');
-
-                  datasource.add(ChartData(timestamp, value));
-                }
-
-                chartSeries.add(
-                  ColumnSeries<ChartData, dynamic>(
-                    name: field,
-                    dataSource: datasource.reversed.toList(),
-                    xValueMapper: (datum, index) => datum.x,
-                    yValueMapper: (datum, index) => datum.y,
-                    animationDuration: 0,
-                  ),
-                );
-              }
-            }
-
-            return buildChart(chartSeries);
-          }
-
-          // loading
-          return buildLoading();
-        },
-      ),
-      */
     );
   }
 
