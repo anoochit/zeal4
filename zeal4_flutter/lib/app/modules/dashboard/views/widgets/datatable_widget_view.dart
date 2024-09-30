@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import 'package:zeal4_client/zeal4_client.dart';
 
@@ -88,9 +89,10 @@ class _DataTableWidgetViewState extends State<DataTableWidgetView> {
                       .map(
                         (cell) => DataCell(
                           (cell == 'timestamp')
-                              ? Text(DateTime.fromMillisecondsSinceEpoch(
-                                  double.parse('${data[cell] * 1000}').toInt(),
-                                ).toIso8601String())
+                              ? Text(DateFormat().format(
+                                  DateTime.fromMillisecondsSinceEpoch(
+                                      double.parse('${data[cell] * 1000}')
+                                          .toInt())))
                               : Text('${data[cell]}'),
                         ),
                       )

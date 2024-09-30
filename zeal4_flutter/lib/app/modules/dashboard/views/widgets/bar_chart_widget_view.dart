@@ -82,9 +82,6 @@ class _BarChartWidgetViewState extends State<BarChartWidgetView> {
 
               for (var log in devicelogs!) {
                 final data = jsonDecode(log.message);
-                // final timestamp = DateTime.fromMillisecondsSinceEpoch(
-                //   double.parse('${data['timestamp'] * 1000}').toInt(),
-                // ).toIso8601String();
                 final timestamp = DateTime.fromMillisecondsSinceEpoch(
                   double.parse('${data['timestamp'] * 1000}').toInt(),
                 );

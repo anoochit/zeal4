@@ -15,6 +15,7 @@ dependencies:
   gap: ^3.0.1
   get: 4.6.6
   intl: ^0.19.0
+  serverpod_auth_client: 2.1.2
   serverpod_auth_email_flutter: 2.1.2
   serverpod_auth_shared_flutter: 2.1.2
   serverpod_flutter: 2.1.2

@@ -9,8 +9,10 @@ import 'serverpod.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  // init serverpod
   await initServerPodClient();
 
+  // run app
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,

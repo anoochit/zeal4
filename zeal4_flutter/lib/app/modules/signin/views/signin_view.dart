@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -68,12 +70,10 @@ class SigninView extends GetView<SigninController> {
                 FilledButton(
                   onPressed: () async {
                     if (controller.formKey.currentState!.validate()) {
-                      /*
                       // signins
                       final result = await controller.signInWithEmailPassword(
-                        email: _emailController.text,
-                        password: _passwordController.text,
-                        scope: UserScope.customer.name,
+                        email: emailController.text,
+                        password: passwordController.text,
                       );
                       // check signed in result
                       if (result != null) {
@@ -85,8 +85,6 @@ class SigninView extends GetView<SigninController> {
                           'Cannot sign in, please change your email or password',
                         );
                       }
-        
-                      */
                     }
                   },
                   child: const Text('Sign In'),

@@ -105,7 +105,7 @@ class _TextWidgetViewState extends State<TextWidgetView> {
 
                   // value
                   Text(
-                    valueFormat,
+                    '${valueFormat}',
                     style: Theme.of(context).textTheme.headlineLarge,
                   ),
 

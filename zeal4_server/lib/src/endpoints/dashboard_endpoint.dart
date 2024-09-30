@@ -22,10 +22,7 @@ class DashboardEndpoint extends Endpoint {
   // }
 
   // get dashboard
-  Future<List<Dashboard>> getDashboards(Session session) async {
-    final currentUser = await session.authenticated;
-    final userId = currentUser!.userId;
-
+  Future<List<Dashboard>> getDashboards(Session session, int userId) async {
     final dashboards = await Dashboard.db.find(
       session,
       orderBy: (d) => (d.name),

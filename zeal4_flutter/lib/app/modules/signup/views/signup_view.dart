@@ -85,14 +85,13 @@ class SignupView extends GetView<SignupController> {
                 FilledButton(
                   onPressed: () async {
                     if (formKey.currentState!.validate()) {
-                      /*
-                      // signins
+                      // sign up
                       final result = await controller.signUpWithEmailPassword(
                         name: nameController.text,
                         email: emailController.text,
                         password: passwordController.text,
                       );
-        
+
                       if (result) {
                         Get.offAllNamed(
                           Routes.VERIFY_ACCOUNT,
@@ -107,7 +106,6 @@ class SignupView extends GetView<SignupController> {
                           'Cannot sign up, please change your email or password',
                         );
                       }
-                      */
                     }
                   },
                   child: const Text('Sign Up'),

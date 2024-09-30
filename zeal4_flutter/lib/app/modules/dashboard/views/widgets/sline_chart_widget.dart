@@ -67,13 +67,15 @@ class _SLineChartWidgetViewState extends State<SLineChartWidgetView> {
 
               log('datasource total items = ${datasource.length}');
 
+              log('${DateTime.now()} - $field - $value');
+
               final chartSerieField =
                   chartSeries.firstWhere((p) => (p.name == field));
 
               chartSerieField.dataSource!
                   .add(ChartData(timeStampFormat, value));
 
-              if (widget.points <= datasource.length) {
+              if (datasource.length >= widget.points) {
                 chartSerieField.dataSource!.removeAt(0);
               }
             }
@@ -90,32 +92,32 @@ class _SLineChartWidgetViewState extends State<SLineChartWidgetView> {
             // build init chartdata
             final devicelogs = update.devicelogs;
 
-            // build chart series for each field
-            for (var field in widget.fields) {
-              datasource = [];
+            setState(() {
+              // build chart series for each field
+              for (var field in widget.fields) {
+                datasource = [];
 
-              for (var log in devicelogs) {
-                final data = jsonDecode(log.message);
-                final timestamp = DateTime.fromMillisecondsSinceEpoch(
-                  double.parse('${data['timestamp'] * 1000}').toInt(),
+                for (var log in devicelogs) {
+                  final data = jsonDecode(log.message);
+                  final timestamp = DateTime.fromMillisecondsSinceEpoch(
+                    double.parse('${data['timestamp'] * 1000}').toInt(),
+                  );
+                  final timeStampFormat = DateFormat.Hms().format(timestamp);
+                  double value = double.parse('${data[field]}');
+                  datasource.add(ChartData(timeStampFormat, value));
+                }
+
+                chartSeries.add(
+                  LineSeries<ChartData, dynamic>(
+                    name: field,
+                    dataSource: datasource.reversed.toList(),
+                    xValueMapper: (datum, index) => datum.x,
+                    yValueMapper: (datum, index) => datum.y,
+                    animationDuration: 0,
+                  ),
                 );
-                final timeStampFormat = DateFormat.Hms().format(timestamp);
-                double value = double.parse('${data[field]}');
-                datasource.add(ChartData(timeStampFormat, value));
               }
 
-              chartSeries.add(
-                LineSeries<ChartData, dynamic>(
-                  name: field,
-                  dataSource: datasource.reversed.toList(),
-                  xValueMapper: (datum, index) => datum.x,
-                  yValueMapper: (datum, index) => datum.y,
-                  animationDuration: 0,
-                ),
-              );
-            }
-
-            setState(() {
               log('${DateTime.now()} - snapshot sline device log');
             });
           }

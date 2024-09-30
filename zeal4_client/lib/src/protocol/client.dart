@@ -24,11 +24,11 @@ class EndpointDashboard extends _i1.EndpointRef {
   @override
   String get name => 'dashboard';
 
-  _i2.Future<List<_i3.Dashboard>> getDashboards() =>
+  _i2.Future<List<_i3.Dashboard>> getDashboards(int userId) =>
       caller.callServerEndpoint<List<_i3.Dashboard>>(
         'dashboard',
         'getDashboards',
-        {},
+        {'userId': userId},
       );
 }
 
@@ -157,6 +157,21 @@ class EndpointExample extends _i1.EndpointRef {
       );
 }
 
+/// {@category Endpoint}
+class EndpointUser extends _i1.EndpointRef {
+  EndpointUser(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'user';
+
+  _i2.Future<_i6.UserInfo?> updateToUserScope() =>
+      caller.callServerEndpoint<_i6.UserInfo?>(
+        'user',
+        'updateToUserScope',
+        {},
+      );
+}
+
 class _Modules {
   _Modules(Client client) {
     auth = _i6.Caller(client);
@@ -194,6 +209,7 @@ class Client extends _i1.ServerpodClientShared {
     dashboard = EndpointDashboard(this);
     devicelog = EndpointDevicelog(this);
     example = EndpointExample(this);
+    user = EndpointUser(this);
     modules = _Modules(this);
   }
 
@@ -203,6 +219,8 @@ class Client extends _i1.ServerpodClientShared {
 
   late final EndpointExample example;
 
+  late final EndpointUser user;
+
   late final _Modules modules;
 
   @override
@@ -210,6 +228,7 @@ class Client extends _i1.ServerpodClientShared {
         'dashboard': dashboard,
         'devicelog': devicelog,
         'example': example,
+        'user': user,
       };
 
   @override

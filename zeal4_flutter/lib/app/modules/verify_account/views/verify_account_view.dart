@@ -51,41 +51,7 @@ class VerifyAccountView extends GetView<VerifyAccountController> {
 
                     // button
                     FilledButton(
-                      onPressed: () async {
-                        /*
-                      // verify
-                      final verifyResult = await controller.verifyAccount(
-                        email: email!,
-                        verificationCode: _verificationCodeController.text,
-                      );
-            
-                      // if pass
-                      if (verifyResult != null) {
-                        // signin and update user scope
-                        final user = await controller.signInWithEmailPassword(
-                          email: email!,
-                          password: password!,
-                        );
-                        // check user result update user scope
-                        if (user != null) {
-                          // update scope
-                          await controller.updateToCustomerScope();
-                          // create customer data
-                          await client.customer.createCustomerData();
-                          Get.snackbar('Info', 'Verified account!');
-                          Get.offAllNamed(Routes.HOME);
-                        } else {
-                          Get.snackbar(
-                              'Error', 'Cannot signin and update account!');
-                          Get.offAllNamed(Routes.SIGNUP);
-                        }
-                      } else {
-                        Get.snackbar('Error', 'Cannot verify account!');
-                        Get.offAllNamed(Routes.SIGNUP);
-                      }
-            
-                      */
-                      },
+                      onPressed: () => verifyAccount(email, password!),
                       child: const Text('Verify Account'),
                     )
                   ],
@@ -93,5 +59,37 @@ class VerifyAccountView extends GetView<VerifyAccountController> {
               ),
             ),
     );
+  }
+
+  verifyAccount(String email, String password) async {
+    // verify
+    final verifyResult = await controller.verifyAccount(
+      email: email,
+      verificationCode: controller.verificationCodeController.text,
+    );
+
+    // if pass
+    if (verifyResult != null) {
+      // signin and update user scope
+      final user = await controller.signInWithEmailPassword(
+        email: email,
+        password: password,
+      );
+
+      // check user result update user scope
+      if (user != null) {
+        // update scope
+        await controller.updateToUserScope();
+        Get.snackbar('Info', 'Verified account!');
+        Get.offAllNamed(Routes.HOME);
+      } else {
+        // cannot signin
+        Get.snackbar('Error', 'Cannot signin and update account!');
+        Get.offAllNamed(Routes.SIGNUP);
+      }
+    } else {
+      Get.snackbar('Error', 'Cannot verify account!');
+      Get.offAllNamed(Routes.SIGNUP);
+    }
   }
 }

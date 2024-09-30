@@ -13,7 +13,8 @@ import 'package:serverpod/serverpod.dart' as _i1;
 import '../endpoints/dashboard_endpoint.dart' as _i2;
 import '../endpoints/devicelog_endpoint.dart' as _i3;
 import '../endpoints/example_endpoint.dart' as _i4;
-import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i5;
+import '../endpoints/user_endpoint.dart' as _i5;
+import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i6;
 
 class Endpoints extends _i1.EndpointDispatch {
   @override
@@ -37,6 +38,12 @@ class Endpoints extends _i1.EndpointDispatch {
           'example',
           null,
         ),
+      'user': _i5.UserEndpoint()
+        ..initialize(
+          server,
+          'user',
+          null,
+        ),
     };
     connectors['dashboard'] = _i1.EndpointConnector(
       name: 'dashboard',
@@ -44,13 +51,21 @@ class Endpoints extends _i1.EndpointDispatch {
       methodConnectors: {
         'getDashboards': _i1.MethodConnector(
           name: 'getDashboards',
-          params: {},
+          params: {
+            'userId': _i1.ParameterDescription(
+              name: 'userId',
+              type: _i1.getType<int>(),
+              nullable: false,
+            )
+          },
           call: (
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['dashboard'] as _i2.DashboardEndpoint)
-                  .getDashboards(session),
+              (endpoints['dashboard'] as _i2.DashboardEndpoint).getDashboards(
+            session,
+            params['userId'],
+          ),
         )
       },
     );
@@ -285,6 +300,22 @@ class Endpoints extends _i1.EndpointDispatch {
         ),
       },
     );
-    modules['serverpod_auth'] = _i5.Endpoints()..initializeEndpoints(server);
+    connectors['user'] = _i1.EndpointConnector(
+      name: 'user',
+      endpoint: endpoints['user']!,
+      methodConnectors: {
+        'updateToUserScope': _i1.MethodConnector(
+          name: 'updateToUserScope',
+          params: {},
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['user'] as _i5.UserEndpoint)
+                  .updateToUserScope(session),
+        )
+      },
+    );
+    modules['serverpod_auth'] = _i6.Endpoints()..initializeEndpoints(server);
   }
 }

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -17,11 +15,12 @@ class HomeView extends GetView<HomeController> {
         title: const Text('Home'),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         actions: [
-          (Platform.isWindows || Platform.isLinux || Platform.isMacOS)
-              ? IconButton(
-                  onPressed: () => controller.getDashboard(),
-                  icon: const Icon(Icons.refresh))
-              : const SizedBox()
+          IconButton(
+              onPressed: () => controller.getDashboard(),
+              icon: const Icon(Icons.refresh)),
+          IconButton(
+              onPressed: () => controller.signOut(),
+              icon: const Icon(Icons.exit_to_app))
         ],
       ),
       body: Obx(() {

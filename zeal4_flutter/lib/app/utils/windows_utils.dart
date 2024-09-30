@@ -6,7 +6,6 @@ import 'package:bitsdojo_window/bitsdojo_window.dart';
 
 initWindows() {
   // check desktop platform to config windows size
-  // TODO : check another desktop eg: linux, macos
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     doWhenWindowReady(() {
       final win = appWindow;
@@ -15,8 +14,8 @@ initWindows() {
       win.minSize = minSize;
       win.size = initialSize;
       win.alignment = Alignment.center;
-      win.maximize();
       win.show();
+      win.maximize();
     });
   }
 }
