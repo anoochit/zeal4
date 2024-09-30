@@ -14,14 +14,7 @@ class HomeView extends GetView<HomeController> {
       appBar: AppBar(
         title: const Text('Home'),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        actions: [
-          IconButton(
-              onPressed: () => controller.getDashboard(),
-              icon: const Icon(Icons.refresh)),
-          IconButton(
-              onPressed: () => controller.signOut(),
-              icon: const Icon(Icons.exit_to_app))
-        ],
+        actions: buildActonButtons(),
       ),
       body: Obx(() {
         final dashboards = controller.dashboards;
@@ -73,5 +66,19 @@ class HomeView extends GetView<HomeController> {
         );
       }),
     );
+  }
+
+  List<Widget> buildActonButtons() {
+    return [
+      // refresh
+      IconButton(
+          onPressed: () => controller.getDashboard(),
+          icon: const Icon(Icons.refresh)),
+
+      // signout
+      IconButton(
+          onPressed: () => controller.signOut(),
+          icon: const Icon(Icons.exit_to_app))
+    ];
   }
 }
