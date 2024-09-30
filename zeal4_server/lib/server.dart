@@ -34,7 +34,7 @@ void run(List<String> args) async {
       final subject = 'Verfify your account';
       final body = 'Hi,\nYour validation code = $validationCode';
 
-      return sendMail(session, email, subject, body);
+      return await sendMail(session, email, subject, body);
     },
     sendPasswordResetEmail: (session, userInfo, validationCode) async {
       print('Validation code: $validationCode');
@@ -44,7 +44,7 @@ void run(List<String> args) async {
       final subject = 'Reset your account';
       final body = 'Hi,\nYour validation code = $validationCode';
 
-      return sendMail(session, userInfo.email!, subject, body);
+      return await sendMail(session, userInfo.email!, subject, body);
     },
   ));
 
