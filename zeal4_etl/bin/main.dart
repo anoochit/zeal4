@@ -1,6 +1,6 @@
-import 'package:zeal4_etl/zeal4_etl.dart' as mqtt;
+import 'package:zeal4_etl/zeal4_etl.dart';
 
 void main(List<String> args) {
   // run etl
-  mqtt.runETL();
+  runETL();
 }

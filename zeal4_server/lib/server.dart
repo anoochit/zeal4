@@ -1,5 +1,7 @@
 // ignore_for_file: unused_local_variable
 
+import 'package:mailer/mailer.dart';
+import 'package:mailer/smtp_server/gmail.dart';
 import 'package:serverpod/serverpod.dart';
 import 'src/generated/protocol.dart';
 import 'src/generated/endpoints.dart';
@@ -27,12 +29,22 @@ void run(List<String> args) async {
     sendValidationEmail: (session, email, validationCode) async {
       print('Validation code: $validationCode');
       session.log('Code for $email is $validationCode');
-      return true;
+
+      // send mail
+      final subject = 'Verfify your account';
+      final body = 'Hi,\nYour validation code = $validationCode';
+
+      return sendMail(session, email, subject, body);
     },
     sendPasswordResetEmail: (session, userInfo, validationCode) async {
       print('Validation code: $validationCode');
       session.log('Code for ${userInfo.userName} is $validationCode');
-      return true;
+
+      // send mail
+      final subject = 'Reset your account';
+      final body = 'Hi,\nYour validation code = $validationCode';
+
+      return sendMail(session, userInfo.email!, subject, body);
     },
   ));
 
@@ -50,6 +62,32 @@ void run(List<String> args) async {
 
   // Start the server.
   await pod.start();
+}
+
+Future<bool> sendMail(
+    Session session, String email, String subject, String body) async {
+  // Retrieve the credentials
+  final gmailAccount = session.serverpod.getPassword('gmailAccount')!;
+  final gmailAppPassword = session.serverpod.getPassword('gmailAppPassword')!;
+
+  // Create a SMTP client for Gmail.
+  final smtpServer = gmail(gmailAccount, gmailAppPassword);
+
+  // Create an email message with the validation code.
+  final message = Message()
+    ..from = Address(gmailAccount)
+    ..recipients.add(email)
+    ..subject = subject
+    ..html = body;
+
+  // Send the email message.
+  try {
+    await send(message, smtpServer);
+    return true;
+  } catch (_) {
+    // Return false if the email could not be sent.
+    return false;
+  }
 }
 
 Future<void> initSampleData(Serverpod pod) async {
