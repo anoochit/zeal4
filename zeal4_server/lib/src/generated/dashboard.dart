@@ -11,6 +11,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 import 'protocol.dart' as _i2;
+import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i3;
 
 abstract class Dashboard extends _i1.TableRow
     implements _i1.ProtocolSerialization {
@@ -19,6 +20,8 @@ abstract class Dashboard extends _i1.TableRow
     required this.name,
     required this.description,
     this.widget,
+    required this.userInfoId,
+    this.userInfo,
   }) : super(id);
 
   factory Dashboard({
@@ -26,6 +29,8 @@ abstract class Dashboard extends _i1.TableRow
     required String name,
     required String description,
     List<_i2.DashboardWidget>? widget,
+    required int userInfoId,
+    _i3.UserInfo? userInfo,
   }) = _DashboardImpl;
 
   factory Dashboard.fromJson(Map<String, dynamic> jsonSerialization) {
@@ -37,6 +42,11 @@ abstract class Dashboard extends _i1.TableRow
           ?.map(
               (e) => _i2.DashboardWidget.fromJson((e as Map<String, dynamic>)))
           .toList(),
+      userInfoId: jsonSerialization['userInfoId'] as int,
+      userInfo: jsonSerialization['userInfo'] == null
+          ? null
+          : _i3.UserInfo.fromJson(
+              (jsonSerialization['userInfo'] as Map<String, dynamic>)),
     );
   }
 
@@ -50,6 +60,10 @@ abstract class Dashboard extends _i1.TableRow
 
   List<_i2.DashboardWidget>? widget;
 
+  int userInfoId;
+
+  _i3.UserInfo? userInfo;
+
   @override
   _i1.Table get table => t;
 
@@ -58,6 +72,8 @@ abstract class Dashboard extends _i1.TableRow
     String? name,
     String? description,
     List<_i2.DashboardWidget>? widget,
+    int? userInfoId,
+    _i3.UserInfo? userInfo,
   });
   @override
   Map<String, dynamic> toJson() {
@@ -67,6 +83,8 @@ abstract class Dashboard extends _i1.TableRow
       'description': description,
       if (widget != null)
         'widget': widget?.toJson(valueToJson: (v) => v.toJson()),
+      'userInfoId': userInfoId,
+      if (userInfo != null) 'userInfo': userInfo?.toJson(),
     };
   }
 
@@ -78,11 +96,19 @@ abstract class Dashboard extends _i1.TableRow
       'description': description,
       if (widget != null)
         'widget': widget?.toJson(valueToJson: (v) => v.toJsonForProtocol()),
+      'userInfoId': userInfoId,
+      if (userInfo != null) 'userInfo': userInfo?.toJsonForProtocol(),
     };
   }
 
-  static DashboardInclude include({_i2.DashboardWidgetIncludeList? widget}) {
-    return DashboardInclude._(widget: widget);
+  static DashboardInclude include({
+    _i2.DashboardWidgetIncludeList? widget,
+    _i3.UserInfoInclude? userInfo,
+  }) {
+    return DashboardInclude._(
+      widget: widget,
+      userInfo: userInfo,
+    );
   }
 
   static DashboardIncludeList includeList({
@@ -119,11 +145,15 @@ class _DashboardImpl extends Dashboard {
     required String name,
     required String description,
     List<_i2.DashboardWidget>? widget,
+    required int userInfoId,
+    _i3.UserInfo? userInfo,
   }) : super._(
           id: id,
           name: name,
           description: description,
           widget: widget,
+          userInfoId: userInfoId,
+          userInfo: userInfo,
         );
 
   @override
@@ -132,6 +162,8 @@ class _DashboardImpl extends Dashboard {
     String? name,
     String? description,
     Object? widget = _Undefined,
+    int? userInfoId,
+    Object? userInfo = _Undefined,
   }) {
     return Dashboard(
       id: id is int? ? id : this.id,
@@ -140,6 +172,9 @@ class _DashboardImpl extends Dashboard {
       widget: widget is List<_i2.DashboardWidget>?
           ? widget
           : this.widget?.map((e0) => e0.copyWith()).toList(),
+      userInfoId: userInfoId ?? this.userInfoId,
+      userInfo:
+          userInfo is _i3.UserInfo? ? userInfo : this.userInfo?.copyWith(),
     );
   }
 }
@@ -154,6 +189,10 @@ class DashboardTable extends _i1.Table {
       'description',
       this,
     );
+    userInfoId = _i1.ColumnInt(
+      'userInfoId',
+      this,
+    );
   }
 
   late final _i1.ColumnString name;
@@ -163,6 +202,10 @@ class DashboardTable extends _i1.Table {
   _i2.DashboardWidgetTable? ___widget;
 
   _i1.ManyRelation<_i2.DashboardWidgetTable>? _widget;
+
+  late final _i1.ColumnInt userInfoId;
+
+  _i3.UserInfoTable? _userInfo;
 
   _i2.DashboardWidgetTable get __widget {
     if (___widget != null) return ___widget!;
@@ -175,6 +218,19 @@ class DashboardTable extends _i1.Table {
           _i2.DashboardWidgetTable(tableRelation: foreignTableRelation),
     );
     return ___widget!;
+  }
+
+  _i3.UserInfoTable get userInfo {
+    if (_userInfo != null) return _userInfo!;
+    _userInfo = _i1.createRelationTable(
+      relationFieldName: 'userInfo',
+      field: Dashboard.t.userInfoId,
+      foreignField: _i3.UserInfo.t.id,
+      tableRelation: tableRelation,
+      createTable: (foreignTableRelation) =>
+          _i3.UserInfoTable(tableRelation: foreignTableRelation),
+    );
+    return _userInfo!;
   }
 
   _i1.ManyRelation<_i2.DashboardWidgetTable> get widget {
@@ -200,6 +256,7 @@ class DashboardTable extends _i1.Table {
         id,
         name,
         description,
+        userInfoId,
       ];
 
   @override
@@ -207,19 +264,31 @@ class DashboardTable extends _i1.Table {
     if (relationField == 'widget') {
       return __widget;
     }
+    if (relationField == 'userInfo') {
+      return userInfo;
+    }
     return null;
   }
 }
 
 class DashboardInclude extends _i1.IncludeObject {
-  DashboardInclude._({_i2.DashboardWidgetIncludeList? widget}) {
+  DashboardInclude._({
+    _i2.DashboardWidgetIncludeList? widget,
+    _i3.UserInfoInclude? userInfo,
+  }) {
     _widget = widget;
+    _userInfo = userInfo;
   }
 
   _i2.DashboardWidgetIncludeList? _widget;
 
+  _i3.UserInfoInclude? _userInfo;
+
   @override
-  Map<String, _i1.Include?> get includes => {'widget': _widget};
+  Map<String, _i1.Include?> get includes => {
+        'widget': _widget,
+        'userInfo': _userInfo,
+      };
 
   @override
   _i1.Table get table => Dashboard.t;
@@ -437,6 +506,27 @@ class DashboardAttachRepository {
 
 class DashboardAttachRowRepository {
   const DashboardAttachRowRepository._();
+
+  Future<void> userInfo(
+    _i1.DatabaseAccessor databaseAccessor,
+    Dashboard dashboard,
+    _i3.UserInfo userInfo, {
+    _i1.Transaction? transaction,
+  }) async {
+    if (dashboard.id == null) {
+      throw ArgumentError.notNull('dashboard.id');
+    }
+    if (userInfo.id == null) {
+      throw ArgumentError.notNull('userInfo.id');
+    }
+
+    var $dashboard = dashboard.copyWith(userInfoId: userInfo.id);
+    await databaseAccessor.db.updateRow<Dashboard>(
+      $dashboard,
+      columns: [Dashboard.t.userInfoId],
+      transaction: transaction ?? databaseAccessor.transaction,
+    );
+  }
 
   Future<void> widget(
     _i1.DatabaseAccessor databaseAccessor,

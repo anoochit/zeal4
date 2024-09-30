@@ -5,7 +5,11 @@ import 'package:zeal4_client/zeal4_client.dart';
 
 class DashboardController extends GetxController {
   //
-  Rx<Dashboard> dashboard = Dashboard(name: '', description: '').obs;
+  Rx<Dashboard> dashboard = Dashboard(
+    name: '',
+    description: '',
+    userInfoId: 0,
+  ).obs;
 
   @override
   void onInit() {

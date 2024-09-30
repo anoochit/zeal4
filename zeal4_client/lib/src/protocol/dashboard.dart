@@ -11,6 +11,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import 'protocol.dart' as _i2;
+import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i3;
 
 abstract class Dashboard implements _i1.SerializableModel {
   Dashboard._({
@@ -18,6 +19,8 @@ abstract class Dashboard implements _i1.SerializableModel {
     required this.name,
     required this.description,
     this.widget,
+    required this.userInfoId,
+    this.userInfo,
   });
 
   factory Dashboard({
@@ -25,6 +28,8 @@ abstract class Dashboard implements _i1.SerializableModel {
     required String name,
     required String description,
     List<_i2.DashboardWidget>? widget,
+    required int userInfoId,
+    _i3.UserInfo? userInfo,
   }) = _DashboardImpl;
 
   factory Dashboard.fromJson(Map<String, dynamic> jsonSerialization) {
@@ -36,6 +41,11 @@ abstract class Dashboard implements _i1.SerializableModel {
           ?.map(
               (e) => _i2.DashboardWidget.fromJson((e as Map<String, dynamic>)))
           .toList(),
+      userInfoId: jsonSerialization['userInfoId'] as int,
+      userInfo: jsonSerialization['userInfo'] == null
+          ? null
+          : _i3.UserInfo.fromJson(
+              (jsonSerialization['userInfo'] as Map<String, dynamic>)),
     );
   }
 
@@ -50,11 +60,17 @@ abstract class Dashboard implements _i1.SerializableModel {
 
   List<_i2.DashboardWidget>? widget;
 
+  int userInfoId;
+
+  _i3.UserInfo? userInfo;
+
   Dashboard copyWith({
     int? id,
     String? name,
     String? description,
     List<_i2.DashboardWidget>? widget,
+    int? userInfoId,
+    _i3.UserInfo? userInfo,
   });
   @override
   Map<String, dynamic> toJson() {
@@ -64,6 +80,8 @@ abstract class Dashboard implements _i1.SerializableModel {
       'description': description,
       if (widget != null)
         'widget': widget?.toJson(valueToJson: (v) => v.toJson()),
+      'userInfoId': userInfoId,
+      if (userInfo != null) 'userInfo': userInfo?.toJson(),
     };
   }
 
@@ -81,11 +99,15 @@ class _DashboardImpl extends Dashboard {
     required String name,
     required String description,
     List<_i2.DashboardWidget>? widget,
+    required int userInfoId,
+    _i3.UserInfo? userInfo,
   }) : super._(
           id: id,
           name: name,
           description: description,
           widget: widget,
+          userInfoId: userInfoId,
+          userInfo: userInfo,
         );
 
   @override
@@ -94,6 +116,8 @@ class _DashboardImpl extends Dashboard {
     String? name,
     String? description,
     Object? widget = _Undefined,
+    int? userInfoId,
+    Object? userInfo = _Undefined,
   }) {
     return Dashboard(
       id: id is int? ? id : this.id,
@@ -102,6 +126,9 @@ class _DashboardImpl extends Dashboard {
       widget: widget is List<_i2.DashboardWidget>?
           ? widget
           : this.widget?.map((e0) => e0.copyWith()).toList(),
+      userInfoId: userInfoId ?? this.userInfoId,
+      userInfo:
+          userInfo is _i3.UserInfo? ? userInfo : this.userInfo?.copyWith(),
     );
   }
 }

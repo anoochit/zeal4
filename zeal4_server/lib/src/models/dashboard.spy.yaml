@@ -21,3 +21,4 @@ fields:
   name: String
   description: String
   widget: List<DashboardWidget>?, relation(name=dashboard_widget)
+  userInfo: module:auth:UserInfo?, relation(onUpdate=SetNull, onDelete=SetNull)

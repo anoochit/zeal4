@@ -1,0 +1,5 @@
+enum: UserScope
+serialized: byName
+values:
+  - user
+  - admin

@@ -18,16 +18,18 @@ import 'device.dart' as _i5;
 import 'device_log.dart' as _i6;
 import 'example.dart' as _i7;
 import 'snapshot_devicelog.dart' as _i8;
-import 'widget.dart' as _i9;
-import 'widget_type.dart' as _i10;
-import 'protocol.dart' as _i11;
-import 'package:zeal4_server/src/generated/dashboard.dart' as _i12;
-import 'package:zeal4_server/src/generated/device_log.dart' as _i13;
+import 'user_scope.dart' as _i9;
+import 'widget.dart' as _i10;
+import 'widget_type.dart' as _i11;
+import 'protocol.dart' as _i12;
+import 'package:zeal4_server/src/generated/dashboard.dart' as _i13;
+import 'package:zeal4_server/src/generated/device_log.dart' as _i14;
 export 'dashboard.dart';
 export 'device.dart';
 export 'device_log.dart';
 export 'example.dart';
 export 'snapshot_devicelog.dart';
+export 'user_scope.dart';
 export 'widget.dart';
 export 'widget_type.dart';
 
@@ -64,8 +66,25 @@ class Protocol extends _i1.SerializationManagerServer {
           isNullable: false,
           dartType: 'String',
         ),
+        _i2.ColumnDefinition(
+          name: 'userInfoId',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: false,
+          dartType: 'int',
+        ),
       ],
-      foreignKeys: [],
+      foreignKeys: [
+        _i2.ForeignKeyDefinition(
+          constraintName: 'dashboard_fk_0',
+          columns: ['userInfoId'],
+          referenceTable: 'serverpod_user_info',
+          referenceTableSchema: 'public',
+          referenceColumns: ['id'],
+          onUpdate: _i2.ForeignKeyAction.setNull,
+          onDelete: _i2.ForeignKeyAction.setNull,
+          matchType: null,
+        )
+      ],
       indexes: [
         _i2.IndexDefinition(
           indexName: 'dashboard_pkey',
@@ -174,6 +193,12 @@ class Protocol extends _i1.SerializationManagerServer {
           dartType: 'int',
         ),
         _i2.ColumnDefinition(
+          name: 'userInfoId',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: false,
+          dartType: 'int',
+        ),
+        _i2.ColumnDefinition(
           name: 'enable',
           columnType: _i2.ColumnType.boolean,
           isNullable: false,
@@ -200,6 +225,16 @@ class Protocol extends _i1.SerializationManagerServer {
           referenceColumns: ['id'],
           onUpdate: _i2.ForeignKeyAction.noAction,
           onDelete: _i2.ForeignKeyAction.noAction,
+          matchType: null,
+        ),
+        _i2.ForeignKeyDefinition(
+          constraintName: 'dashboard_widget_fk_2',
+          columns: ['userInfoId'],
+          referenceTable: 'serverpod_user_info',
+          referenceTableSchema: 'public',
+          referenceColumns: ['id'],
+          onUpdate: _i2.ForeignKeyAction.setNull,
+          onDelete: _i2.ForeignKeyAction.setNull,
           matchType: null,
         ),
       ],
@@ -258,6 +293,12 @@ class Protocol extends _i1.SerializationManagerServer {
           dartType: 'List<String>?',
         ),
         _i2.ColumnDefinition(
+          name: 'userInfoId',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: false,
+          dartType: 'int',
+        ),
+        _i2.ColumnDefinition(
           name: 'created',
           columnType: _i2.ColumnType.timestampWithoutTimeZone,
           isNullable: false,
@@ -265,7 +306,18 @@ class Protocol extends _i1.SerializationManagerServer {
           columnDefault: 'CURRENT_TIMESTAMP',
         ),
       ],
-      foreignKeys: [],
+      foreignKeys: [
+        _i2.ForeignKeyDefinition(
+          constraintName: 'device_fk_0',
+          columns: ['userInfoId'],
+          referenceTable: 'serverpod_user_info',
+          referenceTableSchema: 'public',
+          referenceColumns: ['id'],
+          onUpdate: _i2.ForeignKeyAction.setNull,
+          onDelete: _i2.ForeignKeyAction.setNull,
+          matchType: null,
+        )
+      ],
       indexes: [
         _i2.IndexDefinition(
           indexName: 'device_pkey',
@@ -370,11 +422,14 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i8.SnapshotDeviceLog) {
       return _i8.SnapshotDeviceLog.fromJson(data) as T;
     }
-    if (t == _i9.DashboardWidget) {
-      return _i9.DashboardWidget.fromJson(data) as T;
+    if (t == _i9.UserScope) {
+      return _i9.UserScope.fromJson(data) as T;
     }
-    if (t == _i10.WidgetType) {
-      return _i10.WidgetType.fromJson(data) as T;
+    if (t == _i10.DashboardWidget) {
+      return _i10.DashboardWidget.fromJson(data) as T;
+    }
+    if (t == _i11.WidgetType) {
+      return _i11.WidgetType.fromJson(data) as T;
     }
     if (t == _i1.getType<_i4.Dashboard?>()) {
       return (data != null ? _i4.Dashboard.fromJson(data) : null) as T;
@@ -391,16 +446,19 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i1.getType<_i8.SnapshotDeviceLog?>()) {
       return (data != null ? _i8.SnapshotDeviceLog.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i9.DashboardWidget?>()) {
-      return (data != null ? _i9.DashboardWidget.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i9.UserScope?>()) {
+      return (data != null ? _i9.UserScope.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i10.WidgetType?>()) {
-      return (data != null ? _i10.WidgetType.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i10.DashboardWidget?>()) {
+      return (data != null ? _i10.DashboardWidget.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<List<_i11.DashboardWidget>?>()) {
+    if (t == _i1.getType<_i11.WidgetType?>()) {
+      return (data != null ? _i11.WidgetType.fromJson(data) : null) as T;
+    }
+    if (t == _i1.getType<List<_i12.DashboardWidget>?>()) {
       return (data != null
           ? (data as List)
-              .map((e) => deserialize<_i11.DashboardWidget>(e))
+              .map((e) => deserialize<_i12.DashboardWidget>(e))
               .toList()
           : null) as dynamic;
     }
@@ -409,32 +467,32 @@ class Protocol extends _i1.SerializationManagerServer {
           ? (data as List).map((e) => deserialize<String>(e)).toList()
           : null) as dynamic;
     }
-    if (t == _i1.getType<List<_i11.DashboardWidget>?>()) {
+    if (t == _i1.getType<List<_i12.DashboardWidget>?>()) {
       return (data != null
           ? (data as List)
-              .map((e) => deserialize<_i11.DashboardWidget>(e))
+              .map((e) => deserialize<_i12.DashboardWidget>(e))
               .toList()
           : null) as dynamic;
     }
-    if (t == _i1.getType<List<_i11.DeviceLog>?>()) {
+    if (t == _i1.getType<List<_i12.DeviceLog>?>()) {
       return (data != null
-          ? (data as List).map((e) => deserialize<_i11.DeviceLog>(e)).toList()
+          ? (data as List).map((e) => deserialize<_i12.DeviceLog>(e)).toList()
           : null) as dynamic;
     }
-    if (t == List<_i11.DeviceLog>) {
-      return (data as List).map((e) => deserialize<_i11.DeviceLog>(e)).toList()
+    if (t == List<_i12.DeviceLog>) {
+      return (data as List).map((e) => deserialize<_i12.DeviceLog>(e)).toList()
           as dynamic;
     }
     if (t == List<String>) {
       return (data as List).map((e) => deserialize<String>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i12.Dashboard>) {
-      return (data as List).map((e) => deserialize<_i12.Dashboard>(e)).toList()
+    if (t == List<_i13.Dashboard>) {
+      return (data as List).map((e) => deserialize<_i13.Dashboard>(e)).toList()
           as dynamic;
     }
-    if (t == List<_i13.DeviceLog>) {
-      return (data as List).map((e) => deserialize<_i13.DeviceLog>(e)).toList()
+    if (t == List<_i14.DeviceLog>) {
+      return (data as List).map((e) => deserialize<_i14.DeviceLog>(e)).toList()
           as dynamic;
     }
     try {
@@ -465,10 +523,13 @@ class Protocol extends _i1.SerializationManagerServer {
     if (data is _i8.SnapshotDeviceLog) {
       return 'SnapshotDeviceLog';
     }
-    if (data is _i9.DashboardWidget) {
+    if (data is _i9.UserScope) {
+      return 'UserScope';
+    }
+    if (data is _i10.DashboardWidget) {
       return 'DashboardWidget';
     }
-    if (data is _i10.WidgetType) {
+    if (data is _i11.WidgetType) {
       return 'WidgetType';
     }
     className = _i2.Protocol().getClassNameForObject(data);
@@ -499,11 +560,14 @@ class Protocol extends _i1.SerializationManagerServer {
     if (data['className'] == 'SnapshotDeviceLog') {
       return deserialize<_i8.SnapshotDeviceLog>(data['data']);
     }
+    if (data['className'] == 'UserScope') {
+      return deserialize<_i9.UserScope>(data['data']);
+    }
     if (data['className'] == 'DashboardWidget') {
-      return deserialize<_i9.DashboardWidget>(data['data']);
+      return deserialize<_i10.DashboardWidget>(data['data']);
     }
     if (data['className'] == 'WidgetType') {
-      return deserialize<_i10.WidgetType>(data['data']);
+      return deserialize<_i11.WidgetType>(data['data']);
     }
     if (data['className'].startsWith('serverpod.')) {
       data['className'] = data['className'].substring(10);
@@ -537,8 +601,8 @@ class Protocol extends _i1.SerializationManagerServer {
         return _i5.Device.t;
       case _i6.DeviceLog:
         return _i6.DeviceLog.t;
-      case _i9.DashboardWidget:
-        return _i9.DashboardWidget.t;
+      case _i10.DashboardWidget:
+        return _i10.DashboardWidget.t;
     }
     return null;
   }

@@ -30,4 +30,5 @@ fields:
   labels: List<String>
   points: int, default=60
   dashboard: Dashboard?, relation(name=dashboard_widget)
+  userInfo: module:auth:UserInfo?, relation(onUpdate=SetNull, onDelete=SetNull)
   enable: bool, default=false

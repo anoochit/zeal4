@@ -23,10 +23,14 @@ class DashboardEndpoint extends Endpoint {
 
   // get dashboard
   Future<List<Dashboard>> getDashboards(Session session) async {
+    final currentUser = await session.authenticated;
+    final userId = currentUser!.userId;
+
     final dashboards = await Dashboard.db.find(
       session,
       orderBy: (d) => (d.name),
       orderDescending: false,
+      where: (p) => (p.userInfoId.equals(userId)),
       include: Dashboard.include(
         widget: DashboardWidget.includeList(
           where: (p) => (p.enable.equals(true)),
@@ -40,4 +44,11 @@ class DashboardEndpoint extends Endpoint {
 
     return dashboards;
   }
+}
+
+class UserScope extends Scope {
+  const UserScope(String super.name);
+
+  static const admin = UserScope('admin');
+  static const user = UserScope('user');
 }

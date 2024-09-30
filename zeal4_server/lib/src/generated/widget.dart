@@ -11,6 +11,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 import 'protocol.dart' as _i2;
+import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i3;
 
 abstract class DashboardWidget extends _i1.TableRow
     implements _i1.ProtocolSerialization {
@@ -30,6 +31,8 @@ abstract class DashboardWidget extends _i1.TableRow
     int? points,
     required this.dashboardId,
     this.dashboard,
+    required this.userInfoId,
+    this.userInfo,
     bool? enable,
   })  : width = width ?? 3,
         height = height ?? 1,
@@ -55,6 +58,8 @@ abstract class DashboardWidget extends _i1.TableRow
     int? points,
     required int dashboardId,
     _i2.Dashboard? dashboard,
+    required int userInfoId,
+    _i3.UserInfo? userInfo,
     bool? enable,
   }) = _DashboardWidgetImpl;
 
@@ -86,6 +91,11 @@ abstract class DashboardWidget extends _i1.TableRow
           ? null
           : _i2.Dashboard.fromJson(
               (jsonSerialization['dashboard'] as Map<String, dynamic>)),
+      userInfoId: jsonSerialization['userInfoId'] as int,
+      userInfo: jsonSerialization['userInfo'] == null
+          ? null
+          : _i3.UserInfo.fromJson(
+              (jsonSerialization['userInfo'] as Map<String, dynamic>)),
       enable: jsonSerialization['enable'] as bool,
     );
   }
@@ -122,6 +132,10 @@ abstract class DashboardWidget extends _i1.TableRow
 
   _i2.Dashboard? dashboard;
 
+  int userInfoId;
+
+  _i3.UserInfo? userInfo;
+
   bool enable;
 
   @override
@@ -143,6 +157,8 @@ abstract class DashboardWidget extends _i1.TableRow
     int? points,
     int? dashboardId,
     _i2.Dashboard? dashboard,
+    int? userInfoId,
+    _i3.UserInfo? userInfo,
     bool? enable,
   });
   @override
@@ -163,6 +179,8 @@ abstract class DashboardWidget extends _i1.TableRow
       'points': points,
       'dashboardId': dashboardId,
       if (dashboard != null) 'dashboard': dashboard?.toJson(),
+      'userInfoId': userInfoId,
+      if (userInfo != null) 'userInfo': userInfo?.toJson(),
       'enable': enable,
     };
   }
@@ -185,6 +203,8 @@ abstract class DashboardWidget extends _i1.TableRow
       'points': points,
       'dashboardId': dashboardId,
       if (dashboard != null) 'dashboard': dashboard?.toJsonForProtocol(),
+      'userInfoId': userInfoId,
+      if (userInfo != null) 'userInfo': userInfo?.toJsonForProtocol(),
       'enable': enable,
     };
   }
@@ -192,10 +212,12 @@ abstract class DashboardWidget extends _i1.TableRow
   static DashboardWidgetInclude include({
     _i2.DeviceInclude? device,
     _i2.DashboardInclude? dashboard,
+    _i3.UserInfoInclude? userInfo,
   }) {
     return DashboardWidgetInclude._(
       device: device,
       dashboard: dashboard,
+      userInfo: userInfo,
     );
   }
 
@@ -244,6 +266,8 @@ class _DashboardWidgetImpl extends DashboardWidget {
     int? points,
     required int dashboardId,
     _i2.Dashboard? dashboard,
+    required int userInfoId,
+    _i3.UserInfo? userInfo,
     bool? enable,
   }) : super._(
           id: id,
@@ -261,6 +285,8 @@ class _DashboardWidgetImpl extends DashboardWidget {
           points: points,
           dashboardId: dashboardId,
           dashboard: dashboard,
+          userInfoId: userInfoId,
+          userInfo: userInfo,
           enable: enable,
         );
 
@@ -281,6 +307,8 @@ class _DashboardWidgetImpl extends DashboardWidget {
     int? points,
     int? dashboardId,
     Object? dashboard = _Undefined,
+    int? userInfoId,
+    Object? userInfo = _Undefined,
     bool? enable,
   }) {
     return DashboardWidget(
@@ -300,6 +328,9 @@ class _DashboardWidgetImpl extends DashboardWidget {
       dashboardId: dashboardId ?? this.dashboardId,
       dashboard:
           dashboard is _i2.Dashboard? ? dashboard : this.dashboard?.copyWith(),
+      userInfoId: userInfoId ?? this.userInfoId,
+      userInfo:
+          userInfo is _i3.UserInfo? ? userInfo : this.userInfo?.copyWith(),
       enable: enable ?? this.enable,
     );
   }
@@ -362,6 +393,10 @@ class DashboardWidgetTable extends _i1.Table {
       'dashboardId',
       this,
     );
+    userInfoId = _i1.ColumnInt(
+      'userInfoId',
+      this,
+    );
     enable = _i1.ColumnBool(
       'enable',
       this,
@@ -397,6 +432,10 @@ class DashboardWidgetTable extends _i1.Table {
 
   _i2.DashboardTable? _dashboard;
 
+  late final _i1.ColumnInt userInfoId;
+
+  _i3.UserInfoTable? _userInfo;
+
   late final _i1.ColumnBool enable;
 
   _i2.DeviceTable get device {
@@ -425,6 +464,19 @@ class DashboardWidgetTable extends _i1.Table {
     return _dashboard!;
   }
 
+  _i3.UserInfoTable get userInfo {
+    if (_userInfo != null) return _userInfo!;
+    _userInfo = _i1.createRelationTable(
+      relationFieldName: 'userInfo',
+      field: DashboardWidget.t.userInfoId,
+      foreignField: _i3.UserInfo.t.id,
+      tableRelation: tableRelation,
+      createTable: (foreignTableRelation) =>
+          _i3.UserInfoTable(tableRelation: foreignTableRelation),
+    );
+    return _userInfo!;
+  }
+
   @override
   List<_i1.Column> get columns => [
         id,
@@ -440,6 +492,7 @@ class DashboardWidgetTable extends _i1.Table {
         labels,
         points,
         dashboardId,
+        userInfoId,
         enable,
       ];
 
@@ -451,6 +504,9 @@ class DashboardWidgetTable extends _i1.Table {
     if (relationField == 'dashboard') {
       return dashboard;
     }
+    if (relationField == 'userInfo') {
+      return userInfo;
+    }
     return null;
   }
 }
@@ -459,19 +515,24 @@ class DashboardWidgetInclude extends _i1.IncludeObject {
   DashboardWidgetInclude._({
     _i2.DeviceInclude? device,
     _i2.DashboardInclude? dashboard,
+    _i3.UserInfoInclude? userInfo,
   }) {
     _device = device;
     _dashboard = dashboard;
+    _userInfo = userInfo;
   }
 
   _i2.DeviceInclude? _device;
 
   _i2.DashboardInclude? _dashboard;
 
+  _i3.UserInfoInclude? _userInfo;
+
   @override
   Map<String, _i1.Include?> get includes => {
         'device': _device,
         'dashboard': _dashboard,
+        'userInfo': _userInfo,
       };
 
   @override
@@ -696,6 +757,27 @@ class DashboardWidgetAttachRowRepository {
     await databaseAccessor.db.updateRow<DashboardWidget>(
       $dashboardWidget,
       columns: [DashboardWidget.t.dashboardId],
+      transaction: transaction ?? databaseAccessor.transaction,
+    );
+  }
+
+  Future<void> userInfo(
+    _i1.DatabaseAccessor databaseAccessor,
+    DashboardWidget dashboardWidget,
+    _i3.UserInfo userInfo, {
+    _i1.Transaction? transaction,
+  }) async {
+    if (dashboardWidget.id == null) {
+      throw ArgumentError.notNull('dashboardWidget.id');
+    }
+    if (userInfo.id == null) {
+      throw ArgumentError.notNull('userInfo.id');
+    }
+
+    var $dashboardWidget = dashboardWidget.copyWith(userInfoId: userInfo.id);
+    await databaseAccessor.db.updateRow<DashboardWidget>(
+      $dashboardWidget,
+      columns: [DashboardWidget.t.userInfoId],
       transaction: transaction ?? databaseAccessor.transaction,
     );
   }

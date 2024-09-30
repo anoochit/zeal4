@@ -11,6 +11,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import 'protocol.dart' as _i2;
+import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i3;
 
 abstract class DashboardWidget implements _i1.SerializableModel {
   DashboardWidget._({
@@ -29,6 +30,8 @@ abstract class DashboardWidget implements _i1.SerializableModel {
     int? points,
     required this.dashboardId,
     this.dashboard,
+    required this.userInfoId,
+    this.userInfo,
     bool? enable,
   })  : width = width ?? 3,
         height = height ?? 1,
@@ -53,6 +56,8 @@ abstract class DashboardWidget implements _i1.SerializableModel {
     int? points,
     required int dashboardId,
     _i2.Dashboard? dashboard,
+    required int userInfoId,
+    _i3.UserInfo? userInfo,
     bool? enable,
   }) = _DashboardWidgetImpl;
 
@@ -84,6 +89,11 @@ abstract class DashboardWidget implements _i1.SerializableModel {
           ? null
           : _i2.Dashboard.fromJson(
               (jsonSerialization['dashboard'] as Map<String, dynamic>)),
+      userInfoId: jsonSerialization['userInfoId'] as int,
+      userInfo: jsonSerialization['userInfo'] == null
+          ? null
+          : _i3.UserInfo.fromJson(
+              (jsonSerialization['userInfo'] as Map<String, dynamic>)),
       enable: jsonSerialization['enable'] as bool,
     );
   }
@@ -121,6 +131,10 @@ abstract class DashboardWidget implements _i1.SerializableModel {
 
   _i2.Dashboard? dashboard;
 
+  int userInfoId;
+
+  _i3.UserInfo? userInfo;
+
   bool enable;
 
   DashboardWidget copyWith({
@@ -139,6 +153,8 @@ abstract class DashboardWidget implements _i1.SerializableModel {
     int? points,
     int? dashboardId,
     _i2.Dashboard? dashboard,
+    int? userInfoId,
+    _i3.UserInfo? userInfo,
     bool? enable,
   });
   @override
@@ -159,6 +175,8 @@ abstract class DashboardWidget implements _i1.SerializableModel {
       'points': points,
       'dashboardId': dashboardId,
       if (dashboard != null) 'dashboard': dashboard?.toJson(),
+      'userInfoId': userInfoId,
+      if (userInfo != null) 'userInfo': userInfo?.toJson(),
       'enable': enable,
     };
   }
@@ -188,6 +206,8 @@ class _DashboardWidgetImpl extends DashboardWidget {
     int? points,
     required int dashboardId,
     _i2.Dashboard? dashboard,
+    required int userInfoId,
+    _i3.UserInfo? userInfo,
     bool? enable,
   }) : super._(
           id: id,
@@ -205,6 +225,8 @@ class _DashboardWidgetImpl extends DashboardWidget {
           points: points,
           dashboardId: dashboardId,
           dashboard: dashboard,
+          userInfoId: userInfoId,
+          userInfo: userInfo,
           enable: enable,
         );
 
@@ -225,6 +247,8 @@ class _DashboardWidgetImpl extends DashboardWidget {
     int? points,
     int? dashboardId,
     Object? dashboard = _Undefined,
+    int? userInfoId,
+    Object? userInfo = _Undefined,
     bool? enable,
   }) {
     return DashboardWidget(
@@ -244,6 +268,9 @@ class _DashboardWidgetImpl extends DashboardWidget {
       dashboardId: dashboardId ?? this.dashboardId,
       dashboard:
           dashboard is _i2.Dashboard? ? dashboard : this.dashboard?.copyWith(),
+      userInfoId: userInfoId ?? this.userInfoId,
+      userInfo:
+          userInfo is _i3.UserInfo? ? userInfo : this.userInfo?.copyWith(),
       enable: enable ?? this.enable,
     );
   }

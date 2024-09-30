@@ -5,6 +5,7 @@ import 'src/generated/protocol.dart';
 import 'src/generated/endpoints.dart';
 import 'src/web/routes/root.dart';
 import 'package:serverpod_auth_server/serverpod_auth_server.dart' as auth;
+import 'src/endpoints/dashboard_endpoint.dart' as scope;
 
 // This is the starting point of your Serverpod server. In most cases, you will
 // only need to make additions to this file if you add future calls,  are
@@ -57,6 +58,24 @@ Future<void> initSampleData(Serverpod pod) async {
   late Device device;
   late Dashboard dashboard;
 
+  late int userId;
+
+  // add sample user
+  final userTotal = await auth.UserInfo.db.count(session);
+  if (userTotal == 0) {
+    // add sample manager
+    await auth.Emails.createUser(
+            session, 'admin', 'admin@example.com', 'Hello123!')
+        .then((user) {
+      userId = user!.id!;
+      auth.Users.updateUserScopes(
+        session,
+        user.id!,
+        {scope.UserScope.admin},
+      );
+    });
+  }
+
   // add sample device
   final totalDevice = await Device.db.count(session);
   if (totalDevice == 0) {
@@ -70,13 +89,18 @@ Future<void> initSampleData(Serverpod pod) async {
         'mem_total',
         'timestamp',
       ],
+      userInfoId: userId,
     );
     device = await Device.db.insertRow(session, row);
 
     // add sample dashboard
     final totalDashboard = await Dashboard.db.count(session);
     if (totalDashboard == 0) {
-      final row = Dashboard(name: 'Sample', description: 'Sample dashboard');
+      final row = Dashboard(
+        name: 'Sample',
+        description: 'Sample dashboard',
+        userInfoId: userId,
+      );
       dashboard = await Dashboard.db.insertRow(session, row);
     }
 
@@ -99,6 +123,7 @@ Future<void> initSampleData(Serverpod pod) async {
           height: 1,
           order: 1,
           enable: true,
+          userInfoId: userId,
         ),
 
         // text widget
@@ -115,6 +140,7 @@ Future<void> initSampleData(Serverpod pod) async {
           height: 1,
           order: 2,
           enable: true,
+          userInfoId: userId,
         ),
 
         // text widget
@@ -131,6 +157,7 @@ Future<void> initSampleData(Serverpod pod) async {
           height: 1,
           order: 2,
           enable: true,
+          userInfoId: userId,
         ),
 
         // bar chart
@@ -147,6 +174,7 @@ Future<void> initSampleData(Serverpod pod) async {
           height: 1,
           order: 3,
           enable: true,
+          userInfoId: userId,
         ),
         // bar chart
         DashboardWidget(
@@ -162,6 +190,7 @@ Future<void> initSampleData(Serverpod pod) async {
           height: 1,
           order: 4,
           enable: true,
+          userInfoId: userId,
         ),
         // table
         DashboardWidget(
@@ -177,6 +206,7 @@ Future<void> initSampleData(Serverpod pod) async {
           height: 2,
           order: 5,
           enable: true,
+          userInfoId: userId,
         ),
       ];
 

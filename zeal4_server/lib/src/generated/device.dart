@@ -11,6 +11,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 import 'protocol.dart' as _i2;
+import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i3;
 
 abstract class Device extends _i1.TableRow
     implements _i1.ProtocolSerialization {
@@ -22,6 +23,8 @@ abstract class Device extends _i1.TableRow
     this.fields,
     this.widget,
     this.deviceLog,
+    required this.userInfoId,
+    this.userInfo,
     DateTime? created,
   })  : created = created ?? DateTime.now(),
         super(id);
@@ -34,6 +37,8 @@ abstract class Device extends _i1.TableRow
     List<String>? fields,
     List<_i2.DashboardWidget>? widget,
     List<_i2.DeviceLog>? deviceLog,
+    required int userInfoId,
+    _i3.UserInfo? userInfo,
     DateTime? created,
   }) = _DeviceImpl;
 
@@ -53,6 +58,11 @@ abstract class Device extends _i1.TableRow
       deviceLog: (jsonSerialization['deviceLog'] as List?)
           ?.map((e) => _i2.DeviceLog.fromJson((e as Map<String, dynamic>)))
           .toList(),
+      userInfoId: jsonSerialization['userInfoId'] as int,
+      userInfo: jsonSerialization['userInfo'] == null
+          ? null
+          : _i3.UserInfo.fromJson(
+              (jsonSerialization['userInfo'] as Map<String, dynamic>)),
       created: _i1.DateTimeJsonExtension.fromJson(jsonSerialization['created']),
     );
   }
@@ -73,6 +83,10 @@ abstract class Device extends _i1.TableRow
 
   List<_i2.DeviceLog>? deviceLog;
 
+  int userInfoId;
+
+  _i3.UserInfo? userInfo;
+
   DateTime created;
 
   @override
@@ -86,6 +100,8 @@ abstract class Device extends _i1.TableRow
     List<String>? fields,
     List<_i2.DashboardWidget>? widget,
     List<_i2.DeviceLog>? deviceLog,
+    int? userInfoId,
+    _i3.UserInfo? userInfo,
     DateTime? created,
   });
   @override
@@ -100,6 +116,8 @@ abstract class Device extends _i1.TableRow
         'widget': widget?.toJson(valueToJson: (v) => v.toJson()),
       if (deviceLog != null)
         'deviceLog': deviceLog?.toJson(valueToJson: (v) => v.toJson()),
+      'userInfoId': userInfoId,
+      if (userInfo != null) 'userInfo': userInfo?.toJson(),
       'created': created.toJson(),
     };
   }
@@ -117,6 +135,8 @@ abstract class Device extends _i1.TableRow
       if (deviceLog != null)
         'deviceLog':
             deviceLog?.toJson(valueToJson: (v) => v.toJsonForProtocol()),
+      'userInfoId': userInfoId,
+      if (userInfo != null) 'userInfo': userInfo?.toJsonForProtocol(),
       'created': created.toJson(),
     };
   }
@@ -124,10 +144,12 @@ abstract class Device extends _i1.TableRow
   static DeviceInclude include({
     _i2.DashboardWidgetIncludeList? widget,
     _i2.DeviceLogIncludeList? deviceLog,
+    _i3.UserInfoInclude? userInfo,
   }) {
     return DeviceInclude._(
       widget: widget,
       deviceLog: deviceLog,
+      userInfo: userInfo,
     );
   }
 
@@ -168,6 +190,8 @@ class _DeviceImpl extends Device {
     List<String>? fields,
     List<_i2.DashboardWidget>? widget,
     List<_i2.DeviceLog>? deviceLog,
+    required int userInfoId,
+    _i3.UserInfo? userInfo,
     DateTime? created,
   }) : super._(
           id: id,
@@ -177,6 +201,8 @@ class _DeviceImpl extends Device {
           fields: fields,
           widget: widget,
           deviceLog: deviceLog,
+          userInfoId: userInfoId,
+          userInfo: userInfo,
           created: created,
         );
 
@@ -189,6 +215,8 @@ class _DeviceImpl extends Device {
     Object? fields = _Undefined,
     Object? widget = _Undefined,
     Object? deviceLog = _Undefined,
+    int? userInfoId,
+    Object? userInfo = _Undefined,
     DateTime? created,
   }) {
     return Device(
@@ -205,6 +233,9 @@ class _DeviceImpl extends Device {
       deviceLog: deviceLog is List<_i2.DeviceLog>?
           ? deviceLog
           : this.deviceLog?.map((e0) => e0.copyWith()).toList(),
+      userInfoId: userInfoId ?? this.userInfoId,
+      userInfo:
+          userInfo is _i3.UserInfo? ? userInfo : this.userInfo?.copyWith(),
       created: created ?? this.created,
     );
   }
@@ -226,6 +257,10 @@ class DeviceTable extends _i1.Table {
     );
     fields = _i1.ColumnSerializable(
       'fields',
+      this,
+    );
+    userInfoId = _i1.ColumnInt(
+      'userInfoId',
       this,
     );
     created = _i1.ColumnDateTime(
@@ -250,6 +285,10 @@ class DeviceTable extends _i1.Table {
   _i2.DeviceLogTable? ___deviceLog;
 
   _i1.ManyRelation<_i2.DeviceLogTable>? _deviceLog;
+
+  late final _i1.ColumnInt userInfoId;
+
+  _i3.UserInfoTable? _userInfo;
 
   late final _i1.ColumnDateTime created;
 
@@ -277,6 +316,19 @@ class DeviceTable extends _i1.Table {
           _i2.DeviceLogTable(tableRelation: foreignTableRelation),
     );
     return ___deviceLog!;
+  }
+
+  _i3.UserInfoTable get userInfo {
+    if (_userInfo != null) return _userInfo!;
+    _userInfo = _i1.createRelationTable(
+      relationFieldName: 'userInfo',
+      field: Device.t.userInfoId,
+      foreignField: _i3.UserInfo.t.id,
+      tableRelation: tableRelation,
+      createTable: (foreignTableRelation) =>
+          _i3.UserInfoTable(tableRelation: foreignTableRelation),
+    );
+    return _userInfo!;
   }
 
   _i1.ManyRelation<_i2.DashboardWidgetTable> get widget {
@@ -322,6 +374,7 @@ class DeviceTable extends _i1.Table {
         name,
         description,
         fields,
+        userInfoId,
         created,
       ];
 
@@ -333,6 +386,9 @@ class DeviceTable extends _i1.Table {
     if (relationField == 'deviceLog') {
       return __deviceLog;
     }
+    if (relationField == 'userInfo') {
+      return userInfo;
+    }
     return null;
   }
 }
@@ -341,19 +397,24 @@ class DeviceInclude extends _i1.IncludeObject {
   DeviceInclude._({
     _i2.DashboardWidgetIncludeList? widget,
     _i2.DeviceLogIncludeList? deviceLog,
+    _i3.UserInfoInclude? userInfo,
   }) {
     _widget = widget;
     _deviceLog = deviceLog;
+    _userInfo = userInfo;
   }
 
   _i2.DashboardWidgetIncludeList? _widget;
 
   _i2.DeviceLogIncludeList? _deviceLog;
 
+  _i3.UserInfoInclude? _userInfo;
+
   @override
   Map<String, _i1.Include?> get includes => {
         'widget': _widget,
         'deviceLog': _deviceLog,
+        'userInfo': _userInfo,
       };
 
   @override
@@ -593,6 +654,27 @@ class DeviceAttachRepository {
 
 class DeviceAttachRowRepository {
   const DeviceAttachRowRepository._();
+
+  Future<void> userInfo(
+    _i1.DatabaseAccessor databaseAccessor,
+    Device device,
+    _i3.UserInfo userInfo, {
+    _i1.Transaction? transaction,
+  }) async {
+    if (device.id == null) {
+      throw ArgumentError.notNull('device.id');
+    }
+    if (userInfo.id == null) {
+      throw ArgumentError.notNull('userInfo.id');
+    }
+
+    var $device = device.copyWith(userInfoId: userInfo.id);
+    await databaseAccessor.db.updateRow<Device>(
+      $device,
+      columns: [Device.t.userInfoId],
+      transaction: transaction ?? databaseAccessor.transaction,
+    );
+  }
 
   Future<void> widget(
     _i1.DatabaseAccessor databaseAccessor,
