@@ -82,7 +82,6 @@ class _DataTableWidgetViewState extends State<DataTableWidgetView> {
               ),
               rows: devicelogs!.map((e) {
                 final message = e.message;
-
                 final data = jsonDecode(message) as Map<String, dynamic>;
                 return DataRow(
                   cells: widget.fields

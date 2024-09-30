@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import 'package:zeal4_client/zeal4_client.dart';
 
@@ -59,7 +60,7 @@ class _STextWidgetViewState extends State<STextWidgetView> {
             // get device log
             if (mounted) {
               setState(() {
-                log('device log', time: DateTime.now());
+                log('${DateTime.now()} - text device log');
                 deviceLog = update;
               });
             }
@@ -68,7 +69,7 @@ class _STextWidgetViewState extends State<STextWidgetView> {
           if (update is SnapshotDeviceLog) {
             //get snapshot devicelog
             setState(() {
-              log('snapshot device log', time: DateTime.now());
+              log('${DateTime.now()} - snapshot text device log');
               deviceLog = update.devicelogs.first;
             });
           }
@@ -101,6 +102,11 @@ class _STextWidgetViewState extends State<STextWidgetView> {
             // value
             final value = jsonDecode(deviceLog!.message)[widget.fields.first];
 
+            // value format
+            final valueFormat =
+                NumberFormat.simpleCurrency(name: '', decimalDigits: 2)
+                    .format(value);
+
             return Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -112,7 +118,7 @@ class _STextWidgetViewState extends State<STextWidgetView> {
 
                 // value
                 Text(
-                  '$value',
+                  '$valueFormat',
                   style: Theme.of(context).textTheme.headlineLarge,
                 ),
 

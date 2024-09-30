@@ -10,8 +10,8 @@ initWindows() {
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     doWhenWindowReady(() {
       final win = appWindow;
-      const initialSize = Size(800, 600);
-      const minSize = Size(540, 920);
+      const initialSize = Size(1280, 720);
+      const minSize = Size(1280, 720);
       win.minSize = minSize;
       win.size = initialSize;
       win.alignment = Alignment.center;

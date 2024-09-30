@@ -17,9 +17,15 @@ enum WidgetType implements _i1.SerializableModel {
   bar,
   sbar,
   line,
+  sline,
+  spline,
+  sspline,
   pie,
+  spie,
   table,
-  map;
+  stable,
+  map,
+  smap;
 
   static WidgetType fromJson(String name) {
     switch (name) {
@@ -33,12 +39,24 @@ enum WidgetType implements _i1.SerializableModel {
         return sbar;
       case 'line':
         return line;
+      case 'sline':
+        return sline;
+      case 'spline':
+        return spline;
+      case 'sspline':
+        return sspline;
       case 'pie':
         return pie;
+      case 'spie':
+        return spie;
       case 'table':
         return table;
+      case 'stable':
+        return stable;
       case 'map':
         return map;
+      case 'smap':
+        return smap;
       default:
         throw ArgumentError(
             'Value "$name" cannot be converted to "WidgetType"');

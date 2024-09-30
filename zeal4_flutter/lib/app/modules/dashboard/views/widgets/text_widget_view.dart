@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import 'package:zeal4_client/zeal4_client.dart';
 
@@ -40,7 +41,7 @@ class _TextWidgetViewState extends State<TextWidgetView> {
     timer = Timer.periodic(
       const Duration(seconds: 5),
       (timer) {
-        log('update text widget');
+        log('${DateTime.now()} - update text widget');
         setState(() {});
       },
     );
@@ -85,6 +86,11 @@ class _TextWidgetViewState extends State<TextWidgetView> {
               // get value from first field
               final value = jsonDecode(log.message)[widget.fields.first];
 
+              // value format
+              final valueFormat =
+                  NumberFormat.simpleCurrency(name: '', decimalDigits: 2)
+                      .format(value);
+
               // unit from first field
               final unit = widget.units.first;
 
@@ -99,7 +105,7 @@ class _TextWidgetViewState extends State<TextWidgetView> {
 
                   // value
                   Text(
-                    '$value',
+                    '$valueFormat',
                     style: Theme.of(context).textTheme.headlineLarge,
                   ),
 

@@ -10,6 +10,8 @@ import 'widgets/datatable_widget_view.dart';
 import 'widgets/line_chart.dart';
 import 'widgets/pie_chart_widget_view.dart';
 import 'widgets/sbar_chart_widget.dart';
+import 'widgets/sline_chart_widget.dart';
+import 'widgets/spie_chart_widget.dart';
 import 'widgets/stext_widget_view.dart';
 import 'widgets/text_widget_view.dart';
 import 'widgets/wrong_widget_view.dart';
@@ -103,8 +105,29 @@ class DashboardView extends GetView<DashboardController> {
                                 points: points,
                               );
 
+                            case WidgetType.sline:
+                              return SLineChartWidgetView(
+                                name: name,
+                                description: description,
+                                fields: fields,
+                                units: units,
+                                deviceId: deviceId,
+                                points: points,
+                              );
+
                             case WidgetType.pie:
                               return PieChartWidgetView(
+                                name: name,
+                                description: description,
+                                fields: fields,
+                                units: units,
+                                deviceId: deviceId,
+                                // fix 1 point
+                                points: 1,
+                              );
+
+                            case WidgetType.spie:
+                              return SPieChartWidgetView(
                                 name: name,
                                 description: description,
                                 fields: fields,

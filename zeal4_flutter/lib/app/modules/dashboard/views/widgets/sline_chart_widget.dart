@@ -10,8 +10,8 @@ import 'package:zeal4_client/zeal4_client.dart';
 
 import '../../../../../serverpod.dart';
 
-class SBarChartWidgetView extends StatefulWidget {
-  const SBarChartWidgetView(
+class SLineChartWidgetView extends StatefulWidget {
+  const SLineChartWidgetView(
       {super.key,
       required this.name,
       required this.description,
@@ -28,10 +28,10 @@ class SBarChartWidgetView extends StatefulWidget {
   final int points;
 
   @override
-  State<SBarChartWidgetView> createState() => _SBarChartWidgetViewState();
+  State<SLineChartWidgetView> createState() => _SLineChartWidgetViewState();
 }
 
-class _SBarChartWidgetViewState extends State<SBarChartWidgetView> {
+class _SLineChartWidgetViewState extends State<SLineChartWidgetView> {
   List<CartesianSeries> chartSeries = [];
   List<ChartData> datasource = [];
 
@@ -62,7 +62,6 @@ class _SBarChartWidgetViewState extends State<SBarChartWidgetView> {
               final timestamp = DateTime.fromMillisecondsSinceEpoch(
                 double.parse('${data['timestamp'] * 1000}').toInt(),
               );
-
               final timeStampFormat = DateFormat.Hms().format(timestamp);
               double value = double.parse('${data[field]}');
 
@@ -82,7 +81,7 @@ class _SBarChartWidgetViewState extends State<SBarChartWidgetView> {
             // build update chartdata
             if (mounted) {
               setState(() {
-                log('${DateTime.now()} - device log');
+                log('${DateTime.now()} - sline device log');
               });
             }
           }
@@ -106,7 +105,7 @@ class _SBarChartWidgetViewState extends State<SBarChartWidgetView> {
               }
 
               chartSeries.add(
-                ColumnSeries<ChartData, dynamic>(
+                LineSeries<ChartData, dynamic>(
                   name: field,
                   dataSource: datasource.reversed.toList(),
                   xValueMapper: (datum, index) => datum.x,
@@ -117,7 +116,7 @@ class _SBarChartWidgetViewState extends State<SBarChartWidgetView> {
             }
 
             setState(() {
-              log('${DateTime.now()} - snapshot device log');
+              log('${DateTime.now()} - snapshot sline device log');
             });
           }
         }

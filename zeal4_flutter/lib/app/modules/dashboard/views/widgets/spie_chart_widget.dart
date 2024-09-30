@@ -4,14 +4,13 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 
-import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:zeal4_client/zeal4_client.dart';
 
 import '../../../../../serverpod.dart';
 
-class SBarChartWidgetView extends StatefulWidget {
-  const SBarChartWidgetView(
+class SPieChartWidgetView extends StatefulWidget {
+  const SPieChartWidgetView(
       {super.key,
       required this.name,
       required this.description,
@@ -28,11 +27,11 @@ class SBarChartWidgetView extends StatefulWidget {
   final int points;
 
   @override
-  State<SBarChartWidgetView> createState() => _SBarChartWidgetViewState();
+  State<SPieChartWidgetView> createState() => _SPieChartWidgetViewState();
 }
 
-class _SBarChartWidgetViewState extends State<SBarChartWidgetView> {
-  List<CartesianSeries> chartSeries = [];
+class _SPieChartWidgetViewState extends State<SPieChartWidgetView> {
+  List<PieSeries> chartSeries = [];
   List<ChartData> datasource = [];
 
   @override
@@ -56,68 +55,51 @@ class _SBarChartWidgetViewState extends State<SBarChartWidgetView> {
         await for (final update in messageUpdates) {
           // get device log
           if (update is DeviceLog) {
+            datasource = [];
             // build chart series for each field
             for (var field in widget.fields) {
               final data = jsonDecode(update.message);
-              final timestamp = DateTime.fromMillisecondsSinceEpoch(
-                double.parse('${data['timestamp'] * 1000}').toInt(),
-              );
-
-              final timeStampFormat = DateFormat.Hms().format(timestamp);
               double value = double.parse('${data[field]}');
-
-              log('datasource total items = ${datasource.length}');
-
-              final chartSerieField =
-                  chartSeries.firstWhere((p) => (p.name == field));
-
-              chartSerieField.dataSource!
-                  .add(ChartData(timeStampFormat, value));
-
-              if (widget.points <= datasource.length) {
-                chartSerieField.dataSource!.removeAt(0);
-              }
+              datasource.add(
+                ChartData(field, value),
+              );
             }
 
             // build update chartdata
             if (mounted) {
               setState(() {
-                log('${DateTime.now()} - device log');
+                log('${DateTime.now()} - spie device log');
               });
             }
           }
           // get snapshot devicelog
           if (update is SnapshotDeviceLog) {
             // build init chartdata
-            final devicelogs = update.devicelogs;
+            final devicelog = update.devicelogs.first;
+            final message = jsonDecode(devicelog.message);
 
             // build chart series for each field
+            datasource = [];
             for (var field in widget.fields) {
-              datasource = [];
-
-              for (var log in devicelogs) {
-                final data = jsonDecode(log.message);
-                final timestamp = DateTime.fromMillisecondsSinceEpoch(
-                  double.parse('${data['timestamp'] * 1000}').toInt(),
-                );
-                final timeStampFormat = DateFormat.Hms().format(timestamp);
-                double value = double.parse('${data[field]}');
-                datasource.add(ChartData(timeStampFormat, value));
-              }
-
-              chartSeries.add(
-                ColumnSeries<ChartData, dynamic>(
-                  name: field,
-                  dataSource: datasource.reversed.toList(),
-                  xValueMapper: (datum, index) => datum.x,
-                  yValueMapper: (datum, index) => datum.y,
-                  animationDuration: 0,
+              datasource.add(
+                ChartData(
+                  field,
+                  double.parse('${message[field]}'),
                 ),
               );
             }
 
+            chartSeries = <PieSeries>[
+              PieSeries(
+                dataSource: datasource,
+                xValueMapper: (data, _) => data.x,
+                yValueMapper: (data, _) => data.y,
+                animationDelay: 0,
+              )
+            ];
+
             setState(() {
-              log('${DateTime.now()} - snapshot device log');
+              log('${DateTime.now()} - snapshot spie device log');
             });
           }
         }
@@ -142,11 +124,8 @@ class _SBarChartWidgetViewState extends State<SBarChartWidgetView> {
     );
   }
 
-  SfCartesianChart buildChart(
-      List<CartesianSeries<dynamic, dynamic>> chartSeries) {
-    return SfCartesianChart(
-      primaryXAxis: const CategoryAxis(),
-      primaryYAxis: const NumericAxis(),
+  SfCircularChart buildChart(List<PieSeries<dynamic, dynamic>> chartSeries) {
+    return SfCircularChart(
       series: chartSeries,
       legend: const Legend(
         isVisible: true,

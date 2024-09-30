@@ -85,6 +85,7 @@ class _PieChartWidgetViewState extends State<PieChartWidgetView> {
                 dataSource: dataSource,
                 xValueMapper: (data, _) => data.x,
                 yValueMapper: (data, _) => data.y,
+                animationDelay: 0,
               )
             ];
 
