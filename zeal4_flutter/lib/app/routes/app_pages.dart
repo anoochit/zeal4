@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:zeal4_flutter/app/middlewares/route_guard.dart';
 
 import '../modules/dashboard/bindings/dashboard_binding.dart';
 import '../modules/dashboard/views/dashboard_view.dart';
@@ -24,27 +25,36 @@ class AppPages {
       page: () => const HomeView(),
       binding: HomeBinding(),
       transition: Transition.cupertino,
+      middlewares: [
+        RouteGuard(),
+      ],
     ),
     GetPage(
       name: _Paths.DASHBOARD,
       page: () => const DashboardView(),
       binding: DashboardBinding(),
       transition: Transition.cupertino,
+      middlewares: [
+        RouteGuard(),
+      ],
     ),
     GetPage(
       name: _Paths.SIGNIN,
       page: () => const SigninView(),
       binding: SigninBinding(),
+      transition: Transition.cupertino,
     ),
     GetPage(
       name: _Paths.SIGNUP,
       page: () => const SignupView(),
       binding: SignupBinding(),
+      transition: Transition.cupertino,
     ),
     GetPage(
       name: _Paths.VERIFY_ACCOUNT,
       page: () => const VerifyAccountView(),
       binding: VerifyAccountBinding(),
+      transition: Transition.cupertino,
     ),
   ];
 }
