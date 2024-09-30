@@ -813,6 +813,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.5.0"
+  validation_pro:
+    dependency: "direct main"
+    description:
+      name: validation_pro
+      sha256: fe7b8a5a19fd331cd408b8724edc273be94fb69b518d63e44a8736fb59f5033e
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.0"
   vector_math:
     dependency: transitive
     description:

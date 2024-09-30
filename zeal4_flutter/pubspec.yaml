@@ -19,6 +19,7 @@ dependencies:
   serverpod_auth_shared_flutter: 2.1.2
   serverpod_flutter: 2.1.2
   syncfusion_flutter_charts: ^26.2.14
+  validation_pro: ^1.2.0
   zeal4_client:
     path: ../zeal4_client
 

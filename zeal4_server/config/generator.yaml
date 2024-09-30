@@ -1,3 +1,6 @@
 type: server
 
 client_package_path: ../zeal4_client
+modules:
+  serverpod_auth:
+    nickname: auth

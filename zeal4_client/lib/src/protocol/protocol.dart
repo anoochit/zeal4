@@ -21,6 +21,7 @@ import 'widget_type.dart' as _i8;
 import 'protocol.dart' as _i9;
 import 'package:zeal4_client/src/protocol/dashboard.dart' as _i10;
 import 'package:zeal4_client/src/protocol/device_log.dart' as _i11;
+import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i12;
 export 'dashboard.dart';
 export 'device.dart';
 export 'device_log.dart';
@@ -125,6 +126,9 @@ class Protocol extends _i1.SerializationManager {
       return (data as List).map((e) => deserialize<_i11.DeviceLog>(e)).toList()
           as dynamic;
     }
+    try {
+      return _i12.Protocol().deserialize<T>(data, t);
+    } on _i1.DeserializationTypeNotFoundException catch (_) {}
     return super.deserialize<T>(data, t);
   }
 
@@ -153,6 +157,10 @@ class Protocol extends _i1.SerializationManager {
     if (data is _i8.WidgetType) {
       return 'WidgetType';
     }
+    className = _i12.Protocol().getClassNameForObject(data);
+    if (className != null) {
+      return 'serverpod_auth.$className';
+    }
     return null;
   }
 
@@ -178,6 +186,10 @@ class Protocol extends _i1.SerializationManager {
     }
     if (data['className'] == 'WidgetType') {
       return deserialize<_i8.WidgetType>(data['data']);
+    }
+    if (data['className'].startsWith('serverpod_auth.')) {
+      data['className'] = data['className'].substring(15);
+      return _i12.Protocol().deserializeByClassName(data);
     }
     return super.deserializeByClassName(data);
   }

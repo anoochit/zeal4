@@ -4,6 +4,7 @@ import 'package:serverpod/serverpod.dart';
 import 'src/generated/protocol.dart';
 import 'src/generated/endpoints.dart';
 import 'src/web/routes/root.dart';
+import 'package:serverpod_auth_server/serverpod_auth_server.dart' as auth;
 
 // This is the starting point of your Serverpod server. In most cases, you will
 // only need to make additions to this file if you add future calls,  are
@@ -19,6 +20,20 @@ void run(List<String> args) async {
 
   // If you are using any future calls, they need to be registered here.
   // pod.registerFutureCall(ExampleFutureCall(), 'exampleFutureCall');
+
+  // add auth config
+  auth.AuthConfig.set(auth.AuthConfig(
+    sendValidationEmail: (session, email, validationCode) async {
+      print('Validation code: $validationCode');
+      session.log('Code for $email is $validationCode');
+      return true;
+    },
+    sendPasswordResetEmail: (session, userInfo, validationCode) async {
+      print('Validation code: $validationCode');
+      session.log('Code for ${userInfo.userName} is $validationCode');
+      return true;
+    },
+  ));
 
   // Setup a default page at the web root.
   pod.webServer.addRoute(RouteRoot(), '/');

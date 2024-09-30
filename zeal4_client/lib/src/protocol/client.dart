@@ -14,7 +14,8 @@ import 'dart:async' as _i2;
 import 'package:zeal4_client/src/protocol/dashboard.dart' as _i3;
 import 'package:zeal4_client/src/protocol/device_log.dart' as _i4;
 import 'package:zeal4_client/src/protocol/snapshot_devicelog.dart' as _i5;
-import 'protocol.dart' as _i6;
+import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i6;
+import 'protocol.dart' as _i7;
 
 /// {@category Endpoint}
 class EndpointDashboard extends _i1.EndpointRef {
@@ -156,6 +157,14 @@ class EndpointExample extends _i1.EndpointRef {
       );
 }
 
+class _Modules {
+  _Modules(Client client) {
+    auth = _i6.Caller(client);
+  }
+
+  late final _i6.Caller auth;
+}
+
 class Client extends _i1.ServerpodClientShared {
   Client(
     String host, {
@@ -172,7 +181,7 @@ class Client extends _i1.ServerpodClientShared {
     bool? disconnectStreamsOnLostInternetConnection,
   }) : super(
           host,
-          _i6.Protocol(),
+          _i7.Protocol(),
           securityContext: securityContext,
           authenticationKeyManager: authenticationKeyManager,
           streamingConnectionTimeout: streamingConnectionTimeout,
@@ -185,6 +194,7 @@ class Client extends _i1.ServerpodClientShared {
     dashboard = EndpointDashboard(this);
     devicelog = EndpointDevicelog(this);
     example = EndpointExample(this);
+    modules = _Modules(this);
   }
 
   late final EndpointDashboard dashboard;
@@ -192,6 +202,8 @@ class Client extends _i1.ServerpodClientShared {
   late final EndpointDevicelog devicelog;
 
   late final EndpointExample example;
+
+  late final _Modules modules;
 
   @override
   Map<String, _i1.EndpointRef> get endpointRefLookup => {
@@ -201,5 +213,6 @@ class Client extends _i1.ServerpodClientShared {
       };
 
   @override
-  Map<String, _i1.ModuleEndpointCaller> get moduleLookup => {};
+  Map<String, _i1.ModuleEndpointCaller> get moduleLookup =>
+      {'auth': modules.auth};
 }
