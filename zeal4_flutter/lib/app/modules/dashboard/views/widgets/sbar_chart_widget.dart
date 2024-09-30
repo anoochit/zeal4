@@ -66,7 +66,7 @@ class _SBarChartWidgetViewState extends State<SBarChartWidgetView> {
               final timeStampFormat = DateFormat.Hms().format(timestamp);
               double value = double.parse('${data[field]}');
 
-              log('datasource total items = ${datasource.length}');
+              log('${DateTime.now()} - datasource total items = ${datasource.length}');
 
               final chartSerieField =
                   chartSeries.firstWhere((p) => (p.name == field));

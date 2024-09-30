@@ -25,7 +25,8 @@ enum WidgetType implements _i1.SerializableModel {
   table,
   stable,
   map,
-  smap;
+  smap,
+  weather;
 
   static WidgetType fromJson(String name) {
     switch (name) {
@@ -57,6 +58,8 @@ enum WidgetType implements _i1.SerializableModel {
         return map;
       case 'smap':
         return smap;
+      case 'weather':
+        return weather;
       default:
         throw ArgumentError(
             'Value "$name" cannot be converted to "WidgetType"');

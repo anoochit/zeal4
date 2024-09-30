@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:zeal4_client/zeal4_client.dart';
+import 'package:zeal4_flutter/app/modules/dashboard/views/widgets/weather.dart';
 
 import '../../../utils/grid_utils.dart';
 import '../controllers/dashboard_controller.dart';
@@ -145,6 +146,13 @@ class DashboardView extends GetView<DashboardController> {
                                 units: units,
                                 deviceId: deviceId,
                                 points: points,
+                              );
+
+                            case WidgetType.weather:
+                              return WeatherWidgetView(
+                                name: name,
+                                description: description,
+                                fields: fields,
                               );
 
                             default:
