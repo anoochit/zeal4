@@ -8288,3 +8288,478 @@
 1727596788: Sending PUBLISH to ClientId-1727590424662212 (d0, q0, r0, m0, '/device/mock_device/msg', ... (85 bytes))
 1727596788: Received PUBLISH from mqttjs_5122cf31 (d0, q0, r0, m0, '/device/mock_device/msg', ... (86 bytes))
 1727596788: Sending PUBLISH to ClientId-1727590424662212 (d0, q0, r0, m0, '/device/mock_device/msg', ... (86 bytes))
+1765146200: mosquitto version 2.0.22 starting
+1765146200: Config loaded from /mosquitto/config/mosquitto.conf.
+1765146200: Opening ipv4 listen socket on port 1883.
+1765146200: Opening ipv6 listen socket on port 1883.
+1765146200: mosquitto version 2.0.22 running
+1765146284: mosquitto version 2.0.22 terminating
+1765146284: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1765146298: mosquitto version 2.0.22 starting
+1765146298: Config loaded from /mosquitto/config/mosquitto.conf.
+1765146298: Opening ipv4 listen socket on port 1883.
+1765146298: Opening ipv6 listen socket on port 1883.
+1765146298: mosquitto version 2.0.22 running
+1765146318: mosquitto version 2.0.22 terminating
+1765146318: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1765146347: mosquitto version 2.0.22 starting
+1765146347: Config loaded from /mosquitto/config/mosquitto.conf.
+1765146347: Opening ipv4 listen socket on port 1883.
+1765146347: Opening ipv6 listen socket on port 1883.
+1765146347: mosquitto version 2.0.22 running
+1765146561: New connection from 172.20.0.3:42118 on port 1883.
+1765146561: New client connected from 172.20.0.3:42118 as dmw27bu9PdHflcEJOI8MRx2GambID9me (p2, c0, k60).
+1765146561: No will message specified.
+1765146561: Sending CONNACK to dmw27bu9PdHflcEJOI8MRx2GambID9me (0, 0)
+1765146574: New connection from 172.20.0.3:58192 on port 1883.
+1765146574: Client dmw27bu9PdHflcEJOI8MRx2GambID9me already connected, closing old connection.
+1765146574: New client connected from 172.20.0.3:58192 as dmw27bu9PdHflcEJOI8MRx2GambID9me (p2, c0, k60).
+1765146574: No will message specified.
+1765146574: Sending CONNACK to dmw27bu9PdHflcEJOI8MRx2GambID9me (1, 0)
+1765146574: New connection from 172.20.0.3:58208 on port 1883.
+1765146574: Client dmw27bu9PdHflcEJOI8MRx2GambID9me already connected, closing old connection.
+1765146574: New client connected from 172.20.0.3:58208 as dmw27bu9PdHflcEJOI8MRx2GambID9me (p2, c0, k60).
+1765146574: No will message specified.
+1765146574: Sending CONNACK to dmw27bu9PdHflcEJOI8MRx2GambID9me (1, 0)
+1765146574: New connection from 172.20.0.3:58210 on port 1883.
+1765146574: Client dmw27bu9PdHflcEJOI8MRx2GambID9me already connected, closing old connection.
+1765146574: New client connected from 172.20.0.3:58210 as dmw27bu9PdHflcEJOI8MRx2GambID9me (p2, c0, k60).
+1765146574: No will message specified.
+1765146574: Sending CONNACK to dmw27bu9PdHflcEJOI8MRx2GambID9me (1, 0)
+1765146575: New connection from 172.20.0.3:58220 on port 1883.
+1765146575: Client dmw27bu9PdHflcEJOI8MRx2GambID9me already connected, closing old connection.
+1765146575: New client connected from 172.20.0.3:58220 as dmw27bu9PdHflcEJOI8MRx2GambID9me (p2, c0, k60).
+1765146575: No will message specified.
+1765146575: Sending CONNACK to dmw27bu9PdHflcEJOI8MRx2GambID9me (1, 0)
+1765146576: New connection from 172.20.0.3:58232 on port 1883.
+1765146576: Client dmw27bu9PdHflcEJOI8MRx2GambID9me already connected, closing old connection.
+1765146576: New client connected from 172.20.0.3:58232 as dmw27bu9PdHflcEJOI8MRx2GambID9me (p2, c0, k60).
+1765146576: No will message specified.
+1765146576: Sending CONNACK to dmw27bu9PdHflcEJOI8MRx2GambID9me (1, 0)
+1765146578: New connection from 172.20.0.3:58240 on port 1883.
+1765146578: Client dmw27bu9PdHflcEJOI8MRx2GambID9me already connected, closing old connection.
+1765146578: New client connected from 172.20.0.3:58240 as dmw27bu9PdHflcEJOI8MRx2GambID9me (p2, c0, k60).
+1765146578: No will message specified.
+1765146578: Sending CONNACK to dmw27bu9PdHflcEJOI8MRx2GambID9me (1, 0)
+1765146579: Received DISCONNECT from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765146579: Client dmw27bu9PdHflcEJOI8MRx2GambID9me disconnected.
+1765146580: New connection from 172.20.0.3:58252 on port 1883.
+1765146580: New client connected from 172.20.0.3:58252 as dmw27bu9PdHflcEJOI8MRx2GambID9me (p2, c0, k60).
+1765146580: No will message specified.
+1765146580: Sending CONNACK to dmw27bu9PdHflcEJOI8MRx2GambID9me (1, 0)
+1765146623: Received SUBSCRIBE from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765146623: 	tele/* (QoS 0)
+1765146623: dmw27bu9PdHflcEJOI8MRx2GambID9me 0 tele/*
+1765146623: Sending SUBACK to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765146678: Received UNSUBSCRIBE from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765146678: 	tele/*
+1765146678: dmw27bu9PdHflcEJOI8MRx2GambID9me tele/*
+1765146678: Sending UNSUBACK to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765146740: Received PINGREQ from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765146740: Sending PINGRESP to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765146781: Received UNSUBSCRIBE from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765146781: Invalid unsubscription string from dmw27bu9PdHflcEJOI8MRx2GambID9me, disconnecting.
+1765146781: Client dmw27bu9PdHflcEJOI8MRx2GambID9me disconnected due to malformed packet.
+1765146781: New connection from 172.20.0.3:35074 on port 1883.
+1765146781: New client connected from 172.20.0.3:35074 as dmw27bu9PdHflcEJOI8MRx2GambID9me (p2, c0, k60).
+1765146781: No will message specified.
+1765146781: Sending CONNACK to dmw27bu9PdHflcEJOI8MRx2GambID9me (1, 0)
+1765146790: New connection from 172.20.0.1:60990 on port 1883.
+1765146790: New client connected from 172.20.0.1:60990 as mqttx_4af3215d (p1, c1, k60).
+1765146790: No will message specified.
+1765146790: Sending CONNACK to mqttx_4af3215d (0, 0)
+1765146790: Received SUBSCRIBE from mqttx_4af3215d
+1765146790: 	tele/tasmota_E3ECEC/SENSOR (QoS 0)
+1765146790: mqttx_4af3215d 0 tele/tasmota_E3ECEC/SENSOR
+1765146790: Sending SUBACK to mqttx_4af3215d
+1765146796: Received DISCONNECT from mqttx_4af3215d
+1765146796: Client mqttx_4af3215d disconnected.
+1765146812: Received SUBSCRIBE from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765146812: 	tele/tasmota_E3ECEC/SENSOR (QoS 0)
+1765146812: dmw27bu9PdHflcEJOI8MRx2GambID9me 0 tele/tasmota_E3ECEC/SENSOR
+1765146812: Sending SUBACK to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765146830: Received SUBSCRIBE from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765146830: 	tele/tasmota_E3ECEC/SENSOR (QoS 0)
+1765146830: dmw27bu9PdHflcEJOI8MRx2GambID9me 0 tele/tasmota_E3ECEC/SENSOR
+1765146830: Sending SUBACK to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765146860: Received SUBSCRIBE from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765146860: 	tele/tasmota_E3ECEC/SENSOR (QoS 0)
+1765146860: dmw27bu9PdHflcEJOI8MRx2GambID9me 0 tele/tasmota_E3ECEC/SENSOR
+1765146860: Sending SUBACK to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765146921: Received PINGREQ from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765146921: Sending PINGRESP to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765146950: Received UNSUBSCRIBE from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765146950: 	tele/tasmota_E3ECEC/SENSOR
+1765146950: dmw27bu9PdHflcEJOI8MRx2GambID9me tele/tasmota_E3ECEC/SENSOR
+1765146950: Sending UNSUBACK to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147011: Received PINGREQ from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147011: Sending PINGRESP to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147076: Received PINGREQ from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147076: Sending PINGRESP to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147077: Received SUBSCRIBE from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147077: 	tele/tasmota_E3ECEC/SENSOR (QoS 0)
+1765147077: dmw27bu9PdHflcEJOI8MRx2GambID9me 0 tele/tasmota_E3ECEC/SENSOR
+1765147077: Sending SUBACK to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147126: New connection from 172.20.0.1:41442 on port 1883.
+1765147126: New client connected from 172.20.0.1:41442 as mqttx_4af3215d (p1, c1, k60).
+1765147126: No will message specified.
+1765147126: Sending CONNACK to mqttx_4af3215d (0, 0)
+1765147126: Received SUBSCRIBE from mqttx_4af3215d
+1765147126: 	tele/tasmota_E3ECEC/SENSOR (QoS 0)
+1765147126: mqttx_4af3215d 0 tele/tasmota_E3ECEC/SENSOR
+1765147126: Sending SUBACK to mqttx_4af3215d
+1765147134: Received SUBSCRIBE from mqttx_4af3215d
+1765147134: 	tele/# (QoS 0)
+1765147134: mqttx_4af3215d 0 tele/#
+1765147134: Sending SUBACK to mqttx_4af3215d
+1765147134: Sending PUBLISH to mqttx_4af3215d (d0, q0, r1, m0, 'tele/tasmota_E3ECEC/LWT', ... (6 bytes))
+1765147141: Received PINGREQ from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147141: Sending PINGRESP to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147182: Received SUBSCRIBE from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147182: 	tele/tasmota_E3ECEC/LWT (QoS 0)
+1765147182: dmw27bu9PdHflcEJOI8MRx2GambID9me 0 tele/tasmota_E3ECEC/LWT
+1765147182: Sending SUBACK to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147182: Sending PUBLISH to dmw27bu9PdHflcEJOI8MRx2GambID9me (d0, q0, r1, m0, 'tele/tasmota_E3ECEC/LWT', ... (6 bytes))
+1765147194: Received PINGREQ from mqttx_4af3215d
+1765147194: Sending PINGRESP to mqttx_4af3215d
+1765147207: Received UNSUBSCRIBE from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147207: 	tele/tasmota_E3ECEC/LWT
+1765147207: dmw27bu9PdHflcEJOI8MRx2GambID9me tele/tasmota_E3ECEC/LWT
+1765147207: Sending UNSUBACK to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147207: Received UNSUBSCRIBE from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147207: 	tele/tasmota_E3ECEC/SENSOR
+1765147207: dmw27bu9PdHflcEJOI8MRx2GambID9me tele/tasmota_E3ECEC/SENSOR
+1765147207: Sending UNSUBACK to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147213: Received SUBSCRIBE from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147213: 	tele/tasmota_E3ECEC/LWT (QoS 0)
+1765147213: dmw27bu9PdHflcEJOI8MRx2GambID9me 0 tele/tasmota_E3ECEC/LWT
+1765147213: Sending SUBACK to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147213: Sending PUBLISH to dmw27bu9PdHflcEJOI8MRx2GambID9me (d0, q0, r1, m0, 'tele/tasmota_E3ECEC/LWT', ... (6 bytes))
+1765147248: Received UNSUBSCRIBE from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147248: 	tele/tasmota_E3ECEC/LWT
+1765147248: dmw27bu9PdHflcEJOI8MRx2GambID9me tele/tasmota_E3ECEC/LWT
+1765147248: Sending UNSUBACK to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147255: Received PINGREQ from mqttx_4af3215d
+1765147255: Sending PINGRESP to mqttx_4af3215d
+1765147261: Received SUBSCRIBE from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147261: 	tele/tasmota_E3ECEC/LWT (QoS 0)
+1765147261: dmw27bu9PdHflcEJOI8MRx2GambID9me 0 tele/tasmota_E3ECEC/LWT
+1765147261: Sending SUBACK to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147261: Sending PUBLISH to dmw27bu9PdHflcEJOI8MRx2GambID9me (d0, q0, r1, m0, 'tele/tasmota_E3ECEC/LWT', ... (6 bytes))
+1765147316: Received PINGREQ from mqttx_4af3215d
+1765147316: Sending PINGRESP to mqttx_4af3215d
+1765147321: Received PINGREQ from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147321: Sending PINGRESP to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147374: Received SUBSCRIBE from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147374: 	tele/tasmota_E3ECEC/SENSOR (QoS 0)
+1765147374: dmw27bu9PdHflcEJOI8MRx2GambID9me 0 tele/tasmota_E3ECEC/SENSOR
+1765147374: Sending SUBACK to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147377: Received PINGREQ from mqttx_4af3215d
+1765147377: Sending PINGRESP to mqttx_4af3215d
+1765147391: Received UNSUBSCRIBE from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147391: 	tele/tasmota_E3ECEC/LWT
+1765147391: dmw27bu9PdHflcEJOI8MRx2GambID9me tele/tasmota_E3ECEC/LWT
+1765147391: Sending UNSUBACK to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147410: New connection from 172.20.0.1:58724 on port 1883.
+1765147410: New client connected from 172.20.0.1:58724 as DVES_E3ECEC (p2, c1, k30, u'DVES_USER').
+1765147410: Will message specified (7 bytes) (r1, q1).
+1765147410: 	tele/tasmota_E3ECEC/LWT
+1765147410: Sending CONNACK to DVES_E3ECEC (0, 0)
+1765147410: Received PUBLISH from DVES_E3ECEC (d0, q0, r1, m0, 'tele/tasmota_E3ECEC/LWT', ... (6 bytes))
+1765147410: Sending PUBLISH to mqttx_4af3215d (d0, q0, r0, m0, 'tele/tasmota_E3ECEC/LWT', ... (6 bytes))
+1765147410: Received PUBLISH from DVES_E3ECEC (d0, q0, r0, m0, 'cmnd/tasmota_E3ECEC/POWER', ... (0 bytes))
+1765147410: Received SUBSCRIBE from DVES_E3ECEC
+1765147410: 	cmnd/tasmota_E3ECEC/# (QoS 0)
+1765147410: DVES_E3ECEC 0 cmnd/tasmota_E3ECEC/#
+1765147410: Sending SUBACK to DVES_E3ECEC
+1765147410: Received SUBSCRIBE from DVES_E3ECEC
+1765147410: 	cmnd/tasmotas/# (QoS 0)
+1765147410: DVES_E3ECEC 0 cmnd/tasmotas/#
+1765147410: Sending SUBACK to DVES_E3ECEC
+1765147410: Received SUBSCRIBE from DVES_E3ECEC
+1765147410: 	cmnd/DVES_E3ECEC_fb/# (QoS 0)
+1765147410: DVES_E3ECEC 0 cmnd/DVES_E3ECEC_fb/#
+1765147410: Sending SUBACK to DVES_E3ECEC
+1765147410: Received PUBLISH from DVES_E3ECEC (d0, q0, r0, m0, 'tele/tasmota_E3ECEC/INFO1', ... (142 bytes))
+1765147410: Sending PUBLISH to mqttx_4af3215d (d0, q0, r0, m0, 'tele/tasmota_E3ECEC/INFO1', ... (142 bytes))
+1765147410: Received PUBLISH from DVES_E3ECEC (d0, q0, r0, m0, 'tele/tasmota_E3ECEC/INFO2', ... (153 bytes))
+1765147410: Sending PUBLISH to mqttx_4af3215d (d0, q0, r0, m0, 'tele/tasmota_E3ECEC/INFO2', ... (153 bytes))
+1765147410: Received PUBLISH from DVES_E3ECEC (d0, q0, r0, m0, 'tele/tasmota_E3ECEC/INFO3', ... (63 bytes))
+1765147410: Sending PUBLISH to mqttx_4af3215d (d0, q0, r0, m0, 'tele/tasmota_E3ECEC/INFO3', ... (63 bytes))
+1765147414: Received PUBLISH from DVES_E3ECEC (d0, q0, r0, m0, 'tele/tasmota_E3ECEC/STATE', ... (386 bytes))
+1765147414: Sending PUBLISH to mqttx_4af3215d (d0, q0, r0, m0, 'tele/tasmota_E3ECEC/STATE', ... (386 bytes))
+1765147414: Received PUBLISH from DVES_E3ECEC (d0, q0, r0, m0, 'tele/tasmota_E3ECEC/SENSOR', ... (155 bytes))
+1765147414: Sending PUBLISH to mqttx_4af3215d (d0, q0, r0, m0, 'tele/tasmota_E3ECEC/SENSOR', ... (155 bytes))
+1765147414: Sending PUBLISH to dmw27bu9PdHflcEJOI8MRx2GambID9me (d0, q0, r0, m0, 'tele/tasmota_E3ECEC/SENSOR', ... (155 bytes))
+1765147419: Received PUBLISH from DVES_E3ECEC (d0, q0, r1, m0, 'tasmota/discovery/7C9EBDE3ECEC/config', ... (896 bytes))
+1765147419: Received PUBLISH from DVES_E3ECEC (d0, q0, r1, m0, 'tasmota/discovery/7C9EBDE3ECEC/sensors', ... (178 bytes))
+1765147440: Received PINGREQ from DVES_E3ECEC
+1765147440: Sending PINGRESP to DVES_E3ECEC
+1765147451: Received PINGREQ from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147451: Sending PINGRESP to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147462: Received PINGREQ from mqttx_4af3215d
+1765147462: Sending PINGRESP to mqttx_4af3215d
+1765147470: Received PINGREQ from DVES_E3ECEC
+1765147470: Sending PINGRESP to DVES_E3ECEC
+1765147489: Received UNSUBSCRIBE from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147489: 	tele/tasmota_E3ECEC/SENSOR
+1765147489: dmw27bu9PdHflcEJOI8MRx2GambID9me tele/tasmota_E3ECEC/SENSOR
+1765147489: Sending UNSUBACK to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147500: Received PINGREQ from DVES_E3ECEC
+1765147500: Sending PINGRESP to DVES_E3ECEC
+1765147508: Received SUBSCRIBE from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147508: 	tele/tasmota_E3ECEC/SENSOR (QoS 0)
+1765147508: dmw27bu9PdHflcEJOI8MRx2GambID9me 0 tele/tasmota_E3ECEC/SENSOR
+1765147508: Sending SUBACK to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147522: Received PINGREQ from mqttx_4af3215d
+1765147522: Sending PINGRESP to mqttx_4af3215d
+1765147530: Received PINGREQ from DVES_E3ECEC
+1765147530: Sending PINGRESP to DVES_E3ECEC
+1765147560: Received PINGREQ from DVES_E3ECEC
+1765147560: Sending PINGRESP to DVES_E3ECEC
+1765147571: Received PINGREQ from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147571: Sending PINGRESP to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147583: Received PINGREQ from mqttx_4af3215d
+1765147583: Sending PINGRESP to mqttx_4af3215d
+1765147590: Received PINGREQ from DVES_E3ECEC
+1765147590: Sending PINGRESP to DVES_E3ECEC
+1765147593: Received UNSUBSCRIBE from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147593: 	tele/tasmota_E3ECEC/SENSOR
+1765147593: dmw27bu9PdHflcEJOI8MRx2GambID9me tele/tasmota_E3ECEC/SENSOR
+1765147593: Sending UNSUBACK to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147620: Received PINGREQ from DVES_E3ECEC
+1765147620: Sending PINGRESP to DVES_E3ECEC
+1765147643: Received PINGREQ from mqttx_4af3215d
+1765147643: Sending PINGRESP to mqttx_4af3215d
+1765147650: Received PINGREQ from DVES_E3ECEC
+1765147650: Sending PINGRESP to DVES_E3ECEC
+1765147656: Received PINGREQ from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147656: Sending PINGRESP to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147680: Received PINGREQ from DVES_E3ECEC
+1765147680: Sending PINGRESP to DVES_E3ECEC
+1765147710: Received PINGREQ from DVES_E3ECEC
+1765147710: Sending PINGRESP to DVES_E3ECEC
+1765147714: Received PUBLISH from DVES_E3ECEC (d0, q0, r0, m0, 'tele/tasmota_E3ECEC/STATE', ... (388 bytes))
+1765147714: Sending PUBLISH to mqttx_4af3215d (d0, q0, r0, m0, 'tele/tasmota_E3ECEC/STATE', ... (388 bytes))
+1765147714: Received PUBLISH from DVES_E3ECEC (d0, q0, r0, m0, 'tele/tasmota_E3ECEC/SENSOR', ... (164 bytes))
+1765147714: Sending PUBLISH to mqttx_4af3215d (d0, q0, r0, m0, 'tele/tasmota_E3ECEC/SENSOR', ... (164 bytes))
+1765147721: Received PINGREQ from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147721: Sending PINGRESP to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147734: Client mqttx_4af3215d has exceeded timeout, disconnecting.
+1765147738: New connection from 172.20.0.1:54734 on port 1883.
+1765147738: New client connected from 172.20.0.1:54734 as mqttx_4af3215d (p1, c1, k60).
+1765147738: No will message specified.
+1765147738: Sending CONNACK to mqttx_4af3215d (0, 0)
+1765147738: Received SUBSCRIBE from mqttx_4af3215d
+1765147738: 	tele/tasmota_E3ECEC/SENSOR (QoS 0)
+1765147738: mqttx_4af3215d 0 tele/tasmota_E3ECEC/SENSOR
+1765147738: 	tele/# (QoS 0)
+1765147738: mqttx_4af3215d 0 tele/#
+1765147738: Sending SUBACK to mqttx_4af3215d
+1765147738: Sending PUBLISH to mqttx_4af3215d (d0, q0, r1, m0, 'tele/tasmota_E3ECEC/LWT', ... (6 bytes))
+1765147740: Received PINGREQ from DVES_E3ECEC
+1765147740: Sending PINGRESP to DVES_E3ECEC
+1765147770: Received PINGREQ from DVES_E3ECEC
+1765147770: Sending PINGRESP to DVES_E3ECEC
+1765147781: Received PINGREQ from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147781: Sending PINGRESP to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147799: Received PINGREQ from mqttx_4af3215d
+1765147799: Sending PINGRESP to mqttx_4af3215d
+1765147800: Received PINGREQ from DVES_E3ECEC
+1765147800: Sending PINGRESP to DVES_E3ECEC
+1765147830: Received PINGREQ from DVES_E3ECEC
+1765147830: Sending PINGRESP to DVES_E3ECEC
+1765147846: Received PINGREQ from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147846: Sending PINGRESP to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147860: Received PINGREQ from DVES_E3ECEC
+1765147860: Sending PINGRESP to DVES_E3ECEC
+1765147860: Received PINGREQ from mqttx_4af3215d
+1765147860: Sending PINGRESP to mqttx_4af3215d
+1765147890: Received PINGREQ from DVES_E3ECEC
+1765147890: Sending PINGRESP to DVES_E3ECEC
+1765147906: Received PINGREQ from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147906: Sending PINGRESP to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147920: Received PINGREQ from DVES_E3ECEC
+1765147920: Sending PINGRESP to DVES_E3ECEC
+1765147921: Received PINGREQ from mqttx_4af3215d
+1765147921: Sending PINGRESP to mqttx_4af3215d
+1765147950: Received PINGREQ from DVES_E3ECEC
+1765147950: Sending PINGRESP to DVES_E3ECEC
+1765147971: Received PINGREQ from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147971: Sending PINGRESP to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765147980: Received PINGREQ from DVES_E3ECEC
+1765147980: Sending PINGRESP to DVES_E3ECEC
+1765147982: Received PINGREQ from mqttx_4af3215d
+1765147982: Sending PINGRESP to mqttx_4af3215d
+1765148010: Received PINGREQ from DVES_E3ECEC
+1765148010: Sending PINGRESP to DVES_E3ECEC
+1765148014: Received PUBLISH from DVES_E3ECEC (d0, q0, r0, m0, 'tele/tasmota_E3ECEC/STATE', ... (388 bytes))
+1765148014: Sending PUBLISH to mqttx_4af3215d (d0, q0, r0, m0, 'tele/tasmota_E3ECEC/STATE', ... (388 bytes))
+1765148014: Received PUBLISH from DVES_E3ECEC (d0, q0, r0, m0, 'tele/tasmota_E3ECEC/SENSOR', ... (165 bytes))
+1765148014: Sending PUBLISH to mqttx_4af3215d (d0, q0, r0, m0, 'tele/tasmota_E3ECEC/SENSOR', ... (165 bytes))
+1765148036: Received PINGREQ from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765148036: Sending PINGRESP to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765148040: Received PINGREQ from DVES_E3ECEC
+1765148040: Sending PINGRESP to DVES_E3ECEC
+1765148062: Received PINGREQ from mqttx_4af3215d
+1765148062: Sending PINGRESP to mqttx_4af3215d
+1765148070: Received PINGREQ from DVES_E3ECEC
+1765148070: Sending PINGRESP to DVES_E3ECEC
+1765148096: Received PINGREQ from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765148096: Sending PINGRESP to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765148100: Received PINGREQ from DVES_E3ECEC
+1765148100: Sending PINGRESP to DVES_E3ECEC
+1765148130: Received PINGREQ from DVES_E3ECEC
+1765148130: Sending PINGRESP to DVES_E3ECEC
+1765148148: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1765148153: Client mqttx_4af3215d has exceeded timeout, disconnecting.
+1765148157: New connection from 172.20.0.1:35018 on port 1883.
+1765148157: New client connected from 172.20.0.1:35018 as mqttx_4af3215d (p1, c1, k60).
+1765148157: No will message specified.
+1765148157: Sending CONNACK to mqttx_4af3215d (0, 0)
+1765148157: Received SUBSCRIBE from mqttx_4af3215d
+1765148157: 	tele/tasmota_E3ECEC/SENSOR (QoS 0)
+1765148157: mqttx_4af3215d 0 tele/tasmota_E3ECEC/SENSOR
+1765148157: 	tele/# (QoS 0)
+1765148157: mqttx_4af3215d 0 tele/#
+1765148157: Sending SUBACK to mqttx_4af3215d
+1765148157: Sending PUBLISH to mqttx_4af3215d (d0, q0, r1, m0, 'tele/tasmota_E3ECEC/LWT', ... (6 bytes))
+1765148160: Received PINGREQ from DVES_E3ECEC
+1765148160: Sending PINGRESP to DVES_E3ECEC
+1765148161: Received PINGREQ from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765148161: Sending PINGRESP to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765148190: Received PINGREQ from DVES_E3ECEC
+1765148190: Sending PINGRESP to DVES_E3ECEC
+1765148218: Received PINGREQ from mqttx_4af3215d
+1765148218: Sending PINGRESP to mqttx_4af3215d
+1765148220: Received PINGREQ from DVES_E3ECEC
+1765148220: Sending PINGRESP to DVES_E3ECEC
+1765148221: Received PINGREQ from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765148221: Sending PINGRESP to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765148250: Received PINGREQ from DVES_E3ECEC
+1765148250: Sending PINGRESP to DVES_E3ECEC
+1765148279: Received PINGREQ from mqttx_4af3215d
+1765148279: Sending PINGRESP to mqttx_4af3215d
+1765148280: Received PINGREQ from DVES_E3ECEC
+1765148280: Sending PINGRESP to DVES_E3ECEC
+1765148281: Received PINGREQ from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765148281: Sending PINGRESP to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765148310: Received PINGREQ from DVES_E3ECEC
+1765148310: Sending PINGRESP to DVES_E3ECEC
+1765148315: Received PUBLISH from DVES_E3ECEC (d0, q0, r0, m0, 'tele/tasmota_E3ECEC/STATE', ... (388 bytes))
+1765148315: Sending PUBLISH to mqttx_4af3215d (d0, q0, r0, m0, 'tele/tasmota_E3ECEC/STATE', ... (388 bytes))
+1765148315: Received PUBLISH from DVES_E3ECEC (d0, q0, r0, m0, 'tele/tasmota_E3ECEC/SENSOR', ... (165 bytes))
+1765148315: Sending PUBLISH to mqttx_4af3215d (d0, q0, r0, m0, 'tele/tasmota_E3ECEC/SENSOR', ... (165 bytes))
+1765148340: Received PINGREQ from DVES_E3ECEC
+1765148340: Sending PINGRESP to DVES_E3ECEC
+1765148340: Received PINGREQ from mqttx_4af3215d
+1765148340: Sending PINGRESP to mqttx_4af3215d
+1765148346: Received PINGREQ from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765148346: Sending PINGRESP to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765148370: Received PINGREQ from DVES_E3ECEC
+1765148370: Sending PINGRESP to DVES_E3ECEC
+1765148400: Received PINGREQ from DVES_E3ECEC
+1765148400: Sending PINGRESP to DVES_E3ECEC
+1765148401: Received PINGREQ from mqttx_4af3215d
+1765148401: Sending PINGRESP to mqttx_4af3215d
+1765148406: Received PINGREQ from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765148406: Sending PINGRESP to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765148430: Received PINGREQ from DVES_E3ECEC
+1765148430: Sending PINGRESP to DVES_E3ECEC
+1765148460: Received PINGREQ from DVES_E3ECEC
+1765148460: Sending PINGRESP to DVES_E3ECEC
+1765148471: Received PINGREQ from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765148471: Sending PINGRESP to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765148482: Received PINGREQ from mqttx_4af3215d
+1765148482: Sending PINGRESP to mqttx_4af3215d
+1765148490: Received PINGREQ from DVES_E3ECEC
+1765148490: Sending PINGRESP to DVES_E3ECEC
+1765148520: Received PINGREQ from DVES_E3ECEC
+1765148520: Sending PINGRESP to DVES_E3ECEC
+1765148536: Received PINGREQ from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765148536: Sending PINGRESP to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765148550: Received PINGREQ from DVES_E3ECEC
+1765148550: Sending PINGRESP to DVES_E3ECEC
+1765148573: Client mqttx_4af3215d has exceeded timeout, disconnecting.
+1765148577: New connection from 172.20.0.1:57856 on port 1883.
+1765148577: New client connected from 172.20.0.1:57856 as mqttx_4af3215d (p1, c1, k60).
+1765148577: No will message specified.
+1765148577: Sending CONNACK to mqttx_4af3215d (0, 0)
+1765148577: Received SUBSCRIBE from mqttx_4af3215d
+1765148577: 	tele/tasmota_E3ECEC/SENSOR (QoS 0)
+1765148577: mqttx_4af3215d 0 tele/tasmota_E3ECEC/SENSOR
+1765148577: 	tele/# (QoS 0)
+1765148577: mqttx_4af3215d 0 tele/#
+1765148577: Sending SUBACK to mqttx_4af3215d
+1765148577: Sending PUBLISH to mqttx_4af3215d (d0, q0, r1, m0, 'tele/tasmota_E3ECEC/LWT', ... (6 bytes))
+1765148580: Received PINGREQ from DVES_E3ECEC
+1765148580: Sending PINGRESP to DVES_E3ECEC
+1765148596: Received PINGREQ from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765148596: Sending PINGRESP to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765148610: Received PINGREQ from DVES_E3ECEC
+1765148610: Sending PINGRESP to DVES_E3ECEC
+1765148614: Received PUBLISH from DVES_E3ECEC (d0, q0, r0, m0, 'tele/tasmota_E3ECEC/STATE', ... (389 bytes))
+1765148614: Sending PUBLISH to mqttx_4af3215d (d0, q0, r0, m0, 'tele/tasmota_E3ECEC/STATE', ... (389 bytes))
+1765148614: Received PUBLISH from DVES_E3ECEC (d0, q0, r0, m0, 'tele/tasmota_E3ECEC/SENSOR', ... (164 bytes))
+1765148614: Sending PUBLISH to mqttx_4af3215d (d0, q0, r0, m0, 'tele/tasmota_E3ECEC/SENSOR', ... (164 bytes))
+1765148638: Received PINGREQ from mqttx_4af3215d
+1765148638: Sending PINGRESP to mqttx_4af3215d
+1765148641: Received PINGREQ from DVES_E3ECEC
+1765148641: Sending PINGRESP to DVES_E3ECEC
+1765148656: Received PINGREQ from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765148656: Sending PINGRESP to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765148671: Received PINGREQ from DVES_E3ECEC
+1765148671: Sending PINGRESP to DVES_E3ECEC
+1765148699: Received PINGREQ from mqttx_4af3215d
+1765148699: Sending PINGRESP to mqttx_4af3215d
+1765148701: Received PINGREQ from DVES_E3ECEC
+1765148701: Sending PINGRESP to DVES_E3ECEC
+1765148721: Received PINGREQ from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765148721: Sending PINGRESP to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765148731: Received PINGREQ from DVES_E3ECEC
+1765148731: Sending PINGRESP to DVES_E3ECEC
+1765148760: Received PINGREQ from mqttx_4af3215d
+1765148760: Sending PINGRESP to mqttx_4af3215d
+1765148761: Received PINGREQ from DVES_E3ECEC
+1765148761: Sending PINGRESP to DVES_E3ECEC
+1765148786: Received PINGREQ from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765148786: Sending PINGRESP to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765148791: Received PINGREQ from DVES_E3ECEC
+1765148791: Sending PINGRESP to DVES_E3ECEC
+1765148821: Received PINGREQ from DVES_E3ECEC
+1765148821: Sending PINGRESP to DVES_E3ECEC
+1765148821: Received PINGREQ from mqttx_4af3215d
+1765148821: Sending PINGRESP to mqttx_4af3215d
+1765148846: Received PINGREQ from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765148846: Sending PINGRESP to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765148851: Received PINGREQ from DVES_E3ECEC
+1765148851: Sending PINGRESP to DVES_E3ECEC
+1765148881: Received PINGREQ from DVES_E3ECEC
+1765148881: Sending PINGRESP to DVES_E3ECEC
+1765148899: Received PINGREQ from mqttx_4af3215d
+1765148899: Sending PINGRESP to mqttx_4af3215d
+1765148906: Received PINGREQ from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765148906: Sending PINGRESP to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765148911: Received PINGREQ from DVES_E3ECEC
+1765148911: Sending PINGRESP to DVES_E3ECEC
+1765148914: Received PUBLISH from DVES_E3ECEC (d0, q0, r0, m0, 'tele/tasmota_E3ECEC/STATE', ... (389 bytes))
+1765148914: Sending PUBLISH to mqttx_4af3215d (d0, q0, r0, m0, 'tele/tasmota_E3ECEC/STATE', ... (389 bytes))
+1765148914: Received PUBLISH from DVES_E3ECEC (d0, q0, r0, m0, 'tele/tasmota_E3ECEC/SENSOR', ... (164 bytes))
+1765148914: Sending PUBLISH to mqttx_4af3215d (d0, q0, r0, m0, 'tele/tasmota_E3ECEC/SENSOR', ... (164 bytes))
+1765148917: Client mqttx_4af3215d closed its connection.
+1765148941: Received PINGREQ from DVES_E3ECEC
+1765148941: Sending PINGRESP to DVES_E3ECEC
+1765148971: Received PINGREQ from DVES_E3ECEC
+1765148971: Sending PINGRESP to DVES_E3ECEC
+1765148971: Received PINGREQ from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765148971: Sending PINGRESP to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765149001: Received PINGREQ from DVES_E3ECEC
+1765149001: Sending PINGRESP to DVES_E3ECEC
+1765149031: Received PINGREQ from DVES_E3ECEC
+1765149031: Sending PINGRESP to DVES_E3ECEC
+1765149031: Received PINGREQ from dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765149031: Sending PINGRESP to dmw27bu9PdHflcEJOI8MRx2GambID9me
+1765149061: Received PINGREQ from DVES_E3ECEC
+1765149061: Sending PINGRESP to DVES_E3ECEC
+1765149070: mosquitto version 2.0.22 terminating
+1765149070: Saving in-memory database to /mosquitto/data//mosquitto.db.

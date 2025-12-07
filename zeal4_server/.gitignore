@@ -13,3 +13,6 @@ config/passwords.yaml
 
 # Firebase service account key for Firebase auth
 config/firebase_service_account_key.json
+
+# Mosquitto DB file
+mosquitto/data/mosquitto.db
