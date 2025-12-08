@@ -54,17 +54,10 @@ void run(List<String> args) async {
   // Setup a default page at the web root.
   pod.webServer.addRoute(RouteRoot(), '/');
   pod.webServer.addRoute(RouteRoot(), '/index.html');
-  // Serve all files in the /static directory.
-  final staticRoot = Directory(Uri(path: 'web/static').toFilePath());
-  final static = StaticRoute.directory(
-    staticRoot,
-    cacheControlFactory: StaticRoute.privateNoCache(),
-  );
-  pod.webServer.addRoute(
-    // RouteStaticDirectory(serverDirectory: 'static', basePath: '/'),
-    static,
-    '/*',
-  );
+
+  // Serve all files in the web/static relative directory under /.
+  final root = Directory(Uri(path: 'web/static').toFilePath());
+  pod.webServer.addRoute(StaticRoute.directory(root), '/**');
 
   // init sample data
   // initSampleData(pod);
