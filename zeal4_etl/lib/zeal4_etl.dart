@@ -8,21 +8,19 @@ const serverPodHost = 'http://localhost:8080/';
 
 late MqttServerClient mqtt;
 MqttClientConnectionStatus? status;
-Client client = Client(
-  serverPodHost,
-  onFailedCall: (p0, p1, p2) => print('> serverpod : faild call'),
-);
+Client client = Client(serverPodHost); // Removed onFailedCall
 
 // handle subscribe
 runETL() async {
   // mqtt client id
   final clientId = 'ClientId-${DateTime.now().microsecondsSinceEpoch}';
 
-  // call hello methods
-  final result = await client.example.hello("John");
-
-  // print result after call hello method
-  print('> call hello = $result');
+  // Check Serverpod connection
+  final isServerpodConnected = await _checkServerpodConnection();
+  if (!isServerpodConnected) {
+    print('> Exiting ETL due to Serverpod connection failure.');
+    return; // Exit if connection fails
+  }
 
   // connect, subscribe and push message to serverpod
   try {
@@ -139,4 +137,21 @@ runETL() async {
 // on subscribed
 void onSubscribed(String topic) {
   print('> subscription confirmed for topic $topic');
+}
+
+Future<bool> _checkServerpodConnection() async {
+  print('> Checking Serverpod connection...');
+  try {
+    final result = await client.example.hello("HealthCheck");
+    if (result == "Hello HealthCheck") {
+      print('> Serverpod connection successful!');
+      return true;
+    } else {
+      print('> Serverpod connection failed: Unexpected response from hello endpoint: $result');
+      return false;
+    }
+  } catch (e) {
+    print('> Serverpod connection failed: $e');
+    return false;
+  }
 }
