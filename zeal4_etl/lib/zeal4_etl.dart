@@ -1,6 +1,7 @@
 import 'package:mqtt_client/mqtt_client.dart';
 import 'package:mqtt_client/mqtt_server_client.dart';
 import 'package:zeal4_client/zeal4_client.dart';
+import 'dart:convert';
 
 const mqttHost = 'localhost';
 const serverPodHost = 'http://localhost:8080/';
@@ -65,24 +66,67 @@ runETL() async {
 
         if (match != null) {
           final uuid = match.group(1)!;
+          print('> zeal-device: $uuid');
 
+          // add zeal-device device log
           try {
             client.devicelog.addDeivceLog(uuid, message);
+            print('> zeal-message: $message');
           } catch (e) {
-            print('$e');
+            print('> $e');
           }
         } else {
           RegExp tasmotaRegExp = RegExp(r'tele/([^/]+)/SENSOR');
           Match? tasmotaMatch = tasmotaRegExp.firstMatch(topic);
           if (tasmotaMatch != null) {
+            // add tasmota-device device log
             final deviceId = tasmotaMatch.group(1)!;
+            print('> tasmota-device: $deviceId');
+
+            Map<String, dynamic> parsedMessage;
             try {
-              client.devicelog.addDeivceLog(deviceId, message);
+              parsedMessage = json.decode(message) as Map<String, dynamic>;
+
+              String? sensorId;
+              Map<String, dynamic>? sensorData;
+              String? timeString = parsedMessage['Time'] as String?;
+
+              parsedMessage.forEach((key, value) {
+                if (key != 'Time') {
+                  sensorId = key;
+                  sensorData = value as Map<String, dynamic>;
+                }
+              });
+
+              if (sensorId != null && sensorData != null) {
+                if (timeString != null) {
+                  try {
+                    final dateTime = DateTime.parse(timeString);
+                    final timestamp = dateTime.millisecondsSinceEpoch ~/ 1000;
+                    sensorData!['timestamp'] = timestamp;
+                  } catch (e) {
+                    print('> Error parsing time: $e');
+                  }
+                }
+
+                final combinedId = '${deviceId}_$sensorId';
+                final messageToRecord = json.encode(sensorData);
+
+                try {
+                  client.devicelog.addDeivceLog(combinedId, messageToRecord);
+                  print('> tasmota-device ($combinedId): $messageToRecord');
+                } catch (e) {
+                  print('$e');
+                }
+              } else {
+                print('> Could not extract sensor data from message: $message');
+              }
             } catch (e) {
-              print('$e');
+              print('> Error parsing JSON message: $e');
+              return;
             }
           } else {
-            print('No match found.');
+            print('> No match found.');
           }
         }
       });

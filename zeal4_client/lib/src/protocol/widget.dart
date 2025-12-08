@@ -16,6 +16,7 @@ import 'device.dart' as _i3;
 import 'dashboard.dart' as _i4;
 import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i5;
 import 'package:zeal4_client/src/protocol/protocol.dart' as _i6;
+import 'package:meta/meta.dart' as _i7;
 
 abstract class DashboardWidget implements _i1.SerializableModel {
   DashboardWidget._({
@@ -145,7 +146,7 @@ abstract class DashboardWidget implements _i1.SerializableModel {
 
   /// Returns a shallow copy of this [DashboardWidget]
   /// with some or all fields replaced by the given arguments.
-  @_i1.useResult
+  @_i7.useResult
   DashboardWidget copyWith({
     int? id,
     String? name,
@@ -242,7 +243,7 @@ class _DashboardWidgetImpl extends DashboardWidget {
 
   /// Returns a shallow copy of this [DashboardWidget]
   /// with some or all fields replaced by the given arguments.
-  @_i1.useResult
+  @_i7.useResult
   @override
   DashboardWidget copyWith({
     Object? id = _Undefined,

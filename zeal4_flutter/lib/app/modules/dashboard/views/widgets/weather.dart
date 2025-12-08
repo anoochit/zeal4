@@ -84,7 +84,7 @@ class _WeatherWidgetViewState extends State<WeatherWidgetView> {
                     children: [
                       // icon
                       Image.network(
-                        'https://openweathermap.org/img/wn/${icon}@2x.png',
+                        'https://openweathermap.org/img/wn/$icon@2x.png',
                       ),
 
                       // condition data
@@ -96,15 +96,15 @@ class _WeatherWidgetViewState extends State<WeatherWidgetView> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             // city
-                            Text('${city}'),
+                            Text('$city'),
                             // temp
-                            Text('${temp} °C'),
+                            Text('$temp °C'),
 
                             // condition
-                            Text('${condition}'),
+                            Text('$condition'),
 
                             // description
-                            Text('${description}'),
+                            Text('$description'),
                           ],
                         ),
                       )

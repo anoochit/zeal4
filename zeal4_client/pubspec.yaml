@@ -5,5 +5,6 @@ environment:
   sdk: ">=3.3.0 <4.0.0"
 
 dependencies:
+  meta: ^1.17.0
   serverpod_auth_client: 3.0.0-rc.4
   serverpod_client: 3.0.0-rc.4

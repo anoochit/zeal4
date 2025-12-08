@@ -13,6 +13,7 @@
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import 'device_log.dart' as _i2;
 import 'package:zeal4_client/src/protocol/protocol.dart' as _i3;
+import 'package:meta/meta.dart' as _i4;
 
 abstract class SnapshotDeviceLog implements _i1.SerializableModel {
   SnapshotDeviceLog._({required this.devicelogs});
@@ -32,7 +33,7 @@ abstract class SnapshotDeviceLog implements _i1.SerializableModel {
 
   /// Returns a shallow copy of this [SnapshotDeviceLog]
   /// with some or all fields replaced by the given arguments.
-  @_i1.useResult
+  @_i4.useResult
   SnapshotDeviceLog copyWith({List<_i2.DeviceLog>? devicelogs});
   @override
   Map<String, dynamic> toJson() {
@@ -54,7 +55,7 @@ class _SnapshotDeviceLogImpl extends SnapshotDeviceLog {
 
   /// Returns a shallow copy of this [SnapshotDeviceLog]
   /// with some or all fields replaced by the given arguments.
-  @_i1.useResult
+  @_i4.useResult
   @override
   SnapshotDeviceLog copyWith({List<_i2.DeviceLog>? devicelogs}) {
     return SnapshotDeviceLog(

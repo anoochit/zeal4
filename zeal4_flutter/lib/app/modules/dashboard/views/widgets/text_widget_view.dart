@@ -76,7 +76,7 @@ class _TextWidgetViewState extends State<TextWidgetView> {
           if (snapshot.hasData) {
             final data = snapshot.data;
 
-            if (data != null) {
+            if (data != null && data.isNotEmpty) {
               // get firt message
               final log = data.first;
 
@@ -105,7 +105,7 @@ class _TextWidgetViewState extends State<TextWidgetView> {
 
                   // value
                   Text(
-                    '${valueFormat}',
+                    valueFormat,
                     style: Theme.of(context).textTheme.headlineLarge,
                   ),
 
@@ -118,7 +118,7 @@ class _TextWidgetViewState extends State<TextWidgetView> {
               );
             } else {
               return const Center(
-                child: Text('nodata'),
+                child: Text('No data available'),
               );
             }
           }
