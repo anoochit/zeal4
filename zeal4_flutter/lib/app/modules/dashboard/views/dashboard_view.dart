@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:zeal4_client/zeal4_client.dart';
-import 'package:zeal4_flutter/app/modules/dashboard/views/widgets/weather.dart';
 
 import '../../../utils/grid_utils.dart';
 import '../controllers/dashboard_controller.dart';
@@ -15,6 +14,7 @@ import 'widgets/sline_chart_widget.dart';
 import 'widgets/spie_chart_widget.dart';
 import 'widgets/stext_widget_view.dart';
 import 'widgets/text_widget_view.dart';
+import 'widgets/weather.dart';
 import 'widgets/wrong_widget_view.dart';
 
 class DashboardView extends GetView<DashboardController> {
