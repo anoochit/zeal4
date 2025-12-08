@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
 import 'app/routes/app_pages.dart';
 // import 'app/utils/windows_utils.dart';
+import 'app/utils/windows_utils.dart';
 import 'serverpod.dart';
 
 Future<void> main() async {
@@ -30,5 +33,5 @@ Future<void> main() async {
   );
 
   // windows config
-  // initWindows();
+  initWindows();
 }
