@@ -1,5 +1,5 @@
 import 'package:serverpod/serverpod.dart';
-import 'package:serverpod_auth_server/module.dart';
+import 'package:serverpod_auth_server/serverpod_auth_server.dart';
 
 import 'dashboard_endpoint.dart';
 
@@ -18,7 +18,7 @@ class UserEndpoint extends Endpoint {
 
   // update to customer scope
   Future<UserInfo?> updateToUserScope(Session session) async {
-    final auth = await session.authenticated;
+    final auth = session.authenticated;
     return await Users.updateUserScopes(
       session,
       auth!.userId,

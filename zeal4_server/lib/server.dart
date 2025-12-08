@@ -1,6 +1,8 @@
 // ignore_for_file: unused_local_variable
 
-import 'package:mailer/mailer.dart';
+import 'dart:io';
+
+import 'package:mailer/mailer.dart' as mailer;
 import 'package:mailer/smtp_server/gmail.dart';
 import 'package:serverpod/serverpod.dart';
 import 'src/generated/protocol.dart';
@@ -52,8 +54,14 @@ void run(List<String> args) async {
   pod.webServer.addRoute(RouteRoot(), '/');
   pod.webServer.addRoute(RouteRoot(), '/index.html');
   // Serve all files in the /static directory.
+  final staticRoot = Directory(Uri(path: 'web/static').toFilePath());
+  final static = StaticRoute.directory(
+    staticRoot,
+    cacheControlFactory: StaticRoute.privateNoCache(),
+  );
   pod.webServer.addRoute(
-    RouteStaticDirectory(serverDirectory: 'static', basePath: '/'),
+    // RouteStaticDirectory(serverDirectory: 'static', basePath: '/'),
+    static,
     '/*',
   );
 
@@ -74,15 +82,15 @@ Future<bool> sendMail(
   final smtpServer = gmail(gmailAccount, gmailAppPassword);
 
   // Create an email message with the validation code.
-  final message = Message()
-    ..from = Address(gmailAccount)
+  final message = mailer.Message()
+    ..from = mailer.Address(gmailAccount)
     ..recipients.add(email)
     ..subject = subject
     ..html = body;
 
   // Send the email message.
   try {
-    await send(message, smtpServer);
+    await mailer.send(message, smtpServer);
     return true;
   } catch (_) {
     // Return false if the email could not be sent.

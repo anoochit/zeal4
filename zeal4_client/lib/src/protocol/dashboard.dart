@@ -7,11 +7,13 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
-import 'protocol.dart' as _i2;
+import 'widget.dart' as _i2;
 import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i3;
+import 'package:zeal4_client/src/protocol/protocol.dart' as _i4;
 
 abstract class Dashboard implements _i1.SerializableModel {
   Dashboard._({
@@ -37,15 +39,17 @@ abstract class Dashboard implements _i1.SerializableModel {
       id: jsonSerialization['id'] as int?,
       name: jsonSerialization['name'] as String,
       description: jsonSerialization['description'] as String,
-      widget: (jsonSerialization['widget'] as List?)
-          ?.map(
-              (e) => _i2.DashboardWidget.fromJson((e as Map<String, dynamic>)))
-          .toList(),
+      widget: jsonSerialization['widget'] == null
+          ? null
+          : _i4.Protocol().deserialize<List<_i2.DashboardWidget>>(
+              jsonSerialization['widget'],
+            ),
       userInfoId: jsonSerialization['userInfoId'] as int,
       userInfo: jsonSerialization['userInfo'] == null
           ? null
-          : _i3.UserInfo.fromJson(
-              (jsonSerialization['userInfo'] as Map<String, dynamic>)),
+          : _i4.Protocol().deserialize<_i3.UserInfo>(
+              jsonSerialization['userInfo'],
+            ),
     );
   }
 
@@ -64,6 +68,9 @@ abstract class Dashboard implements _i1.SerializableModel {
 
   _i3.UserInfo? userInfo;
 
+  /// Returns a shallow copy of this [Dashboard]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   Dashboard copyWith({
     int? id,
     String? name,
@@ -75,6 +82,7 @@ abstract class Dashboard implements _i1.SerializableModel {
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'Dashboard',
       if (id != null) 'id': id,
       'name': name,
       'description': description,
@@ -102,14 +110,17 @@ class _DashboardImpl extends Dashboard {
     required int userInfoId,
     _i3.UserInfo? userInfo,
   }) : super._(
-          id: id,
-          name: name,
-          description: description,
-          widget: widget,
-          userInfoId: userInfoId,
-          userInfo: userInfo,
-        );
+         id: id,
+         name: name,
+         description: description,
+         widget: widget,
+         userInfoId: userInfoId,
+         userInfo: userInfo,
+       );
 
+  /// Returns a shallow copy of this [Dashboard]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   Dashboard copyWith({
     Object? id = _Undefined,
@@ -127,8 +138,9 @@ class _DashboardImpl extends Dashboard {
           ? widget
           : this.widget?.map((e0) => e0.copyWith()).toList(),
       userInfoId: userInfoId ?? this.userInfoId,
-      userInfo:
-          userInfo is _i3.UserInfo? ? userInfo : this.userInfo?.copyWith(),
+      userInfo: userInfo is _i3.UserInfo?
+          ? userInfo
+          : this.userInfo?.copyWith(),
     );
   }
 }

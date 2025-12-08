@@ -7,6 +7,7 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
@@ -42,23 +43,24 @@ class EndpointDevicelog extends _i1.EndpointRef {
   _i2.Future<_i4.DeviceLog?> addDeivceLog(
     String uuid,
     String message,
-  ) =>
-      caller.callServerEndpoint<_i4.DeviceLog?>(
-        'devicelog',
-        'addDeivceLog',
-        {
-          'uuid': uuid,
-          'message': message,
-        },
-      );
+  ) => caller.callServerEndpoint<_i4.DeviceLog?>(
+    'devicelog',
+    'addDeivceLog',
+    {
+      'uuid': uuid,
+      'message': message,
+    },
+  );
 
   _i2.Stream<_i5.SnapshotDeviceLog> streamInfinitDeviceLog(
     int deviceId,
     int total,
     bool desc,
   ) =>
-      caller.callStreamingServerEndpoint<_i2.Stream<_i5.SnapshotDeviceLog>,
-          _i5.SnapshotDeviceLog>(
+      caller.callStreamingServerEndpoint<
+        _i2.Stream<_i5.SnapshotDeviceLog>,
+        _i5.SnapshotDeviceLog
+      >(
         'devicelog',
         'streamInfinitDeviceLog',
         {
@@ -74,8 +76,10 @@ class EndpointDevicelog extends _i1.EndpointRef {
     int total,
     bool desc,
   ) =>
-      caller.callStreamingServerEndpoint<_i2.Stream<_i5.SnapshotDeviceLog>,
-          _i5.SnapshotDeviceLog>(
+      caller.callStreamingServerEndpoint<
+        _i2.Stream<_i5.SnapshotDeviceLog>,
+        _i5.SnapshotDeviceLog
+      >(
         'devicelog',
         'streamDeviceLog',
         {
@@ -90,9 +94,8 @@ class EndpointDevicelog extends _i1.EndpointRef {
     int deviceId,
     int total,
     bool desc,
-  ) =>
-      caller.callStreamingServerEndpoint<_i2.Stream<_i4.DeviceLog>,
-          _i4.DeviceLog>(
+  ) => caller
+      .callStreamingServerEndpoint<_i2.Stream<_i4.DeviceLog>, _i4.DeviceLog>(
         'devicelog',
         'streamDeviceLogDataPoints',
         {
@@ -107,32 +110,30 @@ class EndpointDevicelog extends _i1.EndpointRef {
     int deviceId,
     int total,
     bool desc,
-  ) =>
-      caller.callServerEndpoint<List<_i4.DeviceLog>>(
-        'devicelog',
-        'getDeviceLog',
-        {
-          'deviceId': deviceId,
-          'total': total,
-          'desc': desc,
-        },
-      );
+  ) => caller.callServerEndpoint<List<_i4.DeviceLog>>(
+    'devicelog',
+    'getDeviceLog',
+    {
+      'deviceId': deviceId,
+      'total': total,
+      'desc': desc,
+    },
+  );
 
   _i2.Stream<dynamic> deviceLogMessage(
     int deviceId,
     int total,
     bool desc,
-  ) =>
-      caller.callStreamingServerEndpoint<_i2.Stream<dynamic>, dynamic>(
-        'devicelog',
-        'deviceLogMessage',
-        {
-          'deviceId': deviceId,
-          'total': total,
-          'desc': desc,
-        },
-        {},
-      );
+  ) => caller.callStreamingServerEndpoint<_i2.Stream<dynamic>, dynamic>(
+    'devicelog',
+    'deviceLogMessage',
+    {
+      'deviceId': deviceId,
+      'total': total,
+      'desc': desc,
+    },
+    {},
+  );
 }
 
 /// {@category Endpoint}
@@ -143,10 +144,10 @@ class EndpointExample extends _i1.EndpointRef {
   String get name => 'example';
 
   _i2.Future<String> hello(String name) => caller.callServerEndpoint<String>(
-        'example',
-        'hello',
-        {'name': name},
-      );
+    'example',
+    'hello',
+    {'name': name},
+  );
 
   _i2.Stream<int> countdown() =>
       caller.callStreamingServerEndpoint<_i2.Stream<int>, int>(
@@ -172,8 +173,8 @@ class EndpointUser extends _i1.EndpointRef {
       );
 }
 
-class _Modules {
-  _Modules(Client client) {
+class Modules {
+  Modules(Client client) {
     auth = _i6.Caller(client);
   }
 
@@ -191,26 +192,27 @@ class Client extends _i1.ServerpodClientShared {
       _i1.MethodCallContext,
       Object,
       StackTrace,
-    )? onFailedCall,
+    )?
+    onFailedCall,
     Function(_i1.MethodCallContext)? onSucceededCall,
     bool? disconnectStreamsOnLostInternetConnection,
   }) : super(
-          host,
-          _i7.Protocol(),
-          securityContext: securityContext,
-          authenticationKeyManager: authenticationKeyManager,
-          streamingConnectionTimeout: streamingConnectionTimeout,
-          connectionTimeout: connectionTimeout,
-          onFailedCall: onFailedCall,
-          onSucceededCall: onSucceededCall,
-          disconnectStreamsOnLostInternetConnection:
-              disconnectStreamsOnLostInternetConnection,
-        ) {
+         host,
+         _i7.Protocol(),
+         securityContext: securityContext,
+         authenticationKeyManager: authenticationKeyManager,
+         streamingConnectionTimeout: streamingConnectionTimeout,
+         connectionTimeout: connectionTimeout,
+         onFailedCall: onFailedCall,
+         onSucceededCall: onSucceededCall,
+         disconnectStreamsOnLostInternetConnection:
+             disconnectStreamsOnLostInternetConnection,
+       ) {
     dashboard = EndpointDashboard(this);
     devicelog = EndpointDevicelog(this);
     example = EndpointExample(this);
     user = EndpointUser(this);
-    modules = _Modules(this);
+    modules = Modules(this);
   }
 
   late final EndpointDashboard dashboard;
@@ -221,17 +223,18 @@ class Client extends _i1.ServerpodClientShared {
 
   late final EndpointUser user;
 
-  late final _Modules modules;
+  late final Modules modules;
 
   @override
   Map<String, _i1.EndpointRef> get endpointRefLookup => {
-        'dashboard': dashboard,
-        'devicelog': devicelog,
-        'example': example,
-        'user': user,
-      };
+    'dashboard': dashboard,
+    'devicelog': devicelog,
+    'example': example,
+    'user': user,
+  };
 
   @override
-  Map<String, _i1.ModuleEndpointCaller> get moduleLookup =>
-      {'auth': modules.auth};
+  Map<String, _i1.ModuleEndpointCaller> get moduleLookup => {
+    'auth': modules.auth,
+  };
 }

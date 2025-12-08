@@ -7,16 +7,22 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
+
+// ignore_for_file: unnecessary_null_comparison
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
-import 'protocol.dart' as _i2;
-import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i3;
+import 'widget_type.dart' as _i2;
+import 'device.dart' as _i3;
+import 'dashboard.dart' as _i4;
+import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i5;
+import 'package:zeal4_server/src/generated/protocol.dart' as _i6;
 
-abstract class DashboardWidget extends _i1.TableRow
-    implements _i1.ProtocolSerialization {
+abstract class DashboardWidget
+    implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
   DashboardWidget._({
-    int? id,
+    this.id,
     required this.name,
     required this.description,
     int? width,
@@ -34,13 +40,12 @@ abstract class DashboardWidget extends _i1.TableRow
     required this.userInfoId,
     this.userInfo,
     bool? enable,
-  })  : width = width ?? 3,
-        height = height ?? 1,
-        order = order ?? 1,
-        type = type ?? _i2.WidgetType.text,
-        points = points ?? 60,
-        enable = enable ?? false,
-        super(id);
+  }) : width = width ?? 3,
+       height = height ?? 1,
+       order = order ?? 1,
+       type = type ?? _i2.WidgetType.text,
+       points = points ?? 60,
+       enable = enable ?? false;
 
   factory DashboardWidget({
     int? id,
@@ -50,16 +55,16 @@ abstract class DashboardWidget extends _i1.TableRow
     int? height,
     int? order,
     required int deviceId,
-    _i2.Device? device,
+    _i3.Device? device,
     required List<String> fields,
     required List<String> units,
     _i2.WidgetType? type,
     required List<String> labels,
     int? points,
     required int dashboardId,
-    _i2.Dashboard? dashboard,
+    _i4.Dashboard? dashboard,
     required int userInfoId,
-    _i3.UserInfo? userInfo,
+    _i5.UserInfo? userInfo,
     bool? enable,
   }) = _DashboardWidgetImpl;
 
@@ -74,28 +79,30 @@ abstract class DashboardWidget extends _i1.TableRow
       deviceId: jsonSerialization['deviceId'] as int,
       device: jsonSerialization['device'] == null
           ? null
-          : _i2.Device.fromJson(
-              (jsonSerialization['device'] as Map<String, dynamic>)),
-      fields: (jsonSerialization['fields'] as List)
-          .map((e) => e as String)
-          .toList(),
-      units:
-          (jsonSerialization['units'] as List).map((e) => e as String).toList(),
+          : _i6.Protocol().deserialize<_i3.Device>(jsonSerialization['device']),
+      fields: _i6.Protocol().deserialize<List<String>>(
+        jsonSerialization['fields'],
+      ),
+      units: _i6.Protocol().deserialize<List<String>>(
+        jsonSerialization['units'],
+      ),
       type: _i2.WidgetType.fromJson((jsonSerialization['type'] as String)),
-      labels: (jsonSerialization['labels'] as List)
-          .map((e) => e as String)
-          .toList(),
+      labels: _i6.Protocol().deserialize<List<String>>(
+        jsonSerialization['labels'],
+      ),
       points: jsonSerialization['points'] as int,
       dashboardId: jsonSerialization['dashboardId'] as int,
       dashboard: jsonSerialization['dashboard'] == null
           ? null
-          : _i2.Dashboard.fromJson(
-              (jsonSerialization['dashboard'] as Map<String, dynamic>)),
+          : _i6.Protocol().deserialize<_i4.Dashboard>(
+              jsonSerialization['dashboard'],
+            ),
       userInfoId: jsonSerialization['userInfoId'] as int,
       userInfo: jsonSerialization['userInfo'] == null
           ? null
-          : _i3.UserInfo.fromJson(
-              (jsonSerialization['userInfo'] as Map<String, dynamic>)),
+          : _i6.Protocol().deserialize<_i5.UserInfo>(
+              jsonSerialization['userInfo'],
+            ),
       enable: jsonSerialization['enable'] as bool,
     );
   }
@@ -103,6 +110,9 @@ abstract class DashboardWidget extends _i1.TableRow
   static final t = DashboardWidgetTable();
 
   static const db = DashboardWidgetRepository._();
+
+  @override
+  int? id;
 
   String name;
 
@@ -116,7 +126,7 @@ abstract class DashboardWidget extends _i1.TableRow
 
   int deviceId;
 
-  _i2.Device? device;
+  _i3.Device? device;
 
   List<String> fields;
 
@@ -130,17 +140,20 @@ abstract class DashboardWidget extends _i1.TableRow
 
   int dashboardId;
 
-  _i2.Dashboard? dashboard;
+  _i4.Dashboard? dashboard;
 
   int userInfoId;
 
-  _i3.UserInfo? userInfo;
+  _i5.UserInfo? userInfo;
 
   bool enable;
 
   @override
-  _i1.Table get table => t;
+  _i1.Table<int?> get table => t;
 
+  /// Returns a shallow copy of this [DashboardWidget]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   DashboardWidget copyWith({
     int? id,
     String? name,
@@ -149,21 +162,22 @@ abstract class DashboardWidget extends _i1.TableRow
     int? height,
     int? order,
     int? deviceId,
-    _i2.Device? device,
+    _i3.Device? device,
     List<String>? fields,
     List<String>? units,
     _i2.WidgetType? type,
     List<String>? labels,
     int? points,
     int? dashboardId,
-    _i2.Dashboard? dashboard,
+    _i4.Dashboard? dashboard,
     int? userInfoId,
-    _i3.UserInfo? userInfo,
+    _i5.UserInfo? userInfo,
     bool? enable,
   });
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'DashboardWidget',
       if (id != null) 'id': id,
       'name': name,
       'description': description,
@@ -188,6 +202,7 @@ abstract class DashboardWidget extends _i1.TableRow
   @override
   Map<String, dynamic> toJsonForProtocol() {
     return {
+      '__className__': 'DashboardWidget',
       if (id != null) 'id': id,
       'name': name,
       'description': description,
@@ -210,9 +225,9 @@ abstract class DashboardWidget extends _i1.TableRow
   }
 
   static DashboardWidgetInclude include({
-    _i2.DeviceInclude? device,
-    _i2.DashboardInclude? dashboard,
-    _i3.UserInfoInclude? userInfo,
+    _i3.DeviceInclude? device,
+    _i4.DashboardInclude? dashboard,
+    _i5.UserInfoInclude? userInfo,
   }) {
     return DashboardWidgetInclude._(
       device: device,
@@ -258,38 +273,41 @@ class _DashboardWidgetImpl extends DashboardWidget {
     int? height,
     int? order,
     required int deviceId,
-    _i2.Device? device,
+    _i3.Device? device,
     required List<String> fields,
     required List<String> units,
     _i2.WidgetType? type,
     required List<String> labels,
     int? points,
     required int dashboardId,
-    _i2.Dashboard? dashboard,
+    _i4.Dashboard? dashboard,
     required int userInfoId,
-    _i3.UserInfo? userInfo,
+    _i5.UserInfo? userInfo,
     bool? enable,
   }) : super._(
-          id: id,
-          name: name,
-          description: description,
-          width: width,
-          height: height,
-          order: order,
-          deviceId: deviceId,
-          device: device,
-          fields: fields,
-          units: units,
-          type: type,
-          labels: labels,
-          points: points,
-          dashboardId: dashboardId,
-          dashboard: dashboard,
-          userInfoId: userInfoId,
-          userInfo: userInfo,
-          enable: enable,
-        );
+         id: id,
+         name: name,
+         description: description,
+         width: width,
+         height: height,
+         order: order,
+         deviceId: deviceId,
+         device: device,
+         fields: fields,
+         units: units,
+         type: type,
+         labels: labels,
+         points: points,
+         dashboardId: dashboardId,
+         dashboard: dashboard,
+         userInfoId: userInfoId,
+         userInfo: userInfo,
+         enable: enable,
+       );
 
+  /// Returns a shallow copy of this [DashboardWidget]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   DashboardWidget copyWith({
     Object? id = _Undefined,
@@ -319,26 +337,107 @@ class _DashboardWidgetImpl extends DashboardWidget {
       height: height ?? this.height,
       order: order ?? this.order,
       deviceId: deviceId ?? this.deviceId,
-      device: device is _i2.Device? ? device : this.device?.copyWith(),
+      device: device is _i3.Device? ? device : this.device?.copyWith(),
       fields: fields ?? this.fields.map((e0) => e0).toList(),
       units: units ?? this.units.map((e0) => e0).toList(),
       type: type ?? this.type,
       labels: labels ?? this.labels.map((e0) => e0).toList(),
       points: points ?? this.points,
       dashboardId: dashboardId ?? this.dashboardId,
-      dashboard:
-          dashboard is _i2.Dashboard? ? dashboard : this.dashboard?.copyWith(),
+      dashboard: dashboard is _i4.Dashboard?
+          ? dashboard
+          : this.dashboard?.copyWith(),
       userInfoId: userInfoId ?? this.userInfoId,
-      userInfo:
-          userInfo is _i3.UserInfo? ? userInfo : this.userInfo?.copyWith(),
+      userInfo: userInfo is _i5.UserInfo?
+          ? userInfo
+          : this.userInfo?.copyWith(),
       enable: enable ?? this.enable,
     );
   }
 }
 
-class DashboardWidgetTable extends _i1.Table {
+class DashboardWidgetUpdateTable extends _i1.UpdateTable<DashboardWidgetTable> {
+  DashboardWidgetUpdateTable(super.table);
+
+  _i1.ColumnValue<String, String> name(String value) => _i1.ColumnValue(
+    table.name,
+    value,
+  );
+
+  _i1.ColumnValue<String, String> description(String value) => _i1.ColumnValue(
+    table.description,
+    value,
+  );
+
+  _i1.ColumnValue<int, int> width(int value) => _i1.ColumnValue(
+    table.width,
+    value,
+  );
+
+  _i1.ColumnValue<int, int> height(int value) => _i1.ColumnValue(
+    table.height,
+    value,
+  );
+
+  _i1.ColumnValue<int, int> order(int value) => _i1.ColumnValue(
+    table.order,
+    value,
+  );
+
+  _i1.ColumnValue<int, int> deviceId(int value) => _i1.ColumnValue(
+    table.deviceId,
+    value,
+  );
+
+  _i1.ColumnValue<List<String>, List<String>> fields(List<String> value) =>
+      _i1.ColumnValue(
+        table.fields,
+        value,
+      );
+
+  _i1.ColumnValue<List<String>, List<String>> units(List<String> value) =>
+      _i1.ColumnValue(
+        table.units,
+        value,
+      );
+
+  _i1.ColumnValue<_i2.WidgetType, _i2.WidgetType> type(_i2.WidgetType value) =>
+      _i1.ColumnValue(
+        table.type,
+        value,
+      );
+
+  _i1.ColumnValue<List<String>, List<String>> labels(List<String> value) =>
+      _i1.ColumnValue(
+        table.labels,
+        value,
+      );
+
+  _i1.ColumnValue<int, int> points(int value) => _i1.ColumnValue(
+    table.points,
+    value,
+  );
+
+  _i1.ColumnValue<int, int> dashboardId(int value) => _i1.ColumnValue(
+    table.dashboardId,
+    value,
+  );
+
+  _i1.ColumnValue<int, int> userInfoId(int value) => _i1.ColumnValue(
+    table.userInfoId,
+    value,
+  );
+
+  _i1.ColumnValue<bool, bool> enable(bool value) => _i1.ColumnValue(
+    table.enable,
+    value,
+  );
+}
+
+class DashboardWidgetTable extends _i1.Table<int?> {
   DashboardWidgetTable({super.tableRelation})
-      : super(tableName: 'dashboard_widget') {
+    : super(tableName: 'dashboard_widget') {
+    updateTable = DashboardWidgetUpdateTable(this);
     name = _i1.ColumnString(
       'name',
       this,
@@ -366,11 +465,11 @@ class DashboardWidgetTable extends _i1.Table {
       'deviceId',
       this,
     );
-    fields = _i1.ColumnSerializable(
+    fields = _i1.ColumnSerializable<List<String>>(
       'fields',
       this,
     );
-    units = _i1.ColumnSerializable(
+    units = _i1.ColumnSerializable<List<String>>(
       'units',
       this,
     );
@@ -380,7 +479,7 @@ class DashboardWidgetTable extends _i1.Table {
       _i1.EnumSerialization.byName,
       hasDefault: true,
     );
-    labels = _i1.ColumnSerializable(
+    labels = _i1.ColumnSerializable<List<String>>(
       'labels',
       this,
     );
@@ -404,6 +503,8 @@ class DashboardWidgetTable extends _i1.Table {
     );
   }
 
+  late final DashboardWidgetUpdateTable updateTable;
+
   late final _i1.ColumnString name;
 
   late final _i1.ColumnString description;
@@ -416,85 +517,85 @@ class DashboardWidgetTable extends _i1.Table {
 
   late final _i1.ColumnInt deviceId;
 
-  _i2.DeviceTable? _device;
+  _i3.DeviceTable? _device;
 
-  late final _i1.ColumnSerializable fields;
+  late final _i1.ColumnSerializable<List<String>> fields;
 
-  late final _i1.ColumnSerializable units;
+  late final _i1.ColumnSerializable<List<String>> units;
 
   late final _i1.ColumnEnum<_i2.WidgetType> type;
 
-  late final _i1.ColumnSerializable labels;
+  late final _i1.ColumnSerializable<List<String>> labels;
 
   late final _i1.ColumnInt points;
 
   late final _i1.ColumnInt dashboardId;
 
-  _i2.DashboardTable? _dashboard;
+  _i4.DashboardTable? _dashboard;
 
   late final _i1.ColumnInt userInfoId;
 
-  _i3.UserInfoTable? _userInfo;
+  _i5.UserInfoTable? _userInfo;
 
   late final _i1.ColumnBool enable;
 
-  _i2.DeviceTable get device {
+  _i3.DeviceTable get device {
     if (_device != null) return _device!;
     _device = _i1.createRelationTable(
       relationFieldName: 'device',
       field: DashboardWidget.t.deviceId,
-      foreignField: _i2.Device.t.id,
+      foreignField: _i3.Device.t.id,
       tableRelation: tableRelation,
       createTable: (foreignTableRelation) =>
-          _i2.DeviceTable(tableRelation: foreignTableRelation),
+          _i3.DeviceTable(tableRelation: foreignTableRelation),
     );
     return _device!;
   }
 
-  _i2.DashboardTable get dashboard {
+  _i4.DashboardTable get dashboard {
     if (_dashboard != null) return _dashboard!;
     _dashboard = _i1.createRelationTable(
       relationFieldName: 'dashboard',
       field: DashboardWidget.t.dashboardId,
-      foreignField: _i2.Dashboard.t.id,
+      foreignField: _i4.Dashboard.t.id,
       tableRelation: tableRelation,
       createTable: (foreignTableRelation) =>
-          _i2.DashboardTable(tableRelation: foreignTableRelation),
+          _i4.DashboardTable(tableRelation: foreignTableRelation),
     );
     return _dashboard!;
   }
 
-  _i3.UserInfoTable get userInfo {
+  _i5.UserInfoTable get userInfo {
     if (_userInfo != null) return _userInfo!;
     _userInfo = _i1.createRelationTable(
       relationFieldName: 'userInfo',
       field: DashboardWidget.t.userInfoId,
-      foreignField: _i3.UserInfo.t.id,
+      foreignField: _i5.UserInfo.t.id,
       tableRelation: tableRelation,
       createTable: (foreignTableRelation) =>
-          _i3.UserInfoTable(tableRelation: foreignTableRelation),
+          _i5.UserInfoTable(tableRelation: foreignTableRelation),
     );
     return _userInfo!;
   }
 
   @override
   List<_i1.Column> get columns => [
-        id,
-        name,
-        description,
-        width,
-        height,
-        order,
-        deviceId,
-        fields,
-        units,
-        type,
-        labels,
-        points,
-        dashboardId,
-        userInfoId,
-        enable,
-      ];
+    id,
+    name,
+    description,
+    width,
+    height,
+    order,
+    deviceId,
+    fields,
+    units,
+    type,
+    labels,
+    points,
+    dashboardId,
+    userInfoId,
+    enable,
+  ];
 
   @override
   _i1.Table? getRelationTable(String relationField) {
@@ -513,30 +614,30 @@ class DashboardWidgetTable extends _i1.Table {
 
 class DashboardWidgetInclude extends _i1.IncludeObject {
   DashboardWidgetInclude._({
-    _i2.DeviceInclude? device,
-    _i2.DashboardInclude? dashboard,
-    _i3.UserInfoInclude? userInfo,
+    _i3.DeviceInclude? device,
+    _i4.DashboardInclude? dashboard,
+    _i5.UserInfoInclude? userInfo,
   }) {
     _device = device;
     _dashboard = dashboard;
     _userInfo = userInfo;
   }
 
-  _i2.DeviceInclude? _device;
+  _i3.DeviceInclude? _device;
 
-  _i2.DashboardInclude? _dashboard;
+  _i4.DashboardInclude? _dashboard;
 
-  _i3.UserInfoInclude? _userInfo;
+  _i5.UserInfoInclude? _userInfo;
 
   @override
   Map<String, _i1.Include?> get includes => {
-        'device': _device,
-        'dashboard': _dashboard,
-        'userInfo': _userInfo,
-      };
+    'device': _device,
+    'dashboard': _dashboard,
+    'userInfo': _userInfo,
+  };
 
   @override
-  _i1.Table get table => DashboardWidget.t;
+  _i1.Table<int?> get table => DashboardWidget.t;
 }
 
 class DashboardWidgetIncludeList extends _i1.IncludeList {
@@ -556,7 +657,7 @@ class DashboardWidgetIncludeList extends _i1.IncludeList {
   Map<String, _i1.Include?> get includes => include?.includes ?? {};
 
   @override
-  _i1.Table get table => DashboardWidget.t;
+  _i1.Table<int?> get table => DashboardWidget.t;
 }
 
 class DashboardWidgetRepository {
@@ -564,8 +665,30 @@ class DashboardWidgetRepository {
 
   final attachRow = const DashboardWidgetAttachRowRepository._();
 
+  /// Returns a list of [DashboardWidget]s matching the given query parameters.
+  ///
+  /// Use [where] to specify which items to include in the return value.
+  /// If none is specified, all items will be returned.
+  ///
+  /// To specify the order of the items use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
+  /// The maximum number of items can be set by [limit]. If no limit is set,
+  /// all items matching the query will be returned.
+  ///
+  /// [offset] defines how many items to skip, after which [limit] (or all)
+  /// items are read from the database.
+  ///
+  /// ```dart
+  /// var persons = await Persons.db.find(
+  ///   session,
+  ///   where: (t) => t.lastName.equals('Jones'),
+  ///   orderBy: (t) => t.firstName,
+  ///   limit: 100,
+  /// );
+  /// ```
   Future<List<DashboardWidget>> find(
-    _i1.DatabaseAccessor databaseAccessor, {
+    _i1.Session session, {
     _i1.WhereExpressionBuilder<DashboardWidgetTable>? where,
     int? limit,
     int? offset,
@@ -575,20 +698,37 @@ class DashboardWidgetRepository {
     _i1.Transaction? transaction,
     DashboardWidgetInclude? include,
   }) async {
-    return databaseAccessor.db.find<DashboardWidget>(
+    return session.db.find<DashboardWidget>(
       where: where?.call(DashboardWidget.t),
       orderBy: orderBy?.call(DashboardWidget.t),
       orderByList: orderByList?.call(DashboardWidget.t),
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction,
       include: include,
     );
   }
 
+  /// Returns the first matching [DashboardWidget] matching the given query parameters.
+  ///
+  /// Use [where] to specify which items to include in the return value.
+  /// If none is specified, all items will be returned.
+  ///
+  /// To specify the order use [orderBy] or [orderByList]
+  /// when sorting by multiple columns.
+  ///
+  /// [offset] defines how many items to skip, after which the next one will be picked.
+  ///
+  /// ```dart
+  /// var youngestPerson = await Persons.db.findFirstRow(
+  ///   session,
+  ///   where: (t) => t.lastName.equals('Jones'),
+  ///   orderBy: (t) => t.age,
+  /// );
+  /// ```
   Future<DashboardWidget?> findFirstRow(
-    _i1.DatabaseAccessor databaseAccessor, {
+    _i1.Session session, {
     _i1.WhereExpressionBuilder<DashboardWidgetTable>? where,
     int? offset,
     _i1.OrderByBuilder<DashboardWidgetTable>? orderBy,
@@ -597,121 +737,188 @@ class DashboardWidgetRepository {
     _i1.Transaction? transaction,
     DashboardWidgetInclude? include,
   }) async {
-    return databaseAccessor.db.findFirstRow<DashboardWidget>(
+    return session.db.findFirstRow<DashboardWidget>(
       where: where?.call(DashboardWidget.t),
       orderBy: orderBy?.call(DashboardWidget.t),
       orderByList: orderByList?.call(DashboardWidget.t),
       orderDescending: orderDescending,
       offset: offset,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction,
       include: include,
     );
   }
 
+  /// Finds a single [DashboardWidget] by its [id] or null if no such row exists.
   Future<DashboardWidget?> findById(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     int id, {
     _i1.Transaction? transaction,
     DashboardWidgetInclude? include,
   }) async {
-    return databaseAccessor.db.findById<DashboardWidget>(
+    return session.db.findById<DashboardWidget>(
       id,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction,
       include: include,
     );
   }
 
+  /// Inserts all [DashboardWidget]s in the list and returns the inserted rows.
+  ///
+  /// The returned [DashboardWidget]s will have their `id` fields set.
+  ///
+  /// This is an atomic operation, meaning that if one of the rows fails to
+  /// insert, none of the rows will be inserted.
   Future<List<DashboardWidget>> insert(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     List<DashboardWidget> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.insert<DashboardWidget>(
+    return session.db.insert<DashboardWidget>(
       rows,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Inserts a single [DashboardWidget] and returns the inserted row.
+  ///
+  /// The returned [DashboardWidget] will have its `id` field set.
   Future<DashboardWidget> insertRow(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     DashboardWidget row, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.insertRow<DashboardWidget>(
+    return session.db.insertRow<DashboardWidget>(
       row,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Updates all [DashboardWidget]s in the list and returns the updated rows. If
+  /// [columns] is provided, only those columns will be updated. Defaults to
+  /// all columns.
+  /// This is an atomic operation, meaning that if one of the rows fails to
+  /// update, none of the rows will be updated.
   Future<List<DashboardWidget>> update(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     List<DashboardWidget> rows, {
     _i1.ColumnSelections<DashboardWidgetTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.update<DashboardWidget>(
+    return session.db.update<DashboardWidget>(
       rows,
       columns: columns?.call(DashboardWidget.t),
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Updates a single [DashboardWidget]. The row needs to have its id set.
+  /// Optionally, a list of [columns] can be provided to only update those
+  /// columns. Defaults to all columns.
   Future<DashboardWidget> updateRow(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     DashboardWidget row, {
     _i1.ColumnSelections<DashboardWidgetTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.updateRow<DashboardWidget>(
+    return session.db.updateRow<DashboardWidget>(
       row,
       columns: columns?.call(DashboardWidget.t),
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Updates a single [DashboardWidget] by its [id] with the specified [columnValues].
+  /// Returns the updated row or null if no row with the given id exists.
+  Future<DashboardWidget?> updateById(
+    _i1.Session session,
+    int id, {
+    required _i1.ColumnValueListBuilder<DashboardWidgetUpdateTable>
+    columnValues,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateById<DashboardWidget>(
+      id,
+      columnValues: columnValues(DashboardWidget.t.updateTable),
+      transaction: transaction,
+    );
+  }
+
+  /// Updates all [DashboardWidget]s matching the [where] expression with the specified [columnValues].
+  /// Returns the list of updated rows.
+  Future<List<DashboardWidget>> updateWhere(
+    _i1.Session session, {
+    required _i1.ColumnValueListBuilder<DashboardWidgetUpdateTable>
+    columnValues,
+    required _i1.WhereExpressionBuilder<DashboardWidgetTable> where,
+    int? limit,
+    int? offset,
+    _i1.OrderByBuilder<DashboardWidgetTable>? orderBy,
+    _i1.OrderByListBuilder<DashboardWidgetTable>? orderByList,
+    bool orderDescending = false,
+    _i1.Transaction? transaction,
+  }) async {
+    return session.db.updateWhere<DashboardWidget>(
+      columnValues: columnValues(DashboardWidget.t.updateTable),
+      where: where(DashboardWidget.t),
+      limit: limit,
+      offset: offset,
+      orderBy: orderBy?.call(DashboardWidget.t),
+      orderByList: orderByList?.call(DashboardWidget.t),
+      orderDescending: orderDescending,
+      transaction: transaction,
+    );
+  }
+
+  /// Deletes all [DashboardWidget]s in the list and returns the deleted rows.
+  /// This is an atomic operation, meaning that if one of the rows fail to
+  /// be deleted, none of the rows will be deleted.
   Future<List<DashboardWidget>> delete(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     List<DashboardWidget> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.delete<DashboardWidget>(
+    return session.db.delete<DashboardWidget>(
       rows,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Deletes a single [DashboardWidget].
   Future<DashboardWidget> deleteRow(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     DashboardWidget row, {
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.deleteRow<DashboardWidget>(
+    return session.db.deleteRow<DashboardWidget>(
       row,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Deletes all rows matching the [where] expression.
   Future<List<DashboardWidget>> deleteWhere(
-    _i1.DatabaseAccessor databaseAccessor, {
+    _i1.Session session, {
     required _i1.WhereExpressionBuilder<DashboardWidgetTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.deleteWhere<DashboardWidget>(
+    return session.db.deleteWhere<DashboardWidget>(
       where: where(DashboardWidget.t),
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Counts the number of rows matching the [where] expression. If omitted,
+  /// will return the count of all rows in the table.
   Future<int> count(
-    _i1.DatabaseAccessor databaseAccessor, {
+    _i1.Session session, {
     _i1.WhereExpressionBuilder<DashboardWidgetTable>? where,
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return databaseAccessor.db.count<DashboardWidget>(
+    return session.db.count<DashboardWidget>(
       where: where?.call(DashboardWidget.t),
       limit: limit,
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction,
     );
   }
 }
@@ -719,10 +926,12 @@ class DashboardWidgetRepository {
 class DashboardWidgetAttachRowRepository {
   const DashboardWidgetAttachRowRepository._();
 
+  /// Creates a relation between the given [DashboardWidget] and [Device]
+  /// by setting the [DashboardWidget]'s foreign key `deviceId` to refer to the [Device].
   Future<void> device(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     DashboardWidget dashboardWidget,
-    _i2.Device device, {
+    _i3.Device device, {
     _i1.Transaction? transaction,
   }) async {
     if (dashboardWidget.id == null) {
@@ -733,17 +942,19 @@ class DashboardWidgetAttachRowRepository {
     }
 
     var $dashboardWidget = dashboardWidget.copyWith(deviceId: device.id);
-    await databaseAccessor.db.updateRow<DashboardWidget>(
+    await session.db.updateRow<DashboardWidget>(
       $dashboardWidget,
       columns: [DashboardWidget.t.deviceId],
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Creates a relation between the given [DashboardWidget] and [Dashboard]
+  /// by setting the [DashboardWidget]'s foreign key `dashboardId` to refer to the [Dashboard].
   Future<void> dashboard(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     DashboardWidget dashboardWidget,
-    _i2.Dashboard dashboard, {
+    _i4.Dashboard dashboard, {
     _i1.Transaction? transaction,
   }) async {
     if (dashboardWidget.id == null) {
@@ -754,17 +965,19 @@ class DashboardWidgetAttachRowRepository {
     }
 
     var $dashboardWidget = dashboardWidget.copyWith(dashboardId: dashboard.id);
-    await databaseAccessor.db.updateRow<DashboardWidget>(
+    await session.db.updateRow<DashboardWidget>(
       $dashboardWidget,
       columns: [DashboardWidget.t.dashboardId],
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction,
     );
   }
 
+  /// Creates a relation between the given [DashboardWidget] and [UserInfo]
+  /// by setting the [DashboardWidget]'s foreign key `userInfoId` to refer to the [UserInfo].
   Future<void> userInfo(
-    _i1.DatabaseAccessor databaseAccessor,
+    _i1.Session session,
     DashboardWidget dashboardWidget,
-    _i3.UserInfo userInfo, {
+    _i5.UserInfo userInfo, {
     _i1.Transaction? transaction,
   }) async {
     if (dashboardWidget.id == null) {
@@ -775,10 +988,10 @@ class DashboardWidgetAttachRowRepository {
     }
 
     var $dashboardWidget = dashboardWidget.copyWith(userInfoId: userInfo.id);
-    await databaseAccessor.db.updateRow<DashboardWidget>(
+    await session.db.updateRow<DashboardWidget>(
       $dashboardWidget,
       columns: [DashboardWidget.t.userInfoId],
-      transaction: transaction ?? databaseAccessor.transaction,
+      transaction: transaction,
     );
   }
 }

@@ -24,6 +24,6 @@ class HomeController extends GetxController {
   }
 
   signOut() {
-    sessionManager.signOut().then((v) => Get.offAllNamed(Routes.SIGNIN));
+    sessionManager.signOutDevice().then((v) => Get.offAllNamed(Routes.SIGNIN));
   }
 }

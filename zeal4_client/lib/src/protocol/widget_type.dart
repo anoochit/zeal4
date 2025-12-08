@@ -7,6 +7,7 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
@@ -31,43 +32,45 @@ enum WidgetType implements _i1.SerializableModel {
   static WidgetType fromJson(String name) {
     switch (name) {
       case 'text':
-        return text;
+        return WidgetType.text;
       case 'stext':
-        return stext;
+        return WidgetType.stext;
       case 'bar':
-        return bar;
+        return WidgetType.bar;
       case 'sbar':
-        return sbar;
+        return WidgetType.sbar;
       case 'line':
-        return line;
+        return WidgetType.line;
       case 'sline':
-        return sline;
+        return WidgetType.sline;
       case 'spline':
-        return spline;
+        return WidgetType.spline;
       case 'sspline':
-        return sspline;
+        return WidgetType.sspline;
       case 'pie':
-        return pie;
+        return WidgetType.pie;
       case 'spie':
-        return spie;
+        return WidgetType.spie;
       case 'table':
-        return table;
+        return WidgetType.table;
       case 'stable':
-        return stable;
+        return WidgetType.stable;
       case 'map':
-        return map;
+        return WidgetType.map;
       case 'smap':
-        return smap;
+        return WidgetType.smap;
       case 'weather':
-        return weather;
+        return WidgetType.weather;
       default:
         throw ArgumentError(
-            'Value "$name" cannot be converted to "WidgetType"');
+          'Value "$name" cannot be converted to "WidgetType"',
+        );
     }
   }
 
   @override
   String toJson() => name;
+
   @override
   String toString() => name;
 }

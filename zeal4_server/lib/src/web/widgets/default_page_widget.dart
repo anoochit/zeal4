@@ -1,6 +1,6 @@
 import 'package:serverpod/serverpod.dart';
 
-class DefaultPageWidget extends Widget {
+class DefaultPageWidget extends TemplateWidget {
   DefaultPageWidget() : super(name: 'default') {
     values = {
       'served': DateTime.now(),

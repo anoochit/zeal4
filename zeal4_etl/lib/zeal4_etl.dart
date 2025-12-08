@@ -45,6 +45,10 @@ runETL() async {
         '/device/+/msg',
         MqttQos.atMostOnce,
       );
+      mqtt.subscribe(
+        'tele/+/SENSOR',
+        MqttQos.atMostOnce,
+      );
       // result stream data from mqtt broker
       mqtt.updates!.listen((List<MqttReceivedMessage<MqttMessage?>>? data) {
         final recMess = data![0].payload as MqttPublishMessage;
@@ -68,7 +72,18 @@ runETL() async {
             print('$e');
           }
         } else {
-          print('No match found.');
+          RegExp tasmotaRegExp = RegExp(r'tele/([^/]+)/SENSOR');
+          Match? tasmotaMatch = tasmotaRegExp.firstMatch(topic);
+          if (tasmotaMatch != null) {
+            final deviceId = tasmotaMatch.group(1)!;
+            try {
+              client.devicelog.addDeivceLog(deviceId, message);
+            } catch (e) {
+              print('$e');
+            }
+          } else {
+            print('No match found.');
+          }
         }
       });
     }

@@ -7,11 +7,14 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
-import 'protocol.dart' as _i2;
-import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i3;
+import 'widget.dart' as _i2;
+import 'device_log.dart' as _i3;
+import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i4;
+import 'package:zeal4_client/src/protocol/protocol.dart' as _i5;
 
 abstract class Device implements _i1.SerializableModel {
   Device._({
@@ -34,9 +37,9 @@ abstract class Device implements _i1.SerializableModel {
     required String description,
     List<String>? fields,
     List<_i2.DashboardWidget>? widget,
-    List<_i2.DeviceLog>? deviceLog,
+    List<_i3.DeviceLog>? deviceLog,
     required int userInfoId,
-    _i3.UserInfo? userInfo,
+    _i4.UserInfo? userInfo,
     DateTime? created,
   }) = _DeviceImpl;
 
@@ -46,21 +49,27 @@ abstract class Device implements _i1.SerializableModel {
       uuid: jsonSerialization['uuid'] as String,
       name: jsonSerialization['name'] as String,
       description: jsonSerialization['description'] as String,
-      fields: (jsonSerialization['fields'] as List?)
-          ?.map((e) => e as String)
-          .toList(),
-      widget: (jsonSerialization['widget'] as List?)
-          ?.map(
-              (e) => _i2.DashboardWidget.fromJson((e as Map<String, dynamic>)))
-          .toList(),
-      deviceLog: (jsonSerialization['deviceLog'] as List?)
-          ?.map((e) => _i2.DeviceLog.fromJson((e as Map<String, dynamic>)))
-          .toList(),
+      fields: jsonSerialization['fields'] == null
+          ? null
+          : _i5.Protocol().deserialize<List<String>>(
+              jsonSerialization['fields'],
+            ),
+      widget: jsonSerialization['widget'] == null
+          ? null
+          : _i5.Protocol().deserialize<List<_i2.DashboardWidget>>(
+              jsonSerialization['widget'],
+            ),
+      deviceLog: jsonSerialization['deviceLog'] == null
+          ? null
+          : _i5.Protocol().deserialize<List<_i3.DeviceLog>>(
+              jsonSerialization['deviceLog'],
+            ),
       userInfoId: jsonSerialization['userInfoId'] as int,
       userInfo: jsonSerialization['userInfo'] == null
           ? null
-          : _i3.UserInfo.fromJson(
-              (jsonSerialization['userInfo'] as Map<String, dynamic>)),
+          : _i5.Protocol().deserialize<_i4.UserInfo>(
+              jsonSerialization['userInfo'],
+            ),
       created: _i1.DateTimeJsonExtension.fromJson(jsonSerialization['created']),
     );
   }
@@ -80,14 +89,17 @@ abstract class Device implements _i1.SerializableModel {
 
   List<_i2.DashboardWidget>? widget;
 
-  List<_i2.DeviceLog>? deviceLog;
+  List<_i3.DeviceLog>? deviceLog;
 
   int userInfoId;
 
-  _i3.UserInfo? userInfo;
+  _i4.UserInfo? userInfo;
 
   DateTime created;
 
+  /// Returns a shallow copy of this [Device]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   Device copyWith({
     int? id,
     String? uuid,
@@ -95,14 +107,15 @@ abstract class Device implements _i1.SerializableModel {
     String? description,
     List<String>? fields,
     List<_i2.DashboardWidget>? widget,
-    List<_i2.DeviceLog>? deviceLog,
+    List<_i3.DeviceLog>? deviceLog,
     int? userInfoId,
-    _i3.UserInfo? userInfo,
+    _i4.UserInfo? userInfo,
     DateTime? created,
   });
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'Device',
       if (id != null) 'id': id,
       'uuid': uuid,
       'name': name,
@@ -134,23 +147,26 @@ class _DeviceImpl extends Device {
     required String description,
     List<String>? fields,
     List<_i2.DashboardWidget>? widget,
-    List<_i2.DeviceLog>? deviceLog,
+    List<_i3.DeviceLog>? deviceLog,
     required int userInfoId,
-    _i3.UserInfo? userInfo,
+    _i4.UserInfo? userInfo,
     DateTime? created,
   }) : super._(
-          id: id,
-          uuid: uuid,
-          name: name,
-          description: description,
-          fields: fields,
-          widget: widget,
-          deviceLog: deviceLog,
-          userInfoId: userInfoId,
-          userInfo: userInfo,
-          created: created,
-        );
+         id: id,
+         uuid: uuid,
+         name: name,
+         description: description,
+         fields: fields,
+         widget: widget,
+         deviceLog: deviceLog,
+         userInfoId: userInfoId,
+         userInfo: userInfo,
+         created: created,
+       );
 
+  /// Returns a shallow copy of this [Device]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   Device copyWith({
     Object? id = _Undefined,
@@ -175,12 +191,13 @@ class _DeviceImpl extends Device {
       widget: widget is List<_i2.DashboardWidget>?
           ? widget
           : this.widget?.map((e0) => e0.copyWith()).toList(),
-      deviceLog: deviceLog is List<_i2.DeviceLog>?
+      deviceLog: deviceLog is List<_i3.DeviceLog>?
           ? deviceLog
           : this.deviceLog?.map((e0) => e0.copyWith()).toList(),
       userInfoId: userInfoId ?? this.userInfoId,
-      userInfo:
-          userInfo is _i3.UserInfo? ? userInfo : this.userInfo?.copyWith(),
+      userInfo: userInfo is _i4.UserInfo?
+          ? userInfo
+          : this.userInfo?.copyWith(),
       created: created ?? this.created,
     );
   }

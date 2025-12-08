@@ -7,6 +7,7 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
@@ -56,17 +57,18 @@ class Endpoints extends _i1.EndpointDispatch {
               name: 'userId',
               type: _i1.getType<int>(),
               nullable: false,
-            )
+            ),
           },
-          call: (
-            _i1.Session session,
-            Map<String, dynamic> params,
-          ) async =>
-              (endpoints['dashboard'] as _i2.DashboardEndpoint).getDashboards(
-            session,
-            params['userId'],
-          ),
-        )
+          call:
+              (
+                _i1.Session session,
+                Map<String, dynamic> params,
+              ) async => (endpoints['dashboard'] as _i2.DashboardEndpoint)
+                  .getDashboards(
+                    session,
+                    params['userId'],
+                  ),
+        ),
       },
     );
     connectors['devicelog'] = _i1.EndpointConnector(
@@ -87,15 +89,16 @@ class Endpoints extends _i1.EndpointDispatch {
               nullable: false,
             ),
           },
-          call: (
-            _i1.Session session,
-            Map<String, dynamic> params,
-          ) async =>
-              (endpoints['devicelog'] as _i3.DevicelogEndpoint).addDeivceLog(
-            session,
-            params['uuid'],
-            params['message'],
-          ),
+          call:
+              (
+                _i1.Session session,
+                Map<String, dynamic> params,
+              ) async => (endpoints['devicelog'] as _i3.DevicelogEndpoint)
+                  .addDeivceLog(
+                    session,
+                    params['uuid'],
+                    params['message'],
+                  ),
         ),
         'getDeviceLog': _i1.MethodConnector(
           name: 'getDeviceLog',
@@ -116,16 +119,17 @@ class Endpoints extends _i1.EndpointDispatch {
               nullable: false,
             ),
           },
-          call: (
-            _i1.Session session,
-            Map<String, dynamic> params,
-          ) async =>
-              (endpoints['devicelog'] as _i3.DevicelogEndpoint).getDeviceLog(
-            session,
-            params['deviceId'],
-            params['total'],
-            params['desc'],
-          ),
+          call:
+              (
+                _i1.Session session,
+                Map<String, dynamic> params,
+              ) async => (endpoints['devicelog'] as _i3.DevicelogEndpoint)
+                  .getDeviceLog(
+                    session,
+                    params['deviceId'],
+                    params['total'],
+                    params['desc'],
+                  ),
         ),
         'streamInfinitDeviceLog': _i1.MethodStreamConnector(
           name: 'streamInfinitDeviceLog',
@@ -148,18 +152,18 @@ class Endpoints extends _i1.EndpointDispatch {
           },
           streamParams: {},
           returnType: _i1.MethodStreamReturnType.streamType,
-          call: (
-            _i1.Session session,
-            Map<String, dynamic> params,
-            Map<String, Stream> streamParams,
-          ) =>
-              (endpoints['devicelog'] as _i3.DevicelogEndpoint)
+          call:
+              (
+                _i1.Session session,
+                Map<String, dynamic> params,
+                Map<String, Stream> streamParams,
+              ) => (endpoints['devicelog'] as _i3.DevicelogEndpoint)
                   .streamInfinitDeviceLog(
-            session,
-            params['deviceId'],
-            params['total'],
-            params['desc'],
-          ),
+                    session,
+                    params['deviceId'],
+                    params['total'],
+                    params['desc'],
+                  ),
         ),
         'streamDeviceLog': _i1.MethodStreamConnector(
           name: 'streamDeviceLog',
@@ -182,17 +186,18 @@ class Endpoints extends _i1.EndpointDispatch {
           },
           streamParams: {},
           returnType: _i1.MethodStreamReturnType.streamType,
-          call: (
-            _i1.Session session,
-            Map<String, dynamic> params,
-            Map<String, Stream> streamParams,
-          ) =>
-              (endpoints['devicelog'] as _i3.DevicelogEndpoint).streamDeviceLog(
-            session,
-            params['deviceId'],
-            params['total'],
-            params['desc'],
-          ),
+          call:
+              (
+                _i1.Session session,
+                Map<String, dynamic> params,
+                Map<String, Stream> streamParams,
+              ) => (endpoints['devicelog'] as _i3.DevicelogEndpoint)
+                  .streamDeviceLog(
+                    session,
+                    params['deviceId'],
+                    params['total'],
+                    params['desc'],
+                  ),
         ),
         'streamDeviceLogDataPoints': _i1.MethodStreamConnector(
           name: 'streamDeviceLogDataPoints',
@@ -215,18 +220,18 @@ class Endpoints extends _i1.EndpointDispatch {
           },
           streamParams: {},
           returnType: _i1.MethodStreamReturnType.streamType,
-          call: (
-            _i1.Session session,
-            Map<String, dynamic> params,
-            Map<String, Stream> streamParams,
-          ) =>
-              (endpoints['devicelog'] as _i3.DevicelogEndpoint)
+          call:
+              (
+                _i1.Session session,
+                Map<String, dynamic> params,
+                Map<String, Stream> streamParams,
+              ) => (endpoints['devicelog'] as _i3.DevicelogEndpoint)
                   .streamDeviceLogDataPoints(
-            session,
-            params['deviceId'],
-            params['total'],
-            params['desc'],
-          ),
+                    session,
+                    params['deviceId'],
+                    params['total'],
+                    params['desc'],
+                  ),
         ),
         'deviceLogMessage': _i1.MethodStreamConnector(
           name: 'deviceLogMessage',
@@ -249,18 +254,18 @@ class Endpoints extends _i1.EndpointDispatch {
           },
           streamParams: {},
           returnType: _i1.MethodStreamReturnType.streamType,
-          call: (
-            _i1.Session session,
-            Map<String, dynamic> params,
-            Map<String, Stream> streamParams,
-          ) =>
-              (endpoints['devicelog'] as _i3.DevicelogEndpoint)
+          call:
+              (
+                _i1.Session session,
+                Map<String, dynamic> params,
+                Map<String, Stream> streamParams,
+              ) => (endpoints['devicelog'] as _i3.DevicelogEndpoint)
                   .deviceLogMessage(
-            session,
-            params['deviceId'],
-            params['total'],
-            params['desc'],
-          ),
+                    session,
+                    params['deviceId'],
+                    params['total'],
+                    params['desc'],
+                  ),
         ),
       },
     );
@@ -275,28 +280,30 @@ class Endpoints extends _i1.EndpointDispatch {
               name: 'name',
               type: _i1.getType<String>(),
               nullable: false,
-            )
+            ),
           },
-          call: (
-            _i1.Session session,
-            Map<String, dynamic> params,
-          ) async =>
-              (endpoints['example'] as _i4.ExampleEndpoint).hello(
-            session,
-            params['name'],
-          ),
+          call:
+              (
+                _i1.Session session,
+                Map<String, dynamic> params,
+              ) async => (endpoints['example'] as _i4.ExampleEndpoint).hello(
+                session,
+                params['name'],
+              ),
         ),
         'countdown': _i1.MethodStreamConnector(
           name: 'countdown',
           params: {},
           streamParams: {},
           returnType: _i1.MethodStreamReturnType.streamType,
-          call: (
-            _i1.Session session,
-            Map<String, dynamic> params,
-            Map<String, Stream> streamParams,
-          ) =>
-              (endpoints['example'] as _i4.ExampleEndpoint).countdown(session),
+          call:
+              (
+                _i1.Session session,
+                Map<String, dynamic> params,
+                Map<String, Stream> streamParams,
+              ) => (endpoints['example'] as _i4.ExampleEndpoint).countdown(
+                session,
+              ),
         ),
       },
     );
@@ -307,13 +314,13 @@ class Endpoints extends _i1.EndpointDispatch {
         'updateToUserScope': _i1.MethodConnector(
           name: 'updateToUserScope',
           params: {},
-          call: (
-            _i1.Session session,
-            Map<String, dynamic> params,
-          ) async =>
-              (endpoints['user'] as _i5.UserEndpoint)
+          call:
+              (
+                _i1.Session session,
+                Map<String, dynamic> params,
+              ) async => (endpoints['user'] as _i5.UserEndpoint)
                   .updateToUserScope(session),
-        )
+        ),
       },
     );
     modules['serverpod_auth'] = _i6.Endpoints()..initializeEndpoints(server);

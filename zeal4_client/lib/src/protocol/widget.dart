@@ -7,11 +7,15 @@
 // ignore_for_file: public_member_api_docs
 // ignore_for_file: type_literal_in_constant_pattern
 // ignore_for_file: use_super_parameters
+// ignore_for_file: invalid_use_of_internal_member
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
-import 'protocol.dart' as _i2;
-import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i3;
+import 'widget_type.dart' as _i2;
+import 'device.dart' as _i3;
+import 'dashboard.dart' as _i4;
+import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i5;
+import 'package:zeal4_client/src/protocol/protocol.dart' as _i6;
 
 abstract class DashboardWidget implements _i1.SerializableModel {
   DashboardWidget._({
@@ -33,12 +37,12 @@ abstract class DashboardWidget implements _i1.SerializableModel {
     required this.userInfoId,
     this.userInfo,
     bool? enable,
-  })  : width = width ?? 3,
-        height = height ?? 1,
-        order = order ?? 1,
-        type = type ?? _i2.WidgetType.text,
-        points = points ?? 60,
-        enable = enable ?? false;
+  }) : width = width ?? 3,
+       height = height ?? 1,
+       order = order ?? 1,
+       type = type ?? _i2.WidgetType.text,
+       points = points ?? 60,
+       enable = enable ?? false;
 
   factory DashboardWidget({
     int? id,
@@ -48,16 +52,16 @@ abstract class DashboardWidget implements _i1.SerializableModel {
     int? height,
     int? order,
     required int deviceId,
-    _i2.Device? device,
+    _i3.Device? device,
     required List<String> fields,
     required List<String> units,
     _i2.WidgetType? type,
     required List<String> labels,
     int? points,
     required int dashboardId,
-    _i2.Dashboard? dashboard,
+    _i4.Dashboard? dashboard,
     required int userInfoId,
-    _i3.UserInfo? userInfo,
+    _i5.UserInfo? userInfo,
     bool? enable,
   }) = _DashboardWidgetImpl;
 
@@ -72,28 +76,30 @@ abstract class DashboardWidget implements _i1.SerializableModel {
       deviceId: jsonSerialization['deviceId'] as int,
       device: jsonSerialization['device'] == null
           ? null
-          : _i2.Device.fromJson(
-              (jsonSerialization['device'] as Map<String, dynamic>)),
-      fields: (jsonSerialization['fields'] as List)
-          .map((e) => e as String)
-          .toList(),
-      units:
-          (jsonSerialization['units'] as List).map((e) => e as String).toList(),
+          : _i6.Protocol().deserialize<_i3.Device>(jsonSerialization['device']),
+      fields: _i6.Protocol().deserialize<List<String>>(
+        jsonSerialization['fields'],
+      ),
+      units: _i6.Protocol().deserialize<List<String>>(
+        jsonSerialization['units'],
+      ),
       type: _i2.WidgetType.fromJson((jsonSerialization['type'] as String)),
-      labels: (jsonSerialization['labels'] as List)
-          .map((e) => e as String)
-          .toList(),
+      labels: _i6.Protocol().deserialize<List<String>>(
+        jsonSerialization['labels'],
+      ),
       points: jsonSerialization['points'] as int,
       dashboardId: jsonSerialization['dashboardId'] as int,
       dashboard: jsonSerialization['dashboard'] == null
           ? null
-          : _i2.Dashboard.fromJson(
-              (jsonSerialization['dashboard'] as Map<String, dynamic>)),
+          : _i6.Protocol().deserialize<_i4.Dashboard>(
+              jsonSerialization['dashboard'],
+            ),
       userInfoId: jsonSerialization['userInfoId'] as int,
       userInfo: jsonSerialization['userInfo'] == null
           ? null
-          : _i3.UserInfo.fromJson(
-              (jsonSerialization['userInfo'] as Map<String, dynamic>)),
+          : _i6.Protocol().deserialize<_i5.UserInfo>(
+              jsonSerialization['userInfo'],
+            ),
       enable: jsonSerialization['enable'] as bool,
     );
   }
@@ -115,7 +121,7 @@ abstract class DashboardWidget implements _i1.SerializableModel {
 
   int deviceId;
 
-  _i2.Device? device;
+  _i3.Device? device;
 
   List<String> fields;
 
@@ -129,14 +135,17 @@ abstract class DashboardWidget implements _i1.SerializableModel {
 
   int dashboardId;
 
-  _i2.Dashboard? dashboard;
+  _i4.Dashboard? dashboard;
 
   int userInfoId;
 
-  _i3.UserInfo? userInfo;
+  _i5.UserInfo? userInfo;
 
   bool enable;
 
+  /// Returns a shallow copy of this [DashboardWidget]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   DashboardWidget copyWith({
     int? id,
     String? name,
@@ -145,21 +154,22 @@ abstract class DashboardWidget implements _i1.SerializableModel {
     int? height,
     int? order,
     int? deviceId,
-    _i2.Device? device,
+    _i3.Device? device,
     List<String>? fields,
     List<String>? units,
     _i2.WidgetType? type,
     List<String>? labels,
     int? points,
     int? dashboardId,
-    _i2.Dashboard? dashboard,
+    _i4.Dashboard? dashboard,
     int? userInfoId,
-    _i3.UserInfo? userInfo,
+    _i5.UserInfo? userInfo,
     bool? enable,
   });
   @override
   Map<String, dynamic> toJson() {
     return {
+      '__className__': 'DashboardWidget',
       if (id != null) 'id': id,
       'name': name,
       'description': description,
@@ -198,38 +208,41 @@ class _DashboardWidgetImpl extends DashboardWidget {
     int? height,
     int? order,
     required int deviceId,
-    _i2.Device? device,
+    _i3.Device? device,
     required List<String> fields,
     required List<String> units,
     _i2.WidgetType? type,
     required List<String> labels,
     int? points,
     required int dashboardId,
-    _i2.Dashboard? dashboard,
+    _i4.Dashboard? dashboard,
     required int userInfoId,
-    _i3.UserInfo? userInfo,
+    _i5.UserInfo? userInfo,
     bool? enable,
   }) : super._(
-          id: id,
-          name: name,
-          description: description,
-          width: width,
-          height: height,
-          order: order,
-          deviceId: deviceId,
-          device: device,
-          fields: fields,
-          units: units,
-          type: type,
-          labels: labels,
-          points: points,
-          dashboardId: dashboardId,
-          dashboard: dashboard,
-          userInfoId: userInfoId,
-          userInfo: userInfo,
-          enable: enable,
-        );
+         id: id,
+         name: name,
+         description: description,
+         width: width,
+         height: height,
+         order: order,
+         deviceId: deviceId,
+         device: device,
+         fields: fields,
+         units: units,
+         type: type,
+         labels: labels,
+         points: points,
+         dashboardId: dashboardId,
+         dashboard: dashboard,
+         userInfoId: userInfoId,
+         userInfo: userInfo,
+         enable: enable,
+       );
 
+  /// Returns a shallow copy of this [DashboardWidget]
+  /// with some or all fields replaced by the given arguments.
+  @_i1.useResult
   @override
   DashboardWidget copyWith({
     Object? id = _Undefined,
@@ -259,18 +272,20 @@ class _DashboardWidgetImpl extends DashboardWidget {
       height: height ?? this.height,
       order: order ?? this.order,
       deviceId: deviceId ?? this.deviceId,
-      device: device is _i2.Device? ? device : this.device?.copyWith(),
+      device: device is _i3.Device? ? device : this.device?.copyWith(),
       fields: fields ?? this.fields.map((e0) => e0).toList(),
       units: units ?? this.units.map((e0) => e0).toList(),
       type: type ?? this.type,
       labels: labels ?? this.labels.map((e0) => e0).toList(),
       points: points ?? this.points,
       dashboardId: dashboardId ?? this.dashboardId,
-      dashboard:
-          dashboard is _i2.Dashboard? ? dashboard : this.dashboard?.copyWith(),
+      dashboard: dashboard is _i4.Dashboard?
+          ? dashboard
+          : this.dashboard?.copyWith(),
       userInfoId: userInfoId ?? this.userInfoId,
-      userInfo:
-          userInfo is _i3.UserInfo? ? userInfo : this.userInfo?.copyWith(),
+      userInfo: userInfo is _i5.UserInfo?
+          ? userInfo
+          : this.userInfo?.copyWith(),
       enable: enable ?? this.enable,
     );
   }
