@@ -16,3 +16,4 @@ config/firebase_service_account_key.json
 
 # Mosquitto DB file
 mosquitto/data/mosquitto.db
+mosquitto/log/
