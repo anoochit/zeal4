@@ -36,7 +36,7 @@ The project is organized into several key modules:
 - [Flutter SDK](https://flutter.dev/docs/get-started/install)
 - [Dart SDK](https://dart.dev/get-dart)
 - [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/)
-- [Serverpod CLI](https://docs.serverpod.dev/serverpod/getting-started/cli) (if performing Serverpod-specific tasks like code generation or migrations)
+- [Serverpod CLI](https://docs.serverpod.dev/#install-serverpod) (if performing Serverpod-specific tasks like code generation or migrations)
 - Node.js and npm (for `zeal4_mock_device`)
 
 ### Getting Started
