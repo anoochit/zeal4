@@ -13,7 +13,6 @@
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import 'device.dart' as _i2;
 import 'package:zeal4_client/src/protocol/protocol.dart' as _i3;
-import 'package:meta/meta.dart' as _i4;
 
 abstract class DeviceLog implements _i1.SerializableModel {
   DeviceLog._({
@@ -59,7 +58,7 @@ abstract class DeviceLog implements _i1.SerializableModel {
 
   /// Returns a shallow copy of this [DeviceLog]
   /// with some or all fields replaced by the given arguments.
-  @_i4.useResult
+  @_i1.useResult
   DeviceLog copyWith({
     int? id,
     DateTime? created,
@@ -104,7 +103,7 @@ class _DeviceLogImpl extends DeviceLog {
 
   /// Returns a shallow copy of this [DeviceLog]
   /// with some or all fields replaced by the given arguments.
-  @_i4.useResult
+  @_i1.useResult
   @override
   DeviceLog copyWith({
     Object? id = _Undefined,

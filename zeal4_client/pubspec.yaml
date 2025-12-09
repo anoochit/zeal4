@@ -2,9 +2,9 @@ name: zeal4_client
 description: Starting point for a Serverpod client.
 
 environment:
-  sdk: ">=3.3.0 <4.0.0"
+  sdk: ">=3.8.0 <4.0.0"
 
 dependencies:
   meta: ^1.17.0
-  serverpod_auth_client: 3.0.0-rc.4
-  serverpod_client: 3.0.0-rc.4
+  serverpod_auth_client: 3.0.0
+  serverpod_client: 3.0.0

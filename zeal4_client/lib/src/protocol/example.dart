@@ -11,7 +11,6 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
-import 'package:meta/meta.dart' as _i2;
 
 abstract class Example implements _i1.SerializableModel {
   Example._({
@@ -37,7 +36,7 @@ abstract class Example implements _i1.SerializableModel {
 
   /// Returns a shallow copy of this [Example]
   /// with some or all fields replaced by the given arguments.
-  @_i2.useResult
+  @_i1.useResult
   Example copyWith({
     String? name,
     int? data,
@@ -68,7 +67,7 @@ class _ExampleImpl extends Example {
 
   /// Returns a shallow copy of this [Example]
   /// with some or all fields replaced by the given arguments.
-  @_i2.useResult
+  @_i1.useResult
   @override
   Example copyWith({
     String? name,

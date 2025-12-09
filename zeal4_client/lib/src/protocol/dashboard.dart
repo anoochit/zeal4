@@ -14,7 +14,6 @@ import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import 'widget.dart' as _i2;
 import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i3;
 import 'package:zeal4_client/src/protocol/protocol.dart' as _i4;
-import 'package:meta/meta.dart' as _i5;
 
 abstract class Dashboard implements _i1.SerializableModel {
   Dashboard._({
@@ -71,7 +70,7 @@ abstract class Dashboard implements _i1.SerializableModel {
 
   /// Returns a shallow copy of this [Dashboard]
   /// with some or all fields replaced by the given arguments.
-  @_i5.useResult
+  @_i1.useResult
   Dashboard copyWith({
     int? id,
     String? name,
@@ -121,7 +120,7 @@ class _DashboardImpl extends Dashboard {
 
   /// Returns a shallow copy of this [Dashboard]
   /// with some or all fields replaced by the given arguments.
-  @_i5.useResult
+  @_i1.useResult
   @override
   Dashboard copyWith({
     Object? id = _Undefined,

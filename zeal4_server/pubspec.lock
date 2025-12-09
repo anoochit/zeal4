@@ -125,10 +125,10 @@ packages:
     dependency: transitive
     description:
       name: crypto_keys
-      sha256: acc19abf34623d990a0e8aec69463d74a824c31f137128f42e2810befc509ad0
+      sha256: "2ed305a11a3e5d16dd7f489121c956fd19b9816938bb68bc7ed3a379827a304e"
       url: "https://pub.dev"
     source: hosted
-    version: "0.3.0+1"
+    version: "0.3.0+2"
   email_validator:
     dependency: transitive
     description:
@@ -165,10 +165,10 @@ packages:
     dependency: transitive
     description:
       name: googleapis
-      sha256: "5c9e0f25be1dec13d8d2158263141104c51b5ba83487537c17a2330581e505ee"
+      sha256: "692fb9e90c321b61a7a2123de0353ec8a20691cd979db2553d8d732f710f6535"
       url: "https://pub.dev"
     source: hosted
-    version: "14.0.0"
+    version: "15.0.0"
   googleapis_auth:
     dependency: transitive
     description:
@@ -309,10 +309,10 @@ packages:
     dependency: transitive
     description:
       name: pointycastle
-      sha256: "4be0097fcf3fd3e8449e53730c631200ebc7b88016acecab2b0da2f0149222fe"
+      sha256: "92aa3841d083cc4b0f4709b5c74fd6409a3e6ba833ffc7dc6a8fee096366acf5"
       url: "https://pub.dev"
     source: hosted
-    version: "3.9.1"
+    version: "4.0.0"
   pool:
     dependency: transitive
     description:
@@ -357,10 +357,10 @@ packages:
     dependency: transitive
     description:
       name: relic
-      sha256: "2aa3a842adc707dfc1856184348e0bfc2435cb5de47dada1dfd9da7e1837655b"
+      sha256: "7c4d4243bfb8fc5d2ab094aa0f056222ed5ccb532f2fc55231efa3b65f105a2b"
       url: "https://pub.dev"
     source: hosted
-    version: "0.12.0"
+    version: "0.13.1"
   retry:
     dependency: transitive
     description:
@@ -373,50 +373,50 @@ packages:
     dependency: "direct main"
     description:
       name: serverpod
-      sha256: "6069385873fe84e01bbb19aa8ef4b61745acc7567c8134c1c0c6df8bfdd60b34"
+      sha256: "172ab13f03c9330110710fa959882657f56200e5857215e4d5a9ff12b730608e"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.0-rc.4"
+    version: "3.0.0"
   serverpod_auth_server:
     dependency: "direct main"
     description:
       name: serverpod_auth_server
-      sha256: "8100d63df81ff3f165d67fda0c139f7657d63461bc794201b5348c15cf0d1922"
+      sha256: "1aad70114e77360ae1f55412a0c7152046371edc9fd9f8d55dfc6bca666b55a9"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.0-rc.4"
+    version: "3.0.0"
   serverpod_cloud_storage_gcp:
     dependency: "direct main"
     description:
       name: serverpod_cloud_storage_gcp
-      sha256: "44b6a4e888e193b17c6a6c58c15c3a8521b17a51c23fd255356cb7419b4b4228"
+      sha256: d9ec3472d518ba51d2cbe28a1b69b85999340c79bf53bc3d78cdd838a07bb848
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.0-rc.4"
+    version: "3.0.0"
   serverpod_cloud_storage_s3:
     dependency: "direct main"
     description:
       name: serverpod_cloud_storage_s3
-      sha256: "7b38c3fbfde43e0fb4596935645225ec0e048132fac7a397c3616333c0ad5f29"
+      sha256: "0fcf2d87cd97db6ab9f4f169e39414e317592d501ab1c7af3a8e2ec18abb550a"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.0-rc.4"
+    version: "3.0.0"
   serverpod_serialization:
     dependency: transitive
     description:
       name: serverpod_serialization
-      sha256: "370e978b9d929aa84048fb12523fe2b1b2706f6ef4f58f7ec95f2383994c9f03"
+      sha256: b82c9ccd07ccdc30d6ba171ff7fe806a5319487e9edf64511603846a6c182745
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.0-rc.4"
+    version: "3.0.0"
   serverpod_shared:
     dependency: transitive
     description:
       name: serverpod_shared
-      sha256: ed9ecf8af3976b167a012e15d98f38563c7d99e703f970cb6f4dbb014f77a89f
+      sha256: c34274a178031518a2d45bce05aaf961f564d6c576887bd34bf701b7b1524b35
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.0-rc.4"
+    version: "3.0.0"
   source_span:
     dependency: transitive
     description:

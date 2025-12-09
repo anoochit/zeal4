@@ -15,7 +15,6 @@ import 'widget.dart' as _i2;
 import 'device_log.dart' as _i3;
 import 'package:serverpod_auth_client/serverpod_auth_client.dart' as _i4;
 import 'package:zeal4_client/src/protocol/protocol.dart' as _i5;
-import 'package:meta/meta.dart' as _i6;
 
 abstract class Device implements _i1.SerializableModel {
   Device._({
@@ -100,7 +99,7 @@ abstract class Device implements _i1.SerializableModel {
 
   /// Returns a shallow copy of this [Device]
   /// with some or all fields replaced by the given arguments.
-  @_i6.useResult
+  @_i1.useResult
   Device copyWith({
     int? id,
     String? uuid,
@@ -167,7 +166,7 @@ class _DeviceImpl extends Device {
 
   /// Returns a shallow copy of this [Device]
   /// with some or all fields replaced by the given arguments.
-  @_i6.useResult
+  @_i1.useResult
   @override
   Device copyWith({
     Object? id = _Undefined,
