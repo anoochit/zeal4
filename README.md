@@ -95,6 +95,19 @@ The project is organized into several key modules:
     ```bash
     flutter run
     ```
+8. **Building a Flutter Web Client Application (option)**:
+    From the `zeal4_flutter` directory:
+
+    ```bash
+    flutter build web
+    ```
+
+    Copy a build result to server dir: `web/app` (or link)
+
+    ```bash
+    cp -rf build/web ../zeal4_server/web/app
+    ```
+
 
 ## Screenshots
 
